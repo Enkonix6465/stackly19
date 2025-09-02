@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { getCurrentUser, isAuthenticated } from '../utils/auth'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { useTranslation } from 'react-i18next'
 
 export default function BlogPost2() {
   const navigate = useNavigate()
+  const { t, i18n } = useTranslation()
 
   useEffect(() => {
     if (!isAuthenticated()) {
@@ -33,22 +35,22 @@ export default function BlogPost2() {
         <div className="relative mx-auto max-w-6xl px-4 py-16">
           <div className="max-w-4xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-3 py-1 bg-white/20 rounded-full text-sm">Client Acquisition</span>
+              <span className="px-3 py-1 bg-white/20 rounded-full text-sm">{t('blogPost2.hero.category')}</span>
               <span className="text-white/80">•</span>
-              <span className="text-white/80">12 min read</span>
+              <span className="text-white/80">{t('blogPost2.hero.readTime')}</span>
               <span className="text-white/80">•</span>
-              <span className="text-white/80">Dec 12, 2024</span>
+              <span className="text-white/80">{t('blogPost2.hero.date')}</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              How to Attract High-Paying Clients: Proven Strategies
+              {t('blogPost2.hero.title')}
             </h1>
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-indigo-600 font-bold">
                 MC
               </div>
               <div>
-                <p className="font-semibold">Mike Chen</p>
-                <p className="text-white/80 text-sm">Digital Marketing Expert</p>
+                <p className="font-semibold">{t('blogPost2.hero.author')}</p>
+                <p className="text-white/80 text-sm">{t('blogPost2.hero.authorRole')}</p>
               </div>
             </div>
           </div>
@@ -69,135 +71,108 @@ export default function BlogPost2() {
                 />
                 
                 <p className="text-xl text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-                  Attracting high-paying clients is the holy grail of freelancing. While it may seem challenging, 
-                  it's entirely achievable with the right mindset, strategies, and execution. This comprehensive 
-                  guide will show you exactly how to position yourself as a premium service provider.
+                  {t('blogPost2.content.intro')}
                 </p>
 
                 <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                  Understanding High-Paying Clients
+                  {t('blogPost2.content.section1.title')}
                 </h2>
                 <p className="mb-6">
-                  High-paying clients are not just clients who can afford premium rates; they're clients who 
-                  understand the value of quality work and are willing to invest in it. These clients typically 
-                  have larger budgets, more complex projects, and higher expectations.
+                  {t('blogPost2.content.section1.description')}
                 </p>
 
                 <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
-                  Characteristics of High-Paying Clients
+                  {t('blogPost2.content.section2.title')}
                 </h3>
                 <ul className="mb-6 space-y-2">
-                  <li className="flex items-start gap-3">
-                    <span className="text-indigo-500 text-lg">✓</span>
-                    <span>They value quality over price</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-indigo-500 text-lg">✓</span>
-                    <span>They have larger, more complex projects</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-indigo-500 text-lg">✓</span>
-                    <span>They understand the ROI of professional services</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-indigo-500 text-lg">✓</span>
-                    <span>They're willing to pay for expertise and experience</span>
-                  </li>
+                  {t('blogPost2.content.section2.benefits', { returnObjects: true }).map((benefit, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <span className="text-indigo-500 text-lg">✓</span>
+                      <span>{benefit}</span>
+                    </li>
+                  ))}
                 </ul>
 
                 <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                  Strategy 1: Build a Strong Personal Brand
+                  {t('blogPost2.content.section3.title')}
                 </h2>
                 <p className="mb-6">
-                  Your personal brand is how you present yourself to the world. It's what makes you memorable 
-                  and differentiates you from your competition. A strong personal brand can command premium rates 
-                  because it builds trust and credibility.
+                  {t('blogPost2.content.section3.description')}
                 </p>
 
                 <div className="bg-indigo-50 dark:bg-indigo-900/20 p-6 rounded-xl mb-8">
                   <h4 className="font-semibold mb-3 text-indigo-800 dark:text-indigo-200">
-                    Personal Branding Elements
+                    {t('blogPost2.content.section3.checklistTitle')}
                   </h4>
                   <ul className="space-y-2 text-indigo-700 dark:text-indigo-300">
-                    <li>• Professional website and portfolio</li>
-                    <li>• Consistent social media presence</li>
-                    <li>• Thought leadership content</li>
-                    <li>• Professional headshots and branding</li>
-                    <li>• Clear value proposition</li>
+                    {t('blogPost2.content.section3.checklistItems', { returnObjects: true }).map((item, index) => (
+                      <li key={index}>• {item}</li>
+                    ))}
                   </ul>
                 </div>
 
                 <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                  Strategy 2: Position Yourself as an Expert
+                  {t('blogPost2.content.section4.title')}
                 </h2>
                 <p className="mb-6">
-                  High-paying clients want to work with experts, not generalists. They're looking for someone 
-                  who deeply understands their industry, challenges, and needs. Positioning yourself as an expert 
-                  in a specific niche can significantly increase your earning potential.
+                  {t('blogPost2.content.section4.description')}
                 </p>
 
-                <div className="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-xl mb-8">
-                  <h4 className="font-semibold mb-3 text-yellow-800 dark:text-yellow-200">
-                    Establish Expertise Tips
-                  </h4>
-                  <ul className="space-y-2 text-yellow-700 dark:text-yellow-300">
-                    <li>• Specialize in a niche</li>
-                    <li>• Create educational content</li>
-                    <li>• Speak at events</li>
-                    <li>• Get published in respected outlets</li>
-                    <li>• Obtain relevant certifications</li>
-                  </ul>
-                </div>
+                <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
+                  {t('blogPost2.content.section4.subtitle')}
+                </h3>
+                <ul className="mb-8 space-y-2">
+                  {t('blogPost2.content.section4.tips', { returnObjects: true }).map((tip, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <span className="text-indigo-500 text-lg">•</span>
+                      <span>{tip}</span>
+                    </li>
+                  ))}
+                </ul>
 
                 <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                  Strategy 3: Deliver Exceptional Results
+                  {t('blogPost2.content.section5.title')}
                 </h2>
                 <p className="mb-6">
-                  The best way to attract high-paying clients is to consistently deliver exceptional results 
-                  for your current clients. Happy clients become repeat clients and refer you to others, 
-                  creating a virtuous cycle of growth.
+                  {t('blogPost2.content.section5.description')}
                 </p>
 
-                <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-xl mb-8">
-                  <h4 className="font-semibold mb-3 text-green-800 dark:text-green-200">
-                    Keys to Exceptional Delivery
-                  </h4>
-                  <ul className="space-y-2 text-green-700 dark:text-green-300">
-                    <li>• Over-deliver on client expectations</li>
-                    <li>• Communicate proactively</li>
-                    <li>• Meet deadlines consistently</li>
-                    <li>• Provide value-added insights</li>
-                  </ul>
-                </div>
+                <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
+                  {t('blogPost2.content.section5.subtitle')}
+                </h3>
+                <ul className="mb-8 space-y-2">
+                  {t('blogPost2.content.section5.strategies', { returnObjects: true }).map((strategy, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <span className="text-indigo-500 text-lg">•</span>
+                      <span>{strategy}</span>
+                    </li>
+                  ))}
+                </ul>
 
                 <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                  Strategy 4: Network Strategically
+                  {t('blogPost2.content.section6.title')}
                 </h2>
                 <p className="mb-6">
-                  Networking is crucial for attracting high-paying clients. The people you know and the relationships 
-                  you build can open doors to opportunities that might not be available through traditional channels.
+                  {t('blogPost2.content.section6.description')}
                 </p>
 
-                <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-xl mb-8">
-                  <h4 className="font-semibold mb-3 text-blue-800 dark:text-blue-200">
-                    Networking Strategies
-                  </h4>
-                  <ul className="space-y-2 text-blue-700 dark:text-blue-300">
-                    <li>• Attend industry conferences and events</li>
-                    <li>• Join professional groups</li>
-                    <li>• Participate in online communities</li>
-                    <li>• Connect with professionals in your field</li>
-                    <li>• Build relationships before clients need you</li>
-                  </ul>
-                </div>
+                <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
+                  {t('blogPost2.content.section6.subtitle')}
+                </h3>
+                <ul className="mb-8 space-y-2">
+                  {t('blogPost2.content.section6.strategies', { returnObjects: true }).map((strategy, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <span className="text-indigo-500 text-lg">•</span>
+                      <span>{strategy}</span>
+                    </li>
+                  ))}
+                </ul>
 
                 <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                  Conclusion
+                  {t('blogPost2.content.conclusion.title')}
                 </h2>
                 <p className="mb-8">
-                  Attracting high-paying clients is about implementing the right strategies consistently. By 
-                  building a strong personal brand, positioning yourself as an expert, delivering exceptional results, 
-                  networking strategically, and leveraging social proof, you can attract the clients you deserve.
+                  {t('blogPost2.content.conclusion.mainText')}
                 </p>
               </article>
 
@@ -208,20 +183,16 @@ export default function BlogPost2() {
                     MC
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Mike Chen</h3>
+                    <h3 className="text-xl font-bold mb-2">{t('blogPost2.author.name')}</h3>
                     <p className="text-gray-600 dark:text-gray-400 mb-3">
-                      Mike is a digital marketing expert who helps freelancers scale their businesses and attract premium clients.
+                      {t('blogPost2.author.bio')}
                     </p>
                     <div className="flex gap-2">
-                      <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-sm rounded-full">
-                        Marketing
-                      </span>
-                      <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-sm rounded-full">
-                        Growth Strategy
-                      </span>
-                      <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-sm rounded-full">
-                        Analytics
-                      </span>
+                      {t('blogPost2.author.expertise', { returnObjects: true }).map((expertise, index) => (
+                        <span key={index} className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-sm rounded-full">
+                          {expertise}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -234,17 +205,17 @@ export default function BlogPost2() {
 
               {/* Related Posts */}
               <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
-                <h3 className="font-bold text-lg mb-4">Related Posts</h3>
+                <h3 className="font-bold text-lg mb-4">{t('blogPost2.sidebar.relatedPosts')}</h3>
                 <div className="space-y-4">
                   <div 
                     className="cursor-pointer group"
                     onClick={() => navigate('/blog/1')}
                   >
                     <h4 className="font-semibold group-hover:text-indigo-600 transition-colors">
-                      Getting Started as a Freelancer
+                      {t('blogPost2.sidebar.post1.title')}
                     </h4>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      A step-by-step guide to landing your first project online.
+                      {t('blogPost2.sidebar.post1.description')}
                     </p>
                   </div>
                   <div 
@@ -252,10 +223,10 @@ export default function BlogPost2() {
                     onClick={() => navigate('/blog/3')}
                   >
                     <h4 className="font-semibold group-hover:text-indigo-600 transition-colors">
-                      Balancing Multiple Projects
+                      {t('blogPost2.sidebar.post2.title')}
                     </h4>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Time management hacks every freelancer should know.
+                      {t('blogPost2.sidebar.post2.description')}
                     </p>
                   </div>
                 </div>

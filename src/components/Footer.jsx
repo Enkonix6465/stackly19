@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 export default function Footer() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   return (
     <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
@@ -13,7 +15,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <img src="/Logo.jpg" alt="Logo" className="h-10 w-auto mb-4" />
             <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-              Connecting businesses with top talent worldwide to get projects done efficiently and effectively.
+              {t('footer.companyDescription')}
             </p>
             
             {/* Social Media Icons */}
@@ -50,18 +52,18 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="mb-6">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 relative">
-                Quick Links
+                {t('footer.quickLinks')}
                 <div className="absolute bottom-0 left-0 w-12 h-0.5 bg-blue-600"></div>
               </h3>
             </div>
             <ul className="space-y-3">
               {[
-                { name: 'Home1', path: '/home' },
-                { name: 'Home2', path: '/home2' },
-                { name: 'About', path: '/about' },
-                { name: 'Services', path: '/services' },
-                { name: 'Blog', path: '/blog' },
-                { name: 'Contact', path: '/contact' }
+                { name: t('footer.home1'), path: '/home' },
+                { name: t('footer.home2'), path: '/home2' },
+                { name: t('footer.about'), path: '/about' },
+                { name: t('footer.services'), path: '/services' },
+                { name: t('footer.blog'), path: '/blog' },
+                { name: t('footer.contact'), path: '/contact' }
               ].map((link) => (
                 <li key={link.name}>
                   <button
@@ -79,18 +81,18 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="mb-6">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 relative">
-                For Freelancers
+                {t('footer.forFreelancers')}
                 <div className="absolute bottom-0 left-0 w-12 h-0.5 bg-blue-600"></div>
               </h3>
             </div>
             <ul className="space-y-3">
               {[
-                { name: 'Website Development', path: '/services/website-development' },
-                { name: 'E-Commerce Solutions', path: '/services/ecommerce-solutions' },
-                { name: 'Branding & Design', path: '/services/branding-design' },
-                { name: 'Content & Copywriting', path: '/services/content-copywriting' },
-                { name: 'Digital Marketing', path: '/services/digital-marketing' },
-                { name: 'Ongoing Support', path: '/services/ongoing-support' }
+                { name: t('footer.websiteDevelopment'), path: '/services/website-development' },
+                { name: t('footer.ecommerceSolutions'), path: '/services/ecommerce-solutions' },
+                { name: t('footer.brandingDesign'), path: '/services/branding-design' },
+                { name: t('footer.contentCopywriting'), path: '/services/content-copywriting' },
+                { name: t('footer.digitalMarketing'), path: '/services/digital-marketing' },
+                { name: t('footer.ongoingSupport'), path: '/services/ongoing-support' }
               ].map((service) => (
                 <li key={service.name}>
                   <button
@@ -108,7 +110,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="mb-6">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 relative">
-                Contact Us
+                {t('footer.contactUs')}
                 <div className="absolute bottom-0 left-0 w-12 h-0.5 bg-blue-600"></div>
               </h3>
             </div>
@@ -119,7 +121,7 @@ export default function Footer() {
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
                   </svg>
                 </div>
-                <span className="text-gray-600 dark:text-gray-400">+192 123 4567</span>
+                <span className="text-gray-600 dark:text-gray-400">{t('footer.phone')}</span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-5 h-5 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mt-0.5">
@@ -128,7 +130,7 @@ export default function Footer() {
                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
                   </svg>
                 </div>
-                <span className="text-gray-600 dark:text-gray-400">info@enkonix.in</span>
+                <span className="text-gray-600 dark:text-gray-400">{t('footer.email')}</span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-5 h-5 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mt-0.5">
@@ -136,7 +138,7 @@ export default function Footer() {
                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/>
                   </svg>
                 </div>
-                <span className="text-gray-600 dark:text-gray-400">123 Enkonix Street, City, Country</span>
+                <span className="text-gray-600 dark:text-gray-400">{t('footer.address')}</span>
               </li>
             </ul>
           </div>
@@ -148,7 +150,7 @@ export default function Footer() {
         <div className="mx-auto max-w-7xl px-4 py-6">
           <div className="text-center">
             <p className="text-gray-500 dark:text-gray-400 text-sm">
-              © 2025 FreelancerHub. All rights reserved.
+              {t('footer.copyright')}
             </p>
           </div>
         </div>

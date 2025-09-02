@@ -119,7 +119,41 @@ export function getCurrentUser() {
 
 export function isAuthenticated() {
   return Boolean(getCurrentUser());
-} 
+}
+
+export function isAdmin() {
+  const user = getCurrentUser();
+  return user && user.role === 'admin';
+}
+
+export function resetPassword(email, newPassword) {
+  const normalizedEmail = String(email || '').trim().toLowerCase();
+  const users = getUsers();
+  
+  // Find user with matching email
+  const userIndex = users.findIndex(
+    u => String(u.email).toLowerCase() === normalizedEmail
+  );
+  
+  if (userIndex === -1) {
+    return { success: false, message: 'User not found' };
+  }
+  
+  // Update user's password
+  const updatedUsers = [...users];
+  updatedUsers[userIndex] = {
+    ...updatedUsers[userIndex],
+    password: newPassword,
+    passwordResetTime: new Date().toISOString()
+  };
+  
+  // Save updated users
+  saveUsers(updatedUsers);
+  
+  console.log('✅ Password reset successfully for:', normalizedEmail);
+  
+  return { success: true, message: 'Password reset successfully' };
+}
 
 
 

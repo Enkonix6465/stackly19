@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { getCurrentUser, isAuthenticated } from '../utils/auth'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { useTranslation } from 'react-i18next'
 
 export default function Blog() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [activeCategory, setActiveCategory] = useState('all')
 
   useEffect(() => {
@@ -19,53 +21,47 @@ export default function Blog() {
   const blogPosts = [
     {
       id: 1,
-      title: "Getting Started as a Freelancer",
-      excerpt: "A step-by-step guide to landing your first project online.",
+      title: t('blogPage.blogPosts.gettingStarted.title'),
+      excerpt: t('blogPage.blogPosts.gettingStarted.excerpt'),
       image: "/images/freelancer-start.jpg",
-      category: "Freelancing",
-      author: "Sarah Johnson",
-      date: "Dec 15, 2024",
-      readTime: "8 min read",
+      category: t('blogPage.blogPosts.gettingStarted.category'),
+      author: t('blogPage.blogPosts.gettingStarted.author'),
+      date: t('blogPage.blogPosts.gettingStarted.date'),
+      readTime: t('blogPage.blogPosts.gettingStarted.readTime'),
       featured: true
     },
     {
       id: 2,
-      title: "How to Attract High-Paying Clients",
-      excerpt: "Proven strategies to build trust.",
+      title: t('blogPage.blogPosts.highPayingClients.title'),
+      excerpt: t('blogPage.blogPosts.highPayingClients.excerpt'),
       image: "/images/high-paying-clients.jpg",
-      category: "Client Acquisition",
-      author: "Mike Chen",
-      date: "Dec 12, 2024",
-      readTime: "12 min read",
+      category: t('blogPage.blogPosts.highPayingClients.category'),
+      author: t('blogPage.blogPosts.highPayingClients.author'),
+      date: t('blogPage.blogPosts.highPayingClients.date'),
+      readTime: t('blogPage.blogPosts.highPayingClients.readTime'),
       featured: true
     },
     {
       id: 3,
-      title: "Balancing Multiple Projects",
-      excerpt: "Time management hacks every freelancer should know.",
+      title: t('blogPage.blogPosts.multipleProjects.title'),
+      excerpt: t('blogPage.blogPosts.multipleProjects.excerpt'),
       image: "/images/project-balance.jpg",
-      category: "Productivity",
-      author: "Emma Davis",
-      date: "Dec 10, 2024",
-      readTime: "10 min read",
+      category: t('blogPage.blogPosts.multipleProjects.category'),
+      author: t('blogPage.blogPosts.multipleProjects.author'),
+      date: t('blogPage.blogPosts.multipleProjects.date'),
+      readTime: t('blogPage.blogPosts.multipleProjects.readTime'),
       featured: true
     }
   ]
 
   const categories = [
-    { name: 'all', label: 'All Posts', count: 3 },
-    { name: 'freelancing', label: 'Freelancing', count: 1 },
-    { name: 'client-acquisition', label: 'Client Acquisition', count: 1 },
-    { name: 'productivity', label: 'Productivity', count: 1 }
+    { name: 'all', label: t('blogPage.categories.all'), count: 3 },
+    { name: 'freelancing', label: t('blogPage.categories.freelancing'), count: 1 },
+    { name: 'client-acquisition', label: t('blogPage.categories.clientAcquisition'), count: 1 },
+    { name: 'productivity', label: t('blogPage.categories.productivity'), count: 1 }
   ]
 
-  const trendingTopics = [
-    "Remote Work Trends 2025",
-    "AI in Freelancing",
-    "Building Personal Brand",
-    "Financial Planning for Freelancers",
-    "Networking Strategies"
-  ]
+  const trendingTopics = t('blogPage.trendingTopics.topics', { returnObjects: true })
 
   const handleBlogClick = (blogId) => {
     navigate(`/blog/${blogId}`)
@@ -88,7 +84,7 @@ export default function Blog() {
     playsInline
     className="absolute inset-0 w-full h-full object-cover"
   >
-    <source src="/public/vedio5.mp4" type="video/mp4" />
+    <source src="/vedio5.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
@@ -98,20 +94,21 @@ export default function Blog() {
   {/* Content */}
   <div className="relative z-10 px-6 max-w-4xl">
     <p className="text-sm tracking-widest text-indigo-300 font-medium">
-      Freelancer Blog
+      {t('blogPage.showcase.tagline')}
     </p>
     <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
-      Stay Ahead, Stay Inspired
+      {t('blogPage.showcase.title')}
     </h1>
     <p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto">
-      Tips, tools, and trends to fuel your freelancing journey.    </p>
+      {t('blogPage.showcase.subtitle')}
+    </p>
     <div className="mt-8 flex gap-4 justify-center">
       {/* Primary Button */}
       <a
         href="/services"
         className="rounded-md bg-indigo-500 text-black px-5 py-2.5 hover:bg-indigo-600 hover:text-white transition"
       >
-        Subscribe 
+        {t('blogPage.showcase.subscribeButton')}
       </a>
 
       
@@ -129,8 +126,8 @@ export default function Blog() {
       <section className="py-20 border-b border-gray-200 dark:border-gray-700">
         <div className="mx-auto max-w-6xl px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Featured Articles</h2>
-            <p className="text-gray-600 dark:text-gray-400">Our most popular and insightful posts</p>
+            <h2 className="text-3xl font-bold mb-4">{t('blogPage.featuredArticles.title')}</h2>
+            <p className="text-gray-600 dark:text-gray-400">{t('blogPage.featuredArticles.subtitle')}</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -178,10 +175,10 @@ export default function Blog() {
     {/* Heading */}
     <div className="text-center mb-16">
       <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
-        Why Choose Our Freelancing Platform?
+        {t('blogPage.whyChoosePlatform.title')}
       </h2>
       <p className="text-gray-400">
-        Designed for freelancers & clients to connect, collaborate, and grow 🚀
+        {t('blogPage.whyChoosePlatform.subtitle')}
       </p>
     </div>
 
@@ -190,8 +187,8 @@ export default function Blog() {
       {/* Feature Card */}
       {[
         {
-          title: "Global Talent",
-          desc: "Access top freelancers from around the world for any project.",
+          title: t('blogPage.whyChoosePlatform.features.globalTalent.title'),
+          desc: t('blogPage.whyChoosePlatform.features.globalTalent.description'),
           icon: (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -215,8 +212,8 @@ export default function Blog() {
           ),
         },
         {
-          title: "Secure Payments",
-          desc: "Safe & transparent payment system for both clients and freelancers.",
+          title: t('blogPage.whyChoosePlatform.features.securePayments.title'),
+          desc: t('blogPage.whyChoosePlatform.features.securePayments.description'),
           icon: (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -240,8 +237,8 @@ export default function Blog() {
           ),
         },
         {
-          title: "Verified Clients",
-          desc: "Work only with trusted and verified clients to avoid scams.",
+          title: t('blogPage.whyChoosePlatform.features.verifiedClients.title'),
+          desc: t('blogPage.whyChoosePlatform.features.verifiedClients.description'),
           icon: (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -260,8 +257,8 @@ export default function Blog() {
           ),
         },
         {
-          title: "24/7 Support",
-          desc: "Our team is available around the clock to help you succeed.",
+          title: t('blogPage.whyChoosePlatform.features.support24x7.title'),
+          desc: t('blogPage.whyChoosePlatform.features.support24x7.description'),
           icon: (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -285,8 +282,8 @@ export default function Blog() {
           ),
         },
         {
-          title: "Skill Matching",
-          desc: "Smart matching system to connect freelancers with the right projects.",
+          title: t('blogPage.whyChoosePlatform.features.skillMatching.title'),
+          desc: t('blogPage.whyChoosePlatform.features.skillMatching.description'),
           icon: (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -305,8 +302,8 @@ export default function Blog() {
           ),
         },
         {
-          title: "Portfolio Showcase",
-          desc: "Easily display your work to attract high-paying clients.",
+          title: t('blogPage.whyChoosePlatform.features.portfolioShowcase.title'),
+          desc: t('blogPage.whyChoosePlatform.features.portfolioShowcase.description'),
           icon: (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -354,10 +351,10 @@ export default function Blog() {
     {/* Heading */}
     <div className="text-center mb-16">
       <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
-        Trending Topics
+        {t('blogPage.trendingTopics.title')}
       </h2>
       <p className="text-gray-600 max-w-2xl mx-auto">
-        What the freelancing community is talking about
+        {t('blogPage.trendingTopics.subtitle')}
       </p>
     </div>
 
@@ -385,10 +382,10 @@ export default function Blog() {
     {/* Heading */}
     <div className="text-center mb-16">
       <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-white">
-         Meet Our Authors
+         {t('blogPage.authors.title')}
       </h2>
       <p className="text-gray-400">
-        Expert freelancers sharing their knowledge
+        {t('blogPage.authors.subtitle')}
       </p>
     </div>
 
@@ -396,25 +393,25 @@ export default function Blog() {
     <div className="grid md:grid-cols-3 gap-8">
       {[
         {
-          name: "Sarah Johnson",
-          role: "Freelance Writer & Consultant",
-          bio: "10+ years helping freelancers build successful careers",
+          name: t('blogPage.authors.sarah.name'),
+          role: t('blogPage.authors.sarah.role'),
+          bio: t('blogPage.authors.sarah.bio'),
           image: "https://randomuser.me/api/portraits/women/44.jpg",
-          expertise: ["Content Strategy", "Personal Branding", "Client Relations"]
+          expertise: t('blogPage.authors.sarah.expertise', { returnObjects: true })
         },
         {
-          name: "Mike Chen",
-          role: "Digital Marketing Expert",
-          bio: "Specialized in helping freelancers scale their businesses",
+          name: t('blogPage.authors.mike.name'),
+          role: t('blogPage.authors.mike.role'),
+          bio: t('blogPage.authors.mike.bio'),
           image: "https://randomuser.me/api/portraits/men/46.jpg",
-          expertise: ["Marketing", "Growth Strategy", "Analytics"]
+          expertise: t('blogPage.authors.mike.expertise', { returnObjects: true })
         },
         {
-          name: "Emma Davis",
-          role: "Productivity Coach",
-          bio: "Teaching freelancers to work smarter, not harder",
+          name: t('blogPage.authors.emma.name'),
+          role: t('blogPage.authors.emma.role'),
+          bio: t('blogPage.authors.emma.bio'),
           image: "https://randomuser.me/api/portraits/women/65.jpg",
-          expertise: ["Time Management", "Workflow Optimization", "Mindset"]
+          expertise: t('blogPage.authors.emma.expertise', { returnObjects: true })
         }
       ].map((author, index) => (
         <div
@@ -454,11 +451,10 @@ export default function Blog() {
 
   <div className="relative mx-auto max-w-4xl px-6 text-center">
     <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
-      Take the Next Step in Your Freelancing Journey
+      {t('blogPage.cta.title')}
     </h2>
     <p className="text-lg md:text-xl text-gray-300 mb-10">
-      Join a thriving community of freelancers and unlock the tools, insights, 
-      and opportunities you need to succeed. 
+      {t('blogPage.cta.description')}
     </p>
 
     {/* CTA Buttons */}
@@ -468,14 +464,14 @@ export default function Blog() {
         className="px-8 py-3 rounded-xl bg-white text-black font-semibold 
                  shadow-md hover:shadow-xl hover:bg-gray-100 transition duration-300"
       >
-        Start Freelancing
+        {t('blogPage.cta.startFreelancingButton')}
       </a>
       <a
         href="/about"
         className="px-8 py-3 rounded-xl border-2 border-white text-white font-semibold 
                  hover:bg-white hover:text-black transition duration-300"
       >
-        Learn More
+        {t('blogPage.cta.learnMoreButton')}
       </a>
     </div>
   </div>

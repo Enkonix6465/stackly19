@@ -140,6 +140,12 @@ export default function Register() {
               </div>
             </form>
 
+            <div className="mt-4 text-center">
+              <Link to="/forgot-password" className="text-sm text-indigo-300 hover:text-indigo-200 underline">
+                Forgot your password?
+              </Link>
+            </div>
+
             <p className="mt-6 text-center text-sm text-white/80">
               Already have an account? <Link to="/login" className="text-indigo-300 hover:text-indigo-200 underline">Login</Link>
             </p>

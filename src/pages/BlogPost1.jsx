@@ -3,15 +3,19 @@ import { useNavigate } from 'react-router-dom'
 import { getCurrentUser, isAuthenticated } from '../utils/auth'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { useTranslation } from 'react-i18next'
 
 export default function BlogPost1() {
   const navigate = useNavigate()
+  const { t, i18n } = useTranslation()
 
   useEffect(() => {
     if (!isAuthenticated()) {
       navigate('/login', { replace: true })
     }
   }, [navigate])
+
+
 
   const user = getCurrentUser()
 
@@ -23,7 +27,7 @@ export default function BlogPost1() {
 <section 
   className="relative text-white"
   style={{
-    backgroundImage: "url('/images/freelancer-start.jpg')", // <-- replace with your image path
+    backgroundImage: "url('/images/freelancer-start.jpg')",
     backgroundSize: "cover",
     backgroundPosition: "center"
   }}
@@ -34,28 +38,27 @@ export default function BlogPost1() {
   <div className="relative mx-auto max-w-6xl px-4 py-16">
     <div className="max-w-4xl">
       <div className="flex items-center gap-2 mb-4">
-        <span className="px-3 py-1 bg-white/20 rounded-full text-sm">Freelancing</span>
+        <span className="px-3 py-1 bg-white/20 rounded-full text-sm">{t('blogPost1.hero.category')}</span>
         <span className="text-white/80">•</span>
-        <span className="text-white/80">8 min read</span>
+        <span className="text-white/80">{t('blogPost1.hero.readTime')}</span>
         <span className="text-white/80">•</span>
-        <span className="text-white/80">Dec 15, 2024</span>
+        <span className="text-white/80">{t('blogPost1.hero.date')}</span>
       </div>
       <h1 className="text-4xl md:text-5xl font-bold mb-6">
-        Getting Started as a Freelancer: A Complete Guide
+        {t('blogPost1.hero.title')}
       </h1>
       <div className="flex items-center gap-4">
         <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-indigo-600 font-bold">
           SJ
         </div>
         <div>
-          <p className="font-semibold">Sarah Johnson</p>
-          <p className="text-white/80 text-sm">Freelance Writer & Consultant</p>
+          <p className="font-semibold">{t('blogPost1.hero.author')}</p>
+          <p className="text-white/80 text-sm">{t('blogPost1.hero.authorRole')}</p>
         </div>
       </div>
     </div>
   </div>
 </section>
-
 
       {/* Main Content */}
       <section className="py-16">
@@ -71,219 +74,149 @@ export default function BlogPost1() {
                 />
                 
                 <p className="text-xl text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-                  Embarking on a freelancing journey can be both exciting and overwhelming. With the right approach, 
-                  you can build a successful career that offers flexibility, financial freedom, and personal fulfillment. 
-                  This comprehensive guide will walk you through every step of the process.
+                  {t('blogPost1.content.intro')}
                 </p>
 
                 <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                  Understanding the Freelancing Landscape
+                  {t('blogPost1.content.section1.title')}
                 </h2>
                 <p className="mb-6">
-                  Freelancing has evolved significantly over the past decade. What once was considered a side hustle 
-                  has now become a legitimate career path for millions of professionals worldwide. The gig economy 
-                  continues to grow, offering opportunities across virtually every industry.
+                  {t('blogPost1.content.section1.description')}
                 </p>
 
                 <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
-                  Key Benefits of Freelancing
+                  {t('blogPost1.content.section2.title')}
                 </h3>
                 <ul className="mb-6 space-y-2">
-                  <li className="flex items-start gap-3">
-                    <span className="text-indigo-500 text-lg">✓</span>
-                    <span>Flexible work hours and location independence</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-indigo-500 text-lg">✓</span>
-                    <span>Unlimited earning potential based on your skills</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-indigo-500 text-lg">✓</span>
-                    <span>Ability to choose projects that align with your interests</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-indigo-500 text-lg">✓</span>
-                    <span>Professional growth through diverse client experiences</span>
-                  </li>
+                  {t('blogPost1.content.section2.benefits', { returnObjects: true }).map((benefit, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <span className="text-indigo-500 text-lg">✓</span>
+                      <span>{benefit}</span>
+                    </li>
+                  ))}
                 </ul>
 
                 <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                  Step 1: Assess Your Skills and Market Demand
+                  {t('blogPost1.content.section3.title')}
                 </h2>
                 <p className="mb-6">
-                  Before diving into freelancing, it's crucial to evaluate your current skill set and understand 
-                  what the market demands. This self-assessment will help you position yourself effectively and 
-                  identify areas for improvement.
+                  {t('blogPost1.content.section3.description')}
                 </p>
 
                 <div className="bg-indigo-50 dark:bg-indigo-900/20 p-6 rounded-xl mb-8">
                   <h4 className="font-semibold mb-3 text-indigo-800 dark:text-indigo-200">
-                    Skills Assessment Checklist
+                    {t('blogPost1.content.section3.checklistTitle')}
                   </h4>
                   <ul className="space-y-2 text-indigo-700 dark:text-indigo-300">
-                    <li>• Technical skills relevant to your field</li>
-                    <li>• Communication and client management abilities</li>
-                    <li>• Time management and organizational skills</li>
-                    <li>• Problem-solving and critical thinking</li>
-                    <li>• Marketing and self-promotion capabilities</li>
+                    {t('blogPost1.content.section3.checklistItems', { returnObjects: true }).map((item, index) => (
+                      <li key={index}>• {item}</li>
+                    ))}
                   </ul>
                 </div>
 
                 <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                  Step 2: Choose Your Freelancing Platform
+                  {t('blogPost1.content.section4.title')}
                 </h2>
                 <p className="mb-6">
-                  There are numerous platforms where you can find freelance work. Each has its own advantages 
-                  and target audience. Research and choose the ones that best align with your skills and goals.
+                  {t('blogPost1.content.section4.description')}
                 </p>
 
                 <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
-                  Popular Freelancing Platforms
+                  {t('blogPost1.content.section4.subtitle')}
                 </h3>
                 <div className="grid md:grid-cols-2 gap-4 mb-8">
-                  <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                    <h4 className="font-semibold mb-2">Upwork</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Great for beginners, wide variety of projects
-                    </p>
-                  </div>
-                  <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                    <h4 className="font-semibold mb-2">Fiverr</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Service-based marketplace, good for creative work
-                    </p>
-                  </div>
-                  <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                    <h4 className="font-semibold mb-2">Freelancer.com</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Competitive bidding system, various project types
-                    </p>
-                  </div>
-                  <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                    <h4 className="font-semibold mb-2">Toptal</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Premium platform for top-tier professionals
-                    </p>
-                  </div>
+                  {t('blogPost1.content.section4.platforms', { returnObjects: true }).map((platform, index) => (
+                    <div key={index} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                      <h4 className="font-semibold mb-2">{platform.nameTranslated}</h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        {platform.description}
+                      </p>
+                    </div>
+                  ))}
                 </div>
 
                 <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                  Step 3: Create a Compelling Profile
+                  {t('blogPost1.content.section5.title')}
                 </h2>
                 <p className="mb-6">
-                  Your profile is your digital business card. It's often the first impression potential clients 
-                  have of you, so make it count. A well-crafted profile can significantly increase your chances 
-                  of landing projects.
+                  {t('blogPost1.content.section5.description')}
                 </p>
 
                 <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
-                  Profile Optimization Tips
+                  {t('blogPost1.content.section5.subtitle')}
                 </h3>
                 <ol className="mb-8 space-y-3 list-decimal list-inside">
-                  <li>
-                    <strong>Professional Headshot:</strong> Use a high-quality, professional photo that conveys trust and competence.
-                  </li>
-                  <li>
-                    <strong>Compelling Headline:</strong> Create a headline that clearly states what you do and your unique value proposition.
-                  </li>
-                  <li>
-                    <strong>Detailed Overview:</strong> Write a comprehensive overview that highlights your expertise, experience, and achievements.
-                  </li>
-                  <li>
-                    <strong>Portfolio Showcase:</strong> Include your best work samples to demonstrate your capabilities.
-                  </li>
-                  <li>
-                    <strong>Skills and Certifications:</strong> List relevant skills and any certifications that add credibility.
-                  </li>
+                  {t('blogPost1.content.section5.tips', { returnObjects: true }).map((tip, index) => (
+                    <li key={index}>
+                      <strong>{tip.title}</strong> {tip.description}
+                    </li>
+                  ))}
                 </ol>
 
                 <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                  Step 4: Set Your Pricing Strategy
+                  {t('blogPost1.content.section6.title')}
                 </h2>
                 <p className="mb-6">
-                  Pricing is one of the most challenging aspects of freelancing. Set your rates too low, and you 
-                  might struggle to make ends meet. Set them too high, and you might price yourself out of the market.
+                  {t('blogPost1.content.section6.description')}
                 </p>
 
                 <div className="bg-yellow-50 dark:bg-yellow-900/20 p-6 rounded-xl mb-8">
                   <h4 className="font-semibold mb-3 text-yellow-800 dark:text-yellow-200">
-                    Pricing Strategy Considerations
+                    {t('blogPost1.content.section6.subtitle')}
                   </h4>
                   <ul className="space-y-2 text-yellow-700 dark:text-yellow-300">
-                    <li>• Research market rates for your skills and experience level</li>
-                    <li>• Consider your living expenses and financial goals</li>
-                    <li>• Factor in taxes, healthcare, and other business expenses</li>
-                    <li>• Start with competitive rates and increase as you gain experience</li>
-                    <li>• Offer different pricing tiers for different service levels</li>
+                    {t('blogPost1.content.section6.considerations', { returnObjects: true }).map((consideration, index) => (
+                      <li key={index}>• {consideration}</li>
+                    ))}
                   </ul>
                 </div>
 
                 <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                  Step 5: Land Your First Client
+                  {t('blogPost1.content.section7.title')}
                 </h2>
                 <p className="mb-6">
-                  Getting your first client can be the most challenging part of your freelancing journey. 
-                  However, with persistence and the right approach, you can overcome this hurdle and start building your client base.
+                  {t('blogPost1.content.section7.description')}
                 </p>
 
                 <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
-                  Strategies for Landing Your First Client
+                  {t('blogPost1.content.section7.subtitle')}
                 </h3>
                 <ul className="mb-8 space-y-3">
-                  <li className="flex items-start gap-3">
-                    <span className="text-indigo-500 text-lg">•</span>
-                    <span><strong>Start with Small Projects:</strong> Offer to do smaller, simpler projects to build your portfolio and gain reviews.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-indigo-500 text-lg">•</span>
-                    <span><strong>Leverage Your Network:</strong> Reach out to friends, family, and professional contacts who might need your services.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-indigo-500 text-lg">•</span>
-                    <span><strong>Cold Outreach:</strong> Identify potential clients and reach out with personalized proposals.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-indigo-500 text-lg">•</span>
-                    <span><strong>Social Media Marketing:</strong> Use platforms like LinkedIn, Twitter, and Instagram to showcase your expertise.</span>
-                  </li>
+                  {t('blogPost1.content.section7.strategies', { returnObjects: true }).map((strategy, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <span className="text-indigo-500 text-lg">•</span>
+                      <span><strong>{strategy.title}</strong> {strategy.description}</span>
+                    </li>
+                  ))}
                 </ul>
 
                 <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                  Building Long-term Success
+                  {t('blogPost1.content.section8.title')}
                 </h2>
                 <p className="mb-6">
-                  Freelancing is not just about landing individual projects; it's about building a sustainable 
-                  business. Focus on delivering exceptional value, building strong client relationships, and 
-                  continuously improving your skills.
+                  {t('blogPost1.content.section8.description')}
                 </p>
 
                 <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-xl mb-8">
                   <h4 className="font-semibold mb-3 text-green-800 dark:text-green-200">
-                    Success Principles for Freelancers
+                    {t('blogPost1.content.section8.subtitle')}
                   </h4>
                   <ul className="space-y-2 text-green-700 dark:text-green-300">
-                    <li>• Always exceed client expectations</li>
-                    <li>• Communicate clearly and regularly</li>
-                    <li>• Meet deadlines consistently</li>
-                    <li>• Ask for feedback and testimonials</li>
-                    <li>• Continuously learn and adapt</li>
-                    <li>• Build a strong personal brand</li>
+                    {t('blogPost1.content.section8.principles', { returnObjects: true }).map((principle, index) => (
+                      <li key={index}>• {principle}</li>
+                    ))}
                   </ul>
                 </div>
 
                 <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-                  Conclusion
+                  {t('blogPost1.content.conclusion.title')}
                 </h2>
                 <p className="mb-8">
-                  Starting your freelancing journey requires preparation, patience, and persistence. By following 
-                  these steps and maintaining a professional approach, you can build a successful freelancing career 
-                  that offers the freedom and flexibility you're looking for.
+                  {t('blogPost1.content.conclusion.mainText')}
                 </p>
 
                 <p className="text-lg text-gray-600 dark:text-gray-400">
-                  Remember, every successful freelancer started exactly where you are now. The key is to take 
-                  action, learn from your experiences, and never stop improving. Your freelancing success story 
-                  is waiting to be written.
+                  {t('blogPost1.content.conclusion.finalText')}
                 </p>
               </article>
 
@@ -294,22 +227,16 @@ export default function BlogPost1() {
                     SJ
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Sarah Johnson</h3>
+                    <h3 className="text-xl font-bold mb-2">{t('blogPost1.author.name')}</h3>
                     <p className="text-gray-600 dark:text-gray-400 mb-3">
-                      Sarah is a freelance writer and consultant with over 10 years of experience helping 
-                      freelancers build successful careers. She specializes in content strategy, personal branding, 
-                      and client relations.
+                      {t('blogPost1.author.bio')}
                     </p>
                     <div className="flex gap-2">
-                      <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-sm rounded-full">
-                        Content Strategy
-                      </span>
-                      <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-sm rounded-full">
-                        Personal Branding
-                      </span>
-                      <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-sm rounded-full">
-                        Client Relations
-                      </span>
+                      {t('blogPost1.author.expertise', { returnObjects: true }).map((expertise, index) => (
+                        <span key={index} className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-sm rounded-full">
+                          {expertise}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -322,17 +249,17 @@ export default function BlogPost1() {
 
               {/* Related Posts */}
               <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
-                <h3 className="font-bold text-lg mb-4">Related Posts</h3>
+                <h3 className="font-bold text-lg mb-4">{t('blogPost1.sidebar.relatedPosts')}</h3>
                 <div className="space-y-4">
                   <div 
                     className="cursor-pointer group"
                     onClick={() => navigate('/blog/2')}
                   >
                     <h4 className="font-semibold group-hover:text-indigo-600 transition-colors">
-                      How to Attract High-Paying Clients
+                      {t('blogPost1.sidebar.post1.title')}
                     </h4>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Proven strategies to build trust and grow your income.
+                      {t('blogPost1.sidebar.post1.description')}
                     </p>
                   </div>
                   <div 
@@ -340,10 +267,10 @@ export default function BlogPost1() {
                     onClick={() => navigate('/blog/3')}
                   >
                     <h4 className="font-semibold group-hover:text-indigo-600 transition-colors">
-                      Balancing Multiple Projects
+                      {t('blogPost1.sidebar.post2.title')}
                     </h4>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      Time management hacks every freelancer should know.
+                      {t('blogPost1.sidebar.post2.description')}
                     </p>
                   </div>
                 </div>
@@ -352,8 +279,6 @@ export default function BlogPost1() {
           </div>
         </div>
       </section>
-
-
 
       <Footer />
     </div>

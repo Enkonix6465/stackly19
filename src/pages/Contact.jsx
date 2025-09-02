@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { getCurrentUser, isAuthenticated } from '../utils/auth'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { useTranslation } from 'react-i18next'
 
 export default function Contact() {
   const [user, setUser] = useState(null)
@@ -16,6 +17,7 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -83,7 +85,7 @@ export default function Contact() {
     className="absolute inset-0 w-full h-full object-cover"
   >
     <source src="/vedio6.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
+    {t('contact.video.notSupported')}
   </video>
 
   {/* Overlay (darken video for readability) */}
@@ -93,10 +95,10 @@ export default function Contact() {
   <div className="relative z-10 px-6 max-w-4xl">
     
     <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
-       Get In Touch
+       {t('contact.showcase.title')}
     </h1>
     <p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto">
-      Ready to start your next project? Let's discuss how we can help bring your vision to life. 
+      {t('contact.showcase.subtitle')}
     </p>
     <div className="mt-8 flex gap-4 justify-center">
       {/* Primary Button */}
@@ -104,7 +106,7 @@ export default function Contact() {
         href="#contact"
         className="rounded-md bg-indigo-500 text-black px-5 py-2.5 hover:bg-indigo-600 hover:text-white transition"
       >
-        Contact
+        {t('contact.showcase.contactButton')}
       </a>
 
       
@@ -119,11 +121,10 @@ export default function Contact() {
         <div className="mx-auto max-w-4xl px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4" id='contact2'>
-              Send Us a Message
+              {t('contact.form.title')}
             </h2> 
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Fill out the form below and we'll get back to you within 24 hours. 
-              We're excited to hear about your project!
+              {t('contact.form.subtitle')}
             </p>
           </div>
 
@@ -134,7 +135,7 @@ export default function Contact() {
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
                   </svg>
-                  Thank you! Your message has been sent successfully. We'll get back to you soon.
+                  {t('contact.form.successMessage')}
                 </div>
               </div>
             )}
@@ -143,7 +144,7 @@ export default function Contact() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Full Name *
+                    {t('contact.form.fullName')}
                   </label>
                   <input
                     type="text"
@@ -153,12 +154,12 @@ export default function Contact() {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors"
-                    placeholder="Enter your full name"
+                    placeholder={t('contact.form.fullNamePlaceholder')}
                   />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Email Address *
+                    {t('contact.form.emailAddress')}
                   </label>
                   <input
                     type="email"
@@ -168,7 +169,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors"
-                    placeholder="Enter your email address"
+                    placeholder={t('contact.form.emailPlaceholder')}
                   />
                 </div>
               </div>
@@ -176,7 +177,7 @@ export default function Contact() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Phone Number
+                    {t('contact.form.phoneNumber')}
                   </label>
                   <input
                     type="tel"
@@ -185,12 +186,12 @@ export default function Contact() {
                     value={formData.phone}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors"
-                    placeholder="Enter your phone number"
+                    placeholder={t('contact.form.phonePlaceholder')}
                   />
                 </div>
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Subject *
+                    {t('contact.form.subject')}
                   </label>
                   <input
                     type="text"
@@ -200,14 +201,14 @@ export default function Contact() {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors"
-                    placeholder="What's this about?"
+                    placeholder={t('contact.form.subjectPlaceholder')}
                   />
                 </div>
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Message *
+                  {t('contact.form.message')}
                 </label>
                 <textarea
                   id="message"
@@ -217,7 +218,7 @@ export default function Contact() {
                   required
                   rows={6}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:text-white transition-colors resize-none"
-                  placeholder="Tell us about your project, requirements, or any questions you have..."
+                  placeholder={t('contact.form.messagePlaceholder')}
                 />
               </div>
 
@@ -254,10 +255,10 @@ export default function Contact() {
              1.135 5.824 3 7.938l3-2.647z"
         ></path>
       </svg>
-      Sending Message...
+      {t('contact.form.sendingMessage')}
     </>
   ) : (
-    'Send Message'
+    t('contact.form.sendMessage')
   )}
 </button>
 
@@ -272,10 +273,10 @@ export default function Contact() {
         <div className="mx-auto max-w-7xl px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Find Us
+              {t('contact.map.title')}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Visit our office or get in touch with us. We're always happy to meet in person!
+              {t('contact.map.subtitle')}
             </p>
           </div>
 
@@ -304,10 +305,10 @@ export default function Contact() {
         <div className="mx-auto max-w-7xl px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Contact Information
+              {t('contact.contactInfo.title')}
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Multiple ways to reach us. Choose what works best for you!
+              {t('contact.contactInfo.subtitle')}
             </p>
           </div>
 
@@ -320,13 +321,13 @@ export default function Contact() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                Phone
+                {t('contact.contactInfo.phone')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-2">
-                +1 (555) 123-4567
+                {t('contact.contactInfo.phoneNumber')}
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-500">
-                Mon-Fri: 9:00 AM - 6:00 PM
+                {t('contact.contactInfo.phoneHours')}
               </p>
             </div>
 
@@ -339,13 +340,13 @@ export default function Contact() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                Email
+                {t('contact.contactInfo.email')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-2">
-                hello@enkonix.in
+                {t('contact.contactInfo.emailAddress')}
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-500">
-                We reply within 24 hours
+                {t('contact.contactInfo.emailResponse')}
               </p>
             </div>
 
@@ -357,13 +358,13 @@ export default function Contact() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                Office
+                {t('contact.contactInfo.office')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-2">
-                123 Enkonix Street
+                {t('contact.contactInfo.officeAddress')}
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-500">
-                City, State 12345
+                {t('contact.contactInfo.officeCity')}
               </p>
             </div>
           </div>
@@ -373,24 +374,24 @@ export default function Contact() {
       {/* Call to Action Section */}
 <section
   className="relative py-24 bg-cover bg-center"
-  style={{ backgroundImage: "url('/images/contcatbg.jpeg')" }} // 🔹 Replace with your image path
+  style={{ backgroundImage: "url('/images/CTA.jpg')" }}
 >
-  <div className="absolute inset-0 bg-black bg-opacity-60"></div> {/* overlay for readability */}
+  <div className="absolute inset-0 bg-black bg-opacity-20"></div> {/* reduced overlay opacity */}
   
   <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
     <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
-      Transform Your Ideas Into Reality
+      {t('contact.cta.title')}
     </h2>
-    <p className="text-lg md:text-xl text-gray-200 mb-10 leading-relaxed">
-      Collaborate with us to build impactful digital experiences that stand out.
+    <p className="text-lg md:text-xl text-white mb-10 leading-relaxed">
+      {t('contact.cta.subtitle')}
     </p>
     <a
       href='#contact2'
-      className="px-10 py-4 bg-indigo-600 text-white font-semibold rounded-lg 
-                 shadow-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 
+      className="px-10 py-4 bg-purple-600 text-white font-semibold rounded-lg 
+                 shadow-lg hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 
                  transition-all duration-300 transform hover:scale-105"
     >
-      Get Started
+      {t('contact.cta.getStartedButton')}
     </a>
   </div>
 </section>

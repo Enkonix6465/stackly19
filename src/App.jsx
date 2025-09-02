@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import ForgotPassword from './pages/ForgotPassword'
 import Home from './pages/Home'
 import Home2 from './pages/Home2'
 import About from './pages/About'
@@ -19,6 +20,7 @@ import ContentCopywriting from './pages/ContentCopywriting'
 import DigitalMarketing from './pages/DigitalMarketing'
 import OngoingSupport from './pages/OngoingSupport'
 import ProtectedRoute from './components/ProtectedRoute'
+import AdminProtectedRoute from './components/AdminProtectedRoute'
 import { ThemeProvider } from './components/theme-provider'
 
 function App() {
@@ -29,7 +31,15 @@ function App() {
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/admin-dashbord" element={<AdminDashboard />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route 
+            path="/admin-dashboard" 
+            element={
+              <AdminProtectedRoute>
+                <AdminDashboard />
+              </AdminProtectedRoute>
+            } 
+          />
           <Route
             path="/home"
             element={

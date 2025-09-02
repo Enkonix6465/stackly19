@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import { getCurrentUser, isAuthenticated } from '../utils/auth'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { useTranslation } from 'react-i18next'
 
 export default function WebsiteDevelopment() {
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -53,11 +55,10 @@ export default function WebsiteDevelopment() {
   <div className="relative z-10 px-6 max-w-4xl">
     
     <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
-      Website Development
+      {t('websiteDevelopment.showcase.title')}
     </h1>
     <p className="text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
-      Custom business websites and landing pages that convert visitors into clients. 
-      Professional, responsive, and optimized for success.
+      {t('websiteDevelopment.showcase.subtitle')}
     </p>
     <div className="mt-8 flex gap-4 justify-center">
       {/* Primary Button */}
@@ -65,7 +66,7 @@ export default function WebsiteDevelopment() {
         href="/contact"
         className="rounded-md bg-indigo-500 text-black px-5 py-2.5 hover:bg-indigo-600 hover:text-white transition"
       >
-        connect
+        {t('websiteDevelopment.showcase.connectButton')}
       </a>
 
       
@@ -79,18 +80,15 @@ export default function WebsiteDevelopment() {
   <div className="mx-auto max-w-6xl px-4 py-28 grid md:grid-cols-2 gap-10 items-center">
     <div className="animate-fade-in">
       <p className="text-sm tracking-widest text-black dark:text-white">
-        WEBSITE DEVELOPMENT SERVICES
+        {t('websiteDevelopment.hero.tagline')}
       </p>
       
       <h1 className="mt-2 text-4xl md:text-5xl font-extrabold leading-tight text-black dark:text-white">
-        Build Powerful Freelancing Platforms with Scalable Web Solutions
+        {t('websiteDevelopment.hero.title')}
       </h1>
       
       <p className="mt-4 text-black dark:text-gray-300">
-        We specialize in developing modern, high-performance websites tailored for freelancers 
-        and businesses. From portfolio platforms to full-featured freelance marketplaces, 
-        our solutions are designed to be secure, scalable, and user-friendly — helping you 
-        connect talent with opportunities seamlessly.
+        {t('websiteDevelopment.hero.description')}
       </p>
     </div>
 
@@ -114,12 +112,10 @@ export default function WebsiteDevelopment() {
       {/* Left Content */}
       <div>
         <h2 className="text-4xl font-bold text-white mb-6">
-          Professional Website Solutions
+          {t('websiteDevelopment.serviceOverview.title')}
         </h2>
         <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-          I specialize in creating custom websites that not only look stunning but also drive results. 
-          From simple landing pages to complex business websites, every project is built with your 
-          business goals in mind.
+          {t('websiteDevelopment.serviceOverview.description')}
         </p>
         <div className="space-y-4">
           <div className="flex items-center gap-3">
@@ -128,7 +124,7 @@ export default function WebsiteDevelopment() {
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
               </svg>
             </div>
-            <span className="text-gray-200">Responsive design for all devices</span>
+            <span className="text-gray-200">{t('websiteDevelopment.serviceOverview.features.responsiveDesign')}</span>
           </div>
           <div className="flex items-center gap-3">
             <div className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center">
@@ -136,7 +132,7 @@ export default function WebsiteDevelopment() {
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
               </svg>
             </div>
-            <span className="text-gray-200">SEO optimized for better visibility</span>
+            <span className="text-gray-200">{t('websiteDevelopment.serviceOverview.features.seoOptimized')}</span>
           </div>
           <div className="flex items-center gap-3">
             <div className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center">
@@ -144,34 +140,34 @@ export default function WebsiteDevelopment() {
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
               </svg>
             </div>
-            <span className="text-gray-200">Fast loading and performance optimized</span>
+            <span className="text-gray-200">{t('websiteDevelopment.serviceOverview.features.fastLoading')}</span>
           </div>
         </div>
       </div>
 
       {/* Right Card */}
       <div className="bg-gray-900 rounded-2xl shadow-xl p-8">
-        <h3 className="text-2xl font-bold text-white mb-4">What You Get</h3>
+        <h3 className="text-2xl font-bold text-white mb-4">{t('websiteDevelopment.serviceOverview.websiteFeatures.title')}</h3>
         <ul className="space-y-3">
           <li className="flex items-start gap-3">
             <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></span>
-            <span className="text-gray-300">Custom design tailored to your brand</span>
+            <span className="text-gray-300">{t('websiteDevelopment.serviceOverview.websiteFeatures.customDesign')}</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></span>
-            <span className="text-gray-300">Mobile-first responsive design</span>
+            <span className="text-gray-300">{t('websiteDevelopment.serviceOverview.websiteFeatures.mobileFirst')}</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></span>
-            <span className="text-gray-300">Content management system</span>
+            <span className="text-gray-300">{t('websiteDevelopment.serviceOverview.websiteFeatures.cms')}</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></span>
-            <span className="text-gray-300">SEO optimization and analytics</span>
+            <span className="text-gray-300">{t('websiteDevelopment.serviceOverview.websiteFeatures.seoAnalytics')}</span>
           </li>
           <li className="flex items-start gap-3">
             <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></span>
-            <span className="text-gray-300">Ongoing support and maintenance</span>
+            <span className="text-gray-300">{t('websiteDevelopment.serviceOverview.websiteFeatures.ongoingSupport')}</span>
           </li>
         </ul>
       </div>
@@ -184,14 +180,14 @@ export default function WebsiteDevelopment() {
 <section className="py-20 bg-white text-gray-900 transition-colors duration-500">
   <div className="mx-auto max-w-7xl px-4">
     {/* Heading */}
-    <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold text-gray-900 mb-4">
-        Development Process
-      </h2>
-      <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-        A streamlined approach to deliver your website on time and within budget
-      </p>
-    </div>
+          <div className="text-center mb-16">
+        <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          {t('websiteDevelopment.process.title')}
+        </h2>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          {t('websiteDevelopment.process.subtitle')}
+        </p>
+      </div>
 
     {/* Steps */}
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -200,9 +196,9 @@ export default function WebsiteDevelopment() {
         <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
           <span className="text-2xl font-bold text-white">1</span>
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">Discovery</h3>
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('websiteDevelopment.process.steps.discovery.title')}</h3>
         <p className="text-gray-600">
-          Understanding your business, goals, and target audience
+          {t('websiteDevelopment.process.steps.discovery.description')}
         </p>
       </div>
 
@@ -211,9 +207,9 @@ export default function WebsiteDevelopment() {
         <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
           <span className="text-2xl font-bold text-white">2</span>
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">Design</h3>
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('websiteDevelopment.process.steps.design.title')}</h3>
         <p className="text-gray-600">
-          Creating wireframes and visual designs for approval
+          {t('websiteDevelopment.process.steps.design.description')}
         </p>
       </div>
 
@@ -222,9 +218,9 @@ export default function WebsiteDevelopment() {
         <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
           <span className="text-2xl font-bold text-white">3</span>
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">Development</h3>
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('websiteDevelopment.process.steps.development.title')}</h3>
         <p className="text-gray-600">
-          Building your website with clean, optimized code
+          {t('websiteDevelopment.process.steps.development.description')}
         </p>
       </div>
 
@@ -233,9 +229,9 @@ export default function WebsiteDevelopment() {
         <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
           <span className="text-2xl font-bold text-white">4</span>
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">Launch</h3>
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('websiteDevelopment.process.steps.launch.title')}</h3>
         <p className="text-gray-600">
-          Testing, deployment, and post-launch support
+          {t('websiteDevelopment.process.steps.launch.description')}
         </p>
       </div>
     </div>
@@ -250,10 +246,10 @@ export default function WebsiteDevelopment() {
         <div className="mx-auto max-w-7xl px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white dark:text-white mb-4">
-              Technologies I Use
+              {t('websiteDevelopment.technologies.title')}
             </h2>
             <p className="text-lg text-white dark:text-gray-400 max-w-2xl mx-auto">
-              Modern, reliable technologies to build fast and scalable websites
+              {t('websiteDevelopment.technologies.subtitle')}
             </p>
           </div>
 
@@ -282,12 +278,12 @@ export default function WebsiteDevelopment() {
   <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
     {/* Heading */}
     <h2 className="text-5xl font-extrabold text-black mb-6 leading-tight">
-      Let’s Build Something Extraordinary
+      {t('websiteDevelopment.cta.title')}
     </h2>
 
     {/* Subtext */}
     <p className="text-lg text-black max-w-2xl mx-auto mb-10">
-      From concept to launch, we craft digital experiences that inspire action.
+      {t('websiteDevelopment.cta.subtitle')}
     </p>
 
     {/* Buttons */}
@@ -298,7 +294,7 @@ export default function WebsiteDevelopment() {
                    rounded-lg shadow-md hover:bg-indigo-700 
                    transition-all duration-300 transform hover:scale-105"
       >
-        Start Your Project
+        {t('websiteDevelopment.cta.startProjectButton')}
       </button>
       <button
         onClick={() => navigate('/services')}
@@ -306,7 +302,7 @@ export default function WebsiteDevelopment() {
                    rounded-lg hover:bg-indigo-600 hover:text-white 
                    transition-all duration-300 transform hover:scale-105"
       >
-        View Services
+        {t('websiteDevelopment.cta.viewServicesButton')}
       </button>
     </div>
   </div>
