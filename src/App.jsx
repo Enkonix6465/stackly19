@@ -22,11 +22,13 @@ import OngoingSupport from './pages/OngoingSupport'
 import ProtectedRoute from './components/ProtectedRoute'
 import AdminProtectedRoute from './components/AdminProtectedRoute'
 import { ThemeProvider } from './components/theme-provider'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<Login />} />
