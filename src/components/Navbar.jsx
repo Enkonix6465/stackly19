@@ -17,9 +17,9 @@ export default function Navbar({ user }) {
   
   const handleLogout = () => {
     // Clear user session from localStorage
-   logoutUser()
-    // Redirect to login page
-    window.location.href = '/login'
+    logoutUser()
+    // Navigate to login page using React Router
+    navigate('/login')
   }
  
   const navigate = useNavigate()
