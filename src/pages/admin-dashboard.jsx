@@ -32,6 +32,15 @@ export default function AdminDashboard() {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
+    const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    const checkDark = () => setIsDark(document.documentElement.classList.contains('dark'))
+    checkDark()
+    const observer = new MutationObserver(checkDark)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     setUsers(getUsersFromLocalStorage());
@@ -66,8 +75,13 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-      {/* Header */}
+<div
+  className={`min-h-screen ${
+    isDark
+      ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700'
+      : 'bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50'
+  }`}
+>      {/* Header */}
       <header className="bg-white/80 backdrop-blur-md border-b border-slate-200/60 shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">

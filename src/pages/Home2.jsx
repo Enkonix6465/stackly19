@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getCurrentUser, logoutUser, isAuthenticated } from '../utils/auth'
 import Navbar from '../components/Navbar'
@@ -9,12 +9,20 @@ import { useTranslation } from 'react-i18next'
 export default function Home2() {
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
     if (!isAuthenticated()) {
       navigate('/login', { replace: true })
     }
+    // Theme detection
+    const checkDark = () => setIsDark(document.documentElement.classList.contains('dark'))
+    checkDark()
+    const observer = new MutationObserver(checkDark)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
   }, [navigate])
+  
 
   const user = getCurrentUser()
 
@@ -22,9 +30,10 @@ export default function Home2() {
     logoutUser()
     navigate('/login', { replace: true })
   }
+  
 
   return (
-    <div className="bg-white text-black">
+    <div className={`${isDark ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
       <Navbar user={user} />
 
       {/* 1 Showcase */}
@@ -84,9 +93,13 @@ export default function Home2() {
         <div className="mx-auto max-w-6xl px-4 py-24">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-extrabold">{t('home2.portfolio.title')}</h2>
-            <p className="text-black/70 mt-2">
-              {t('home2.portfolio.subtitle')}
-            </p>
+             <p
+      className={`mt-2 ${
+        isDark ? "text-gray-300" : "text-black/70"
+      }`}
+    >
+      {t("home2.portfolio.subtitle")}
+    </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -144,16 +157,24 @@ export default function Home2() {
       </section>
 
       {/* Testimonials */}
-      <section
-        id="testimonials"
-        className="border-t border-black/10 bg-black text-white"
-      >
+         <section
+      id="testimonials"
+      className={`border-t transition-colors duration-300 ${
+        isDark
+          ? "bg-black text-white border-gray-700"
+          : "bg-gray-100 text-black border-black/10"
+      }`}
+    >
         <div className="mx-auto max-w-6xl px-4 py-24">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-extrabold">{t('home2.testimonials.title')}</h2>
-            <p className="text-white/70 mt-2">
-              {t('home2.testimonials.subtitle')}
-            </p>
+             <p
+      className={`mt-2 ${
+        isDark ? "text-white/70" : "text-black/70"
+      }`}
+    >
+      {t("home2.testimonials.subtitle")}
+    </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -209,15 +230,25 @@ export default function Home2() {
                 </div>
 
                 {/* Testimonial Text */}
-                <p className="text-white/80 mb-4 text-justify">
-                  "{testimonial.content}"
-                </p>
+                 <p
+        className={`mb-4 text-justify ${
+          isDark ? "text-white/80" : "text-black/80"
+        }`}
+      >
+        "{testimonial.content}"
+      </p>
 
-                {/* Name + Role */}
-                <div>
-                  <p className="font-semibold">{testimonial.name}</p>
-                  <p className="text-white/60 text-sm">{testimonial.role}</p>
-                </div>
+      {/* Name + Role */}
+      <div>
+        <p className="font-semibold">{testimonial.name}</p>
+        <p
+          className={`text-sm ${
+            isDark ? "text-white/60" : "text-black/60"
+          }`}
+        >
+          {testimonial.role}
+        </p>
+      </div>
               </div>
             ))}
           </div>
@@ -225,13 +256,31 @@ export default function Home2() {
       </section>
 
       {/* Statistics */}
-      <section id="statistics" className="border-t border-black/10 bg-white">
+      <section
+      id="statistics"
+      className={`border-t transition-colors duration-300 ${
+        isDark
+          ? "bg-gray-900 text-white border-gray-700"
+          : "bg-white text-black border-black/10"
+      }`}
+    >
         <div className="mx-auto max-w-6xl px-4 py-24 text-center">
           {/* Heading + Subtitle */}
-          <h2 className="text-4xl font-bold text-gray-900">{t('home2.statistics.title')}</h2>
-          <p className="text-gray-600 mt-2">
-            {t('home2.statistics.subtitle')}
-          </p>
+          <h2
+        className={`text-4xl font-bold ${
+          isDark ? "text-white" : "text-gray-900"
+        }`}
+      >
+        {t("home2.statistics.title")}
+      </h2>
+
+      <p
+        className={`mt-2 ${
+          isDark ? "text-gray-300" : "text-gray-600"
+        }`}
+      >
+        {t("home2.statistics.subtitle")}
+      </p>
 
           {/* Stats Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
@@ -243,8 +292,13 @@ export default function Home2() {
             ].map((stat, idx) => (
               <div key={idx} className="group">
                 <Counter target={stat.target} suffix={stat.suffix} />
-                <div className="text-black/70 mt-2 font-medium">{stat.label}</div>
-              </div>
+<div
+      className={`mt-2 font-medium ${
+        isDark ? "text-gray-300" : "text-black/70"
+      }`}
+    >
+      {stat.label}
+    </div>              </div>
             ))}
           </div>
         </div>
@@ -345,4 +399,4 @@ export default function Home2() {
       <Footer />
     </div>
   )
-} 
+}

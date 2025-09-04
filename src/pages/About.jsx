@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getCurrentUser, logoutUser, isAuthenticated } from '../utils/auth'
 import Navbar from '../components/Navbar'
@@ -8,19 +8,32 @@ import { useTranslation } from 'react-i18next'
 export default function About() {
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
     if (!isAuthenticated()) {
       navigate('/login', { replace: true })
     }
+    // Theme detection
+    const checkDark = () => setIsDark(document.documentElement.classList.contains('dark'))
+    checkDark()
+    const observer = new MutationObserver(checkDark)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
   }, [navigate])
 
   const user = getCurrentUser()
+   const highlights = [
+    t("about.aboutSection.highlights.verifiedFreelancers"),
+    t("about.aboutSection.highlights.securePayments"),
+    t("about.aboutSection.highlights.globalTalentPool"),
+    t("about.aboutSection.highlights.support"),
+  ];
 
 
 
   return (
-    <div className="bg-white text-black">
+    <div className={`${isDark ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
       <Navbar user={user} />
       {/* Showcase */}
 <section
@@ -69,11 +82,22 @@ export default function About() {
 
 
       {/* 2) Mission & Values (upgraded design) */}
-<section id="mission" className="relative border-t border-black/10 bg-gradient-to-b from-white to-indigo-50">
-  <div className="mx-auto max-w-6xl px-4 py-24">
+<section
+      id="mission"
+      className={`relative border-t transition-colors duration-300 ${
+        isDark
+          ? "bg-gradient-to-b from-gray-900 to-gray-800 text-white border-gray-700"
+          : "bg-gradient-to-b from-white to-indigo-50 text-black border-black/10"
+      }`}
+    >  <div className="mx-auto max-w-6xl px-4 py-24">
     <h2 className="text-3xl font-extrabold">{t('about.mission.title')}</h2>
-    <p className="text-black/70 mt-1">{t('about.mission.subtitle')}</p>
-
+  <p
+      className={`mt-1 ${
+        isDark ? "text-gray-300" : "text-black/70"
+      }`}
+    >
+      {t("about.mission.subtitle")}
+    </p>
     <div className="mt-12 grid md:grid-cols-3 gap-8">
       {[{
         t: t('about.mission.trust.title'), 
@@ -99,8 +123,13 @@ export default function About() {
           {/* Icon */}
           <div className="text-3xl mb-4">{item.icon}</div>
 
-          <h3 className="text-xl font-bold">{item.t}</h3>
-          <p className="mt-2 text-black/70">{item.d}</p>
+  <h3
+      className={`text-xl font-bold ${
+        isDark ? "text-black" : "text-black"
+      }`}
+    >
+      {item.t}
+    </h3>          <p className="mt-2 text-black/70">{item.d}</p>
         </div>
       ))}
     </div>
@@ -109,30 +138,47 @@ export default function About() {
 
 
       {/* 3) About (new section) */}
-<section id="about" className="border-t border-black/10 bg-black text-white">
-  <div className="mx-auto max-w-6xl px-4 py-24 grid md:grid-cols-2 gap-10 items-center">
+  <section
+      id="about"
+      className={`border-t transition-colors duration-300 ${
+        isDark
+          ? "bg-black text-white border-gray-700"
+          : "bg-white text-black border-black/10"
+      }`}
+    >  <div className="mx-auto max-w-6xl px-4 py-24 grid md:grid-cols-2 gap-10 items-center">
     
     {/* Left Content */}
-    <div className="order-2 md:order-1">
+<div
+      className={`order-2 md:order-1 ${
+        isDark ? "text-white" : "text-black"
+      }`}
+    >
       <h2 className="text-3xl font-extrabold">{t('about.aboutSection.title')}</h2>
-      <p className="text-white/70 mt-3">
-        {t('about.aboutSection.description1')}
+     <p
+        className={`mt-3 ${
+          isDark ? "text-white/70" : "text-black/70"
+        }`}
+      >
+        {t("about.aboutSection.description1")}
       </p>
-      <p className="text-white/70 mt-3">
-        {t('about.aboutSection.description2')}
+      <p
+        className={`mt-3 ${
+          isDark ? "text-white/70" : "text-black/70"
+        }`}
+      >
+        {t("about.aboutSection.description2")}
       </p>
 
       {/* Key Highlights */}
       <ul className="mt-5 grid grid-cols-2 gap-3 text-sm">
-        {[
-          t('about.aboutSection.highlights.verifiedFreelancers'),
-          t('about.aboutSection.highlights.securePayments'),
-          t('about.aboutSection.highlights.globalTalentPool'),
-          t('about.aboutSection.highlights.support')
-        ].map(b => (
-          <li 
-            key={b} 
-            className="rounded-full border border-white/20 bg-white/5 px-4 py-2 text-white/80"
+        {highlights.map((b) => (
+          <li
+            key={b}
+            className={`rounded-full px-4 py-2 ${
+              isDark
+                ? "border border-white/20 bg-white/5 text-white/80"
+                : "border border-black/20 bg-black/5 text-black/80"
+            }`}
           >
             {b}
           </li>
@@ -158,8 +204,13 @@ export default function About() {
 <section id="journey" className="border-t border-black/10">
   <div className="mx-auto max-w-6xl px-4 py-24">
     <h2 className="text-3xl font-extrabold">{t('about.journey.title')}</h2>
-    <p className="text-black/70 mt-1">{t('about.journey.subtitle')}</p>
-
+ <p
+      className={`mt-1 ${
+        isDark ? "text-white/70" : "text-black/70"
+      }`}
+    >
+      {t("about.journey.subtitle")}
+    </p>
     <div className="mt-10 grid md:grid-cols-2 gap-8 items-stretch">
       
       {/* Left Timeline Box */}
@@ -176,8 +227,13 @@ export default function About() {
               {i !== 3 && ( // hides last line
                 <div className="absolute left-1.5 top-5 bottom-[-2rem] w-[2px] bg-black/10" />
               )}
-              <div className="font-bold">{it.y} — {it.h}</div>
-              <p className="text-black/70">{it.d}</p>
+<div
+      className={`font-bold ${
+        isDark ? "text-black" : "text-black"
+      }`}
+    >
+      {it.y} — {it.h}
+    </div>              <p className="text-black/70">{it.d}</p>
             </div>
           ))}
         </div>
@@ -195,8 +251,13 @@ export default function About() {
       {/* Right Content Box */}
       <div className="flex flex-col justify-between rounded-xl border border-black/10 p-8 bg-gradient-to-br from-indigo-50 to-white shadow-lg animate-fade-in">
         <div>
-          <h3 className="font-semibold text-lg">{t('about.journey.whatMeansTitle')}</h3>
-          <ul className="mt-4 space-y-3 text-black/80 text-sm">
+  <h3
+      className={`font-semibold text-lg ${
+        isDark ? "text-black" : "text-black"
+      }`}
+    >
+      {t('about.journey.whatMeansTitle')}
+    </h3>          <ul className="mt-4 space-y-3 text-black/80 text-sm">
             {t('about.journey.benefits', { returnObjects: true }).map((benefit, index) => (
               <li key={index} className="flex items-start gap-2">
                 <span className="text-indigo-500">▸</span> {benefit}
@@ -224,14 +285,30 @@ export default function About() {
 
 
       {/* 5) Engagement Models - Freelancing Focused */}
-<section id="engagement" className="border-t border-black/10 relative overflow-hidden">
-  <div className="absolute -right-20 top-20 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
+<section
+      id="engagement"
+      className={`border-t relative overflow-hidden ${
+        isDark ? "bg-black text-black border-gray-700" : "bg-white text-black border-black/10"
+      }`}
+    >  <div className="absolute -right-20 top-20 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
   <div className="mx-auto max-w-6xl px-4 py-24 relative">
     <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-      <div>
-        <h2 className="text-3xl font-extrabold">{t('about.engagement.title')}</h2>
-        <p className="text-black/70 mt-1">{t('about.engagement.subtitle')}</p>
-      </div>
+     <div>
+      <h2
+        className={`text-3xl font-extrabold ${
+          isDark ? "text-white" : "text-black"
+        }`}
+      >
+        {t('about.engagement.title')}
+      </h2>
+      <p
+        className={`mt-1 ${
+          isDark ? "text-white/70" : "text-black/70"
+        }`}
+      >
+        {t('about.engagement.subtitle')}
+      </p>
+    </div>
       <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-4 py-1.5 text-sm">
         <span className="h-2 w-2 rounded-full bg-indigo-500" />
         {t('about.engagement.remoteBadge')}
@@ -349,20 +426,45 @@ export default function About() {
 
 
       {/* 6) FAQ */}
-<section id="faq" className="border-t border-black/10 bg-black text-white">
-  <div className="mx-auto max-w-6xl px-4 py-24">
+ <section
+      id="faq"
+      className={`border-t ${
+        isDark
+          ? "bg-gray-900 text-white border-gray-700"
+          : "bg-white text-black border-black/10"
+      }`}
+    >  <div className="mx-auto max-w-6xl px-4 py-24">
     <div className="mb-10">
       <h2 className="text-3xl font-extrabold">{t('about.faq.title')}</h2>
-      <p className="text-white/70 mt-1">{t('about.faq.subtitle')}</p>
-    </div>
+<p className={`mt-1 ${isDark ? "text-white/70" : "text-black/70"}`}>
+      {t("about.faq.subtitle")}
+    </p>    </div>
     <div className="grid md:grid-cols-2 gap-6">
-      {t('about.faq.questions', { returnObjects: true }).map((item, index) => (
-        <details key={index} className="rounded-xl border border-white/15 bg-white/5 p-5 open:animate-fade-in">
-          <summary className="cursor-pointer font-semibold list-none flex items-center justify-between">
+      {t("about.faq.questions", { returnObjects: true }).map((item, index) => (
+        <details
+          key={index}
+          className={`rounded-xl p-5 open:animate-fade-in border ${
+            isDark
+              ? "border-white/15 bg-white/5"
+              : "border-black/10 bg-gray-50"
+          }`}
+        >
+          {/* Question */}
+          <summary
+            className={`cursor-pointer font-semibold list-none flex items-center justify-between ${
+              isDark ? "text-white" : "text-black"
+            }`}
+          >
             <span>{item.question}</span>
-            <span className="ml-4 text-white/60">+</span>
+            <span className={isDark ? "ml-4 text-white/60" : "ml-4 text-black/60"}>
+              +
+            </span>
           </summary>
-          <p className="mt-3 text-white/80">{item.answer}</p>
+
+          {/* Answer */}
+          <p className={`mt-3 ${isDark ? "text-white/80" : "text-black/70"}`}>
+            {item.answer}
+          </p>
         </details>
       ))}
     </div>

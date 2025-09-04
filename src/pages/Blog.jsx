@@ -9,6 +9,16 @@ export default function Blog() {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const [activeCategory, setActiveCategory] = useState('all')
+   const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    const checkDark = () => setIsDark(document.documentElement.classList.contains('dark'))
+    checkDark()
+    const observer = new MutationObserver(checkDark)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
+  }, [])
+
 
   useEffect(() => {
     if (!isAuthenticated()) {
@@ -68,8 +78,11 @@ export default function Blog() {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-900 text-black dark:text-white transition-colors">
-      <Navbar user={user} />
+<div
+      className={`transition-colors duration-500 ${
+        isDark ? "bg-gray-900 text-white" : "bg-white text-black"
+      }`}
+    >      <Navbar user={user} />
 
 {/* Showcase */}
 <section
@@ -170,8 +183,11 @@ export default function Blog() {
       </section>
 
       {/* Section 2: Why Choose Our Freelancing Platform */}
-<section className="py-20 bg-gray-900 text-white">
-  <div className="mx-auto max-w-6xl px-6">
+<section
+  className={`py-20 transition-colors duration-500 ${
+    isDark ? "bg-black text-white" : "bg-gray-100 text-black"
+  }`}
+>  <div className="mx-auto max-w-6xl px-6">
     {/* Heading */}
     <div className="text-center mb-16">
       <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
@@ -346,17 +362,20 @@ export default function Blog() {
       
 
       {/* Section 4: Trending Topics */}
-<section className="py-20 bg-gray-50">
-  <div className="mx-auto max-w-6xl px-6">
+<section
+  className={`py-20 transition-colors duration-500 ${
+    isDark ? "bg-gray-900 text-white" : "bg-gray-50 text-black"
+  }`}
+>  <div className="mx-auto max-w-6xl px-6">
     {/* Heading */}
-    <div className="text-center mb-16">
-      <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
-        {t('blogPage.trendingTopics.title')}
-      </h2>
-      <p className="text-gray-600 max-w-2xl mx-auto">
-        {t('blogPage.trendingTopics.subtitle')}
-      </p>
-    </div>
+    <div className={`text-center mb-16 transition-colors duration-500 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+  <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
+    {t('blogPage.trendingTopics.title')}
+  </h2>
+  <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}>
+    {t('blogPage.trendingTopics.subtitle')}
+  </p>
+</div>
 
     {/* Topics Grid */}
     <div className="grid md:grid-cols-5 sm:grid-cols-2 gap-6">
@@ -377,17 +396,20 @@ export default function Blog() {
 
 
       {/* Section 5: Author Spotlight */}
-<section className="py-20 bg-gray-900 text-gray-100">
-  <div className="mx-auto max-w-6xl px-6">
+<section
+  className={`py-20 transition-colors duration-500 ${
+    isDark ? 'bg-black text-gray-100' : 'bg-gray-50 text-gray-900'
+  }`}
+>  <div className="mx-auto max-w-6xl px-6">
     {/* Heading */}
-    <div className="text-center mb-16">
-      <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-white">
-         {t('blogPage.authors.title')}
-      </h2>
-      <p className="text-gray-400">
-        {t('blogPage.authors.subtitle')}
-      </p>
-    </div>
+   <div className="text-center mb-16">
+  <h2 className={`text-3xl md:text-4xl font-extrabold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+    {t('blogPage.authors.title')}
+  </h2>
+  <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+    {t('blogPage.authors.subtitle')}
+  </p>
+</div>
 
     {/* Authors Grid */}
     <div className="grid md:grid-cols-3 gap-8">

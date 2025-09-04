@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { ThemeToggle } from './theme-toggle'
@@ -14,20 +15,33 @@ import { ChevronDown } from 'lucide-react'
 
 export default function Navbar({ user }) {
   const { t } = useTranslation()
-  
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    // Check if 'dark' class is present on <html>
+    const checkDark = () => setIsDark(document.documentElement.classList.contains('dark'))
+    checkDark()
+    // Listen for class changes (for live theme switching)
+    const observer = new MutationObserver(checkDark)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
+  }, [])
+
   const handleLogout = () => {
     // Clear user session from localStorage
     logoutUser()
     // Navigate to login page using React Router
     navigate('/login')
   }
- 
+
   const navigate = useNavigate()
   const initials = user ? `${user.firstName?.[0] || ''}${user.lastName?.[0] || ''}`.toUpperCase() : 'U'
    
 
   return (
-    <header className="sticky top-0 z-50 bg-white dark:bg-gray-900 text-black dark:text-white border-b border-black/10 dark:border-white/10 transition-colors">
+    <header
+      className={`sticky top-0 z-50 border-b border-black/10 dark:border-white/10 transition-colors ${isDark ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}
+    >
       <nav className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
         {/* Logo - Fixed Left */}
         <div className="flex-shrink-0">
@@ -143,4 +157,4 @@ export default function Navbar({ user }) {
       </nav>
     </header>
   )
-} 
+}

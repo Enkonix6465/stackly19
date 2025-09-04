@@ -18,6 +18,16 @@ export default function Contact() {
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    const checkDark = () => setIsDark(document.documentElement.classList.contains('dark'))
+    checkDark()
+    const observer = new MutationObserver(checkDark)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
+  }, [])
+
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -67,7 +77,7 @@ export default function Contact() {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-900 text-black dark:text-white transition-colors">
+    <div className=" text-black dark:text-white transition-colors">
       <Navbar user={user} />
 
 
@@ -117,16 +127,22 @@ export default function Contact() {
       
 
       {/* Contact Form Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-800">
-        <div className="mx-auto max-w-4xl px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4" id='contact2'>
-              {t('contact.form.title')}
-            </h2> 
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              {t('contact.form.subtitle')}
-            </p>
-          </div>
+<section
+  className={`py-20 transition-colors duration-500 ${
+    isDark ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
+  }`}>        <div className="mx-auto max-w-4xl px-4">
+          <div
+  className={`text-center mb-16 transition-colors duration-500 ${
+    isDark ? "text-white" : "text-gray-900"
+  }`}
+>
+  <h2 className="text-4xl font-bold mb-4" id="contact2">
+    {t('contact.form.title')}
+  </h2>
+  <p className={`text-lg max-w-2xl mx-auto ${isDark ? "text-gray-300" : "text-gray-600"}`}>
+    {t('contact.form.subtitle')}
+  </p>
+</div>
 
           <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 md:p-12">
             {submitSuccess && (
@@ -269,15 +285,15 @@ export default function Contact() {
       </section>
 
       {/* Map Section */}
-      <section className="py-20 bg-white dark:bg-gray-900">
+<section className={`py-20 transition-colors duration-500 ${isDark ? 'bg-gray-900' : 'bg-gray-100'}`}>
         <div className="mx-auto max-w-7xl px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              {t('contact.map.title')}
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              {t('contact.map.subtitle')}
-            </p>
+            <h2 className={`text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+    {t('contact.map.title')}
+  </h2>
+  <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+    {t('contact.map.subtitle')}
+  </p>
           </div>
 
           <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl">
@@ -301,15 +317,15 @@ export default function Contact() {
       </section>
 
       {/* Contact Information Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-800">
+<section className={`py-20 transition-colors duration-500 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
         <div className="mx-auto max-w-7xl px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              {t('contact.contactInfo.title')}
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              {t('contact.contactInfo.subtitle')}
-            </p>
+            <h2 className={`text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+    {t('contact.contactInfo.title')}
+  </h2>
+  <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+    {t('contact.contactInfo.subtitle')}
+  </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -372,17 +388,15 @@ export default function Contact() {
       </section>
 
       {/* Call to Action Section */}
-<section
-  className="relative py-24 bg-cover bg-center"
-  style={{ backgroundImage: "url('/images/CTA.jpg')" }}
->
+<section className={`py-20 transition-colors duration-500 ${isDark ? 'bg-gray-900' : 'bg-gray-100'}`}>
+
   <div className="absolute inset-0 bg-black bg-opacity-20"></div> {/* reduced overlay opacity */}
   
   <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
-    <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
+    <h2 className={`text-4xl md:text-5xl font-extrabold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
       {t('contact.cta.title')}
     </h2>
-    <p className="text-lg md:text-xl text-white mb-10 leading-relaxed">
+    <p className={`text-lg md:text-xl mb-10 leading-relaxed ${isDark ? 'text-white' : 'text-gray-600'}`}>
       {t('contact.cta.subtitle')}
     </p>
     <a

@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 
 export default function ContentCopywriting() {
   const [user, setUser] = useState(null)
+  const [isDark, setIsDark] = useState(false)
   const navigate = useNavigate()
   const { t } = useTranslation()
 
@@ -20,14 +21,48 @@ export default function ContentCopywriting() {
       }
     }
     checkAuth()
+
+    // Theme detection
+    const checkDark = () => setIsDark(document.documentElement.classList.contains('dark'))
+    checkDark()
+    const observer = new MutationObserver(checkDark)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
   }, [navigate])
 
   if (!user) {
     return null
   }
+  const features = [
+    t('contentCopywriting.serviceOverview.features.seoOptimized'),
+    t('contentCopywriting.serviceOverview.features.engagingCopy'),
+    t('contentCopywriting.serviceOverview.features.consistentBrand'),
+  ];
+   const steps = [
+    {
+      number: 1,
+      title: t('contentCopywriting.process.steps.research.title'),
+      description: t('contentCopywriting.process.steps.research.description'),
+    },
+    {
+      number: 2,
+      title: t('contentCopywriting.process.steps.strategy.title'),
+      description: t('contentCopywriting.process.steps.strategy.description'),
+    },
+    {
+      number: 3,
+      title: t('contentCopywriting.process.steps.writing.title'),
+      description: t('contentCopywriting.process.steps.writing.description'),
+    },
+    {
+      number: 4,
+      title: t('contentCopywriting.process.steps.refinement.title'),
+      description: t('contentCopywriting.process.steps.refinement.description'),
+    },
+  ];
 
   return (
-    <div className="bg-white dark:bg-gray-900 text-black dark:text-white transition-colors">
+    <div className={`${isDark ? 'bg-gray-900 text-white' : 'bg-white text-black'} transition-colors`}>
       <Navbar user={user} />
 
       {/*1 Showcase */}
@@ -76,18 +111,22 @@ export default function ContentCopywriting() {
       
 
 {/* 2 Services - Content Copywriting Hero */}
-<section id="hero" className="relative overflow-hidden border-t border-black/10 dark:border-gray-700">
-  <div className="mx-auto max-w-6xl px-4 py-28 grid md:grid-cols-2 gap-10 items-center">
+ <section
+      id="hero"
+      className={`relative overflow-hidden border-t transition-colors duration-300 ${
+        isDark ? "border-gray-700 bg-gray-900 text-white" : "border-black/10 bg-white text-black"
+      }`}
+    >  <div className="mx-auto max-w-6xl px-4 py-28 grid md:grid-cols-2 gap-10 items-center">
     <div className="animate-fade-in">
-      <p className="text-sm tracking-widest text-black dark:text-white">
+      <p className={`text-sm tracking-widest ${isDark ? "text-white" : "text-black"}`}>
         {t('contentCopywriting.hero.tagline')}
       </p>
       
-      <h1 className="mt-2 text-4xl md:text-5xl font-extrabold leading-tight text-black dark:text-white">
+      <h1 className={`mt-2 text-4xl md:text-5xl font-extrabold leading-tight ${isDark ? "text-white" : "text-black"}`}>
         {t('contentCopywriting.hero.title')}
       </h1>
       
-      <p className="mt-4 text-black dark:text-gray-300">
+      <p className={`mt-4 ${isDark ? "text-gray-300" : "text-black"}`}>
         {t('contentCopywriting.hero.description')}
       </p>
     </div>
@@ -106,43 +145,40 @@ export default function ContentCopywriting() {
 
 
       {/* 3 Service Overview */}
-      <section className="py-20 bg-black dark:bg-gray-800">
-        <div className="mx-auto max-w-7xl px-4">
+<section
+      className={`py-20 transition-colors duration-300 ${
+        isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-black"
+      }`}
+    >        <div className="mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-white dark:text-white mb-6">
-                {t('contentCopywriting.serviceOverview.title')}
-              </h2>
-              <p className="text-lg text-white dark:text-gray-400 mb-6 leading-relaxed">
-                {t('contentCopywriting.serviceOverview.description')}
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                    </svg>
-                  </div>
-                  <span className="text-white dark:text-gray-300">{t('contentCopywriting.serviceOverview.features.seoOptimized')}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                    </svg>
-                  </div>
-                  <span className="text-white  dark:text-gray-300">{t('contentCopywriting.serviceOverview.features.engagingCopy')}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                    </svg>
-                  </div>
-                  <span className="text-white dark:text-gray-300">{t('contentCopywriting.serviceOverview.features.consistentBrand')}</span>
-                </div>
-              </div>
+      <h2 className={`text-4xl font-bold mb-6 ${isDark ? "text-white" : "text-black"}`}>
+        {t('contentCopywriting.serviceOverview.title')}
+      </h2>
+      <p className={`text-lg mb-6 leading-relaxed ${isDark ? "text-gray-400" : "text-black/70"}`}>
+        {t('contentCopywriting.serviceOverview.description')}
+      </p>
+      <div className="space-y-4">
+        {features.map((feature, idx) => (
+          <div key={idx} className="flex items-center gap-3">
+            <div className="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center">
+              <svg
+                className="w-4 h-4 text-white"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
             </div>
+            <span className={isDark ? "text-gray-300" : "text-black   "}>{feature}</span>
+          </div>
+        ))}
+      </div>
+    </div>
             <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('contentCopywriting.serviceOverview.contentFeatures.title')}</h3>
               <ul className="space-y-3">
@@ -172,74 +208,50 @@ export default function ContentCopywriting() {
         </div>
       </section>
       {/* 4 Process Section - Content Copywriting */}
-<section className="py-20 bg-white text-gray-900 transition-colors duration-500">
-  <div className="mx-auto max-w-7xl px-4">
+ <section
+      className={`py-20 transition-colors duration-500 ${
+        isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+      }`}
+    >  <div className="mx-auto max-w-7xl px-4">
     {/* Heading */}
     <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold text-gray-900 mb-4">
+      <h2 className={`text-4xl font-bold mb-4 ${isDark ? "text-white" : "text-gray-900"}`}>
         {t('contentCopywriting.process.title')}
       </h2>
-      <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+      <p className={`text-lg max-w-2xl mx-auto ${isDark ? "text-gray-400" : "text-gray-600"}`}>
         {t('contentCopywriting.process.subtitle')}
       </p>
     </div>
 
     {/* Steps */}
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {/* Step 1 */}
-      <div className="text-center">
-        <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-          <span className="text-2xl font-bold text-white">1</span>
+      {steps.map((step) => (
+        <div key={step.number} className="text-center">
+          <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
+            <span className="text-2xl font-bold text-white">{step.number}</span>
+          </div>
+          <h3 className={`text-xl font-semibold mb-2 ${isDark ? "text-white" : "text-gray-900"}`}>
+            {step.title}
+          </h3>
+          <p className={`${isDark ? "text-gray-400" : "text-gray-600"}`}>
+            {step.description}
+          </p>
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('contentCopywriting.process.steps.research.title')}</h3>
-        <p className="text-gray-600">
-          {t('contentCopywriting.process.steps.research.description')}
-        </p>
-      </div>
-
-      {/* Step 2 */}
-      <div className="text-center">
-        <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-          <span className="text-2xl font-bold text-white">2</span>
-        </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('contentCopywriting.process.steps.strategy.title')}</h3>
-        <p className="text-gray-600">
-          {t('contentCopywriting.process.steps.strategy.description')}
-        </p>
-      </div>
-
-      {/* Step 3 */}
-      <div className="text-center">
-        <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-          <span className="text-2xl font-bold text-white">3</span>
-        </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('contentCopywriting.process.steps.writing.title')}</h3>
-        <p className="text-gray-600">
-          {t('contentCopywriting.process.steps.writing.description')}
-        </p>
-      </div>
-
-      {/* Step 4 */}
-      <div className="text-center">
-        <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-          <span className="text-2xl font-bold text-white">4</span>
-        </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('contentCopywriting.process.steps.refinement.title')}</h3>
-        <p className="text-gray-600">
-          {t('contentCopywriting.process.steps.refinement.description')}
-        </p>
-      </div>
+      ))}
     </div>
   </div>
 </section>
 {/* Tools & Skills - Copywriting */}
-<section className="py-20 bg-black dark:bg-gray-800">
-  <div className="mx-auto max-w-7xl px-4">
+<section
+      className={`py-20 transition-colors duration-500 ${
+        isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-white"
+      }`}
+    >  <div className="mx-auto max-w-7xl px-4">
     <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold text-white mb-4">
+       <h2 className={`text-4xl font-bold mb-4 ${isDark ? "text-white" : "text-black"}`}>
         {t('contentCopywriting.tools.title')}
       </h2>
-      <p className="text-lg text-white dark:text-gray-400 max-w-2xl mx-auto">
+      <p className={`text-lg max-w-2xl mx-auto ${isDark ? "text-gray-400" : "text-gray-700"}`}>
         {t('contentCopywriting.tools.subtitle')}
       </p>
     </div>
@@ -271,17 +283,18 @@ export default function ContentCopywriting() {
 
 
        {/* Call to Action */}
-<section className="relative py-24 bg-white">
-  <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+<section
+      className={`relative py-24 transition-colors duration-500 ${
+        isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+      }`}
+    >  <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
     {/* Heading */}
-    <h2 className="text-5xl font-extrabold text-black mb-6 leading-tight">
-      {t('contentCopywriting.cta.title')}
-    </h2>
-
-    {/* Subtext */}
-    <p className="text-lg text-black max-w-2xl mx-auto mb-10">
-      {t('contentCopywriting.cta.subtitle')}
-    </p>
+    <h2 className={`text-5xl font-extrabold mb-6 leading-tight ${isDark ? "text-white" : "text-black"}`}>
+        {t('contentCopywriting.cta.title')}
+      </h2>
+      <p className={`text-lg max-w-2xl mx-auto mb-10 ${isDark ? "text-gray-400" : "text-gray-700"}`}>
+        {t('contentCopywriting.cta.subtitle')}
+      </p>
 
     {/* Buttons */}
     <div className="flex flex-col sm:flex-row gap-5 justify-center">

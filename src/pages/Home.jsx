@@ -23,6 +23,15 @@ export default function Home() {
     logoutUser()
     navigate('/login', { replace: true })
   }
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    const checkDark = () => setIsDark(document.documentElement.classList.contains('dark'))
+    checkDark()
+    const observer = new MutationObserver(checkDark)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
+  }, [])
 
   const blogPosts = [
     {
@@ -118,18 +127,35 @@ export default function Home() {
       
 
       {/* Hero */}
-<section id="hero" className="relative overflow-hidden border-t border-black/10 dark:border-gray-700">
-  <div className="mx-auto max-w-6xl px-4 py-28 grid md:grid-cols-2 gap-10 items-center">
+<section
+      id="hero"
+      className={`relative overflow-hidden border-t transition-colors duration-300 ${
+        isDark ? "bg-gray-900 text-white border-gray-700" : "bg-white text-black border-black/10"
+      }`}
+    >  <div className="mx-auto max-w-6xl px-4 py-28 grid md:grid-cols-2 gap-10 items-center">
     <div className="animate-fade-in">
-              <p className="text-sm tracking-widest text-black dark:text-white">{t('home.hero.tagline')}</p>
-        
-        <h1 className="mt-2 text-4xl md:text-5xl font-extrabold leading-tight text-black dark:text-white">
-          {t('home.hero.title')}
-        </h1>
-        
-        <p className="mt-4 text-black dark:text-gray-300">
-          {t('home.hero.description')}
-        </p>
+ <p
+      className={`text-sm tracking-widest ${
+        isDark ? "text-white" : "text-black"
+      }`}
+    >
+      {t("home.hero.tagline")}
+    </p>        
+      <h1
+        className={`mt-2 text-4xl md:text-5xl font-extrabold leading-tight ${
+          isDark ? "text-white" : "text-black"
+        }`}
+      >
+        {t("home.hero.title")}
+      </h1>
+
+      <p
+        className={`mt-4 ${
+          isDark ? "text-gray-300" : "text-black"
+        }`}
+      >
+        {t("home.hero.description")}
+      </p>
       
       <div className="mt-6 flex gap-3">
         {/* Latest Blog Button */}
@@ -167,12 +193,25 @@ export default function Home() {
 
 
       {/* About */}
- <section id="about" className="border-t border-black/10 dark:border-gray-700 bg-black text-white">
-  <div className="mx-auto max-w-6xl px-4 py-24 grid md:grid-cols-3 gap-10">
+<section
+      id="about"
+      className={`${
+        isDark ? "bg-black text-white border-gray-700" : "bg-gray-100 text-black border-black/10"
+      } border-t transition-colors duration-300`}
+    >  <div className="mx-auto max-w-6xl px-4 py-24 grid md:grid-cols-3 gap-10">
     {/* Heading */}
     <div className="md:col-span-1">
-              <h2 className="text-3xl font-extrabold">{t('home.about.title')}</h2>
-        <p className="mt-2 text-white/70">{t('home.about.subtitle')}</p>
+               <h2 className="text-3xl font-extrabold">
+        {t("home.about.title")}
+      </h2>
+
+      <p
+        className={`mt-2 ${
+          isDark ? "text-white/70" : "text-black/70"
+        }`}
+      >
+        {t("home.about.subtitle")}
+      </p>
     </div>
 
     {/* Content */}
@@ -187,11 +226,29 @@ export default function Home() {
 
 
       {/* Services */}
- <section id="services" className="border-t border-black/10 dark:border-gray-700">
-  <div className="mx-auto max-w-6xl px-4 py-24">
-                   <h2 className="text-3xl font-extrabold text-black dark:text-white">{t('home.services.title')}</h2>
-      <p className="text-black/70 dark:text-gray-300 mt-1">{t('home.services.subtitle')}</p>
+<section
+      id="services"
+      className={`${
+        isDark
+          ? "bg-gray-900 text-white border-gray-700"
+          : "bg-white text-black border-black/10"
+      } border-t transition-colors duration-300`}
+    >  <div className="mx-auto max-w-6xl px-4 py-24">
+                 <h2
+        className={`text-3xl font-extrabold ${
+          isDark ? "text-white" : "text-black"
+        }`}
+      >
+        {t("home.services.title")}
+      </h2>
 
+      <p
+        className={`mt-1 ${
+          isDark ? "text-gray-300" : "text-black/70"
+        }`}
+      >
+        {t("home.services.subtitle")}
+      </p>
     <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {[
                  { t: t('home.services.webDevelopment'), d: t('home.services.webDevelopmentDesc') },
@@ -219,15 +276,30 @@ export default function Home() {
 
 
       {/* Blog */}
- <section id="blog" className="border-t border-black/10 dark:border-gray-700 bg-black">
-  <div className="mx-auto max-w-6xl px-4 py-24 text-white">
-    <div className="flex items-end justify-between">
-      <div>
-                 <h2 className="text-3xl font-extrabold">{t('home.blog.title')}</h2>
-         <p className="text-white/70 mt-1">{t('home.blog.subtitle')}</p>
-      </div>
-      
-    </div>
+<section
+      id="blog"
+      className={`border-t transition-colors duration-300 ${
+        isDark
+          ? "bg-gray-900 text-white border-gray-700"
+          : "bg-gray-100 text-black border-black/10"
+      }`}
+    >
+      <div className="mx-auto max-w-6xl px-4 py-24">
+        <div className="flex items-end justify-between">
+          <div>
+            <h2 className="text-3xl font-extrabold">
+              {t("home.blog.title")}
+            </h2>
+            <p
+              className={`mt-1 ${
+                isDark ? "text-white/70" : "text-black/70"
+              }`}
+            >
+              {t("home.blog.subtitle")}
+            </p>
+          </div>
+        </div>
+    
 
     {/* Blog Posts */}
     <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -248,8 +320,13 @@ export default function Home() {
           {/* Blog Content */}
           <div className="p-4">
             <h3 className="font-semibold">{post.title}</h3>
-            <p className="text-white/70 text-sm">{post.excerpt}</p>
-          </div>
+  <p
+      className={`text-sm ${
+        isDark ? "text-white/70" : "text-black/70"
+      }`}
+    >
+      {post.excerpt}
+    </p>          </div>
         </article>
       ))}
     </div>
@@ -269,10 +346,29 @@ export default function Home() {
 
 
       {/* Categories */}
- <section id="categories" className="border-t border-black/10 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
-  <div className="mx-auto max-w-6xl px-4 py-24 text-center">
-         <h2 className="text-3xl font-extrabold text-black dark:text-white">{t('home.categories.title')}</h2>
-     <p className="text-black/70 dark:text-gray-300 mt-1">{t('home.categories.subtitle')}</p>
+  <section
+      id="categories"
+      className={`border-t transition-colors duration-300 ${
+        isDark
+          ? "bg-gray-800 text-white border-gray-700"
+          : "bg-gray-50 text-black border-black/10"
+      }`}
+    >  <div className="mx-auto max-w-6xl px-4 py-24 text-center">
+         <h2
+        className={`text-3xl font-extrabold ${
+          isDark ? "text-white" : "text-black"
+        }`}
+      >
+        {t("home.categories.title")}
+      </h2>
+
+      <p
+        className={`mt-1 ${
+          isDark ? "text-gray-300" : "text-black/70"
+        }`}
+      >
+        {t("home.categories.subtitle")}
+      </p>
 
     <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-10">
       {[
@@ -287,8 +383,13 @@ export default function Home() {
           <div className="h-16 w-16 flex items-center justify-center rounded-full bg-indigo-500/10 text-3xl">
             {cat.icon}
           </div>
-                     <h3 className="mt-3 text-lg font-semibold text-black dark:text-white">{cat.title}</h3>
-        </div>
+<h3
+      className={`mt-3 text-lg font-semibold ${
+        isDark ? "text-white" : "text-black"
+      }`}
+    >
+      {cat.title}
+    </h3>        </div>
       ))}
     </div>
   </div>
@@ -298,20 +399,34 @@ export default function Home() {
 
 
       {/* Contact */}
-<section
-  id="contact"
-     className="border-t border-black/10 dark:border-gray-700 bg-black text-white"
->
-  <div className="mx-auto max-w-6xl px-4 py-24 grid md:grid-cols-2 gap-10 items-center">
-    {/* Left - Text + Bullet Points */}
+  <section
+      id="contact"
+      className={`border-t transition-colors duration-300 ${
+        isDark
+          ? "bg-black text-white border-gray-700"
+          : "bg-gray-100 text-black border-black/10"
+      }`}
+    >
+ <div
+      className={`mx-auto max-w-6xl px-4 py-24 grid md:grid-cols-2 gap-10 items-center ${
+        isDark ? "text-white" : "text-black"
+      }`}
+    >    {/* Left - Text + Bullet Points */}
     <div>
       <h2 className="text-3xl font-extrabold">{t('home.contact.title')}</h2>
-      <p className="text-white/70 mt-2">
-        {t('home.contact.description')}
-      </p>
+      <p
+      className={`mt-2 ${
+        isDark ? "text-white/70" : "text-black/70"
+      }`}
+    >
+      {t("home.contact.description")}
+    </p>
 
-      <ul className="mt-6 space-y-3 text-white/80">
-        <li className="flex items-center gap-2">
+<ul
+      className={`mt-6 space-y-3 ${
+        isDark ? "text-white/80" : "text-black/80"
+      }`}
+    >        <li className="flex items-center gap-2">
           <span className="text-indigo-400 text-lg">✔</span>
           {t('home.contact.features.webMobile')}
         </li>
@@ -329,13 +444,16 @@ export default function Home() {
         </li>
       </ul>
 
-<a
-  href="/contact"
-  className="mt-10 rounded-md bg-white px-6 py-3 text-black font-semibold 
-             hover:bg-indigo-500 hover:text-white transition-colors duration-300 inline-block"
->
-  {t('home.contact.startProjectButton')}
-</a>
+ <a
+      href="/contact"
+      className={`mt-10 rounded-md px-6 py-3 font-semibold transition-colors duration-300 inline-block ${
+        isDark
+          ? "bg-white text-black hover:bg-indigo-500 hover:text-white"
+          : "bg-black text-white hover:bg-indigo-500 hover:text-white"
+      }`}
+    >
+      {t("home.contact.startProjectButton")}
+    </a>
 
 
     </div>

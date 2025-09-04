@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getCurrentUser, isAuthenticated } from '../utils/auth'
 import Navbar from '../components/Navbar'
@@ -8,6 +8,16 @@ import { useTranslation } from 'react-i18next'
 export default function BlogPost1() {
   const navigate = useNavigate()
   const { t, i18n } = useTranslation()
+    const [isDark, setIsDark] = useState(false) // <-- define state
+
+   useEffect(() => {
+    const checkDark = () => setIsDark(document.documentElement.classList.contains('dark'))
+    checkDark()
+    const observer = new MutationObserver(checkDark)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
+  }, [])
+  
 
   useEffect(() => {
     if (!isAuthenticated()) {
@@ -20,8 +30,11 @@ export default function BlogPost1() {
   const user = getCurrentUser()
 
   return (
-    <div className="bg-white dark:bg-gray-900 text-black dark:text-white transition-colors">
-      <Navbar user={user} />
+ <div
+      className={`transition-colors duration-500 ${
+        isDark ? "bg-gray-900 text-white" : "bg-white text-black"
+      }`}
+    >      <Navbar user={user} />
 
       {/* Hero Section */}
 <section 

@@ -8,11 +8,18 @@ import { useTranslation } from 'react-i18next'
 export default function Services() {
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
     if (!isAuthenticated()) {
       navigate('/login', { replace: true })
     }
+    // Theme detection
+    const checkDark = () => setIsDark(document.documentElement.classList.contains('dark'))
+    checkDark()
+    const observer = new MutationObserver(checkDark)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
   }, [navigate])
 
   // Smooth scroll to section if hash is present
@@ -59,9 +66,15 @@ export default function Services() {
     logoutUser()
     navigate('/login', { replace: true })
   }
+  const benefits = [
+    t('services.cta.benefits.verifiedProfessionals'),
+    t('services.cta.benefits.onTimeDelivery'),
+    t('services.cta.benefits.affordablePricing'),
+    t('services.cta.benefits.flexibleCollaboration')
+  ];
 
   return (
-    <div className="bg-white text-black">
+    <div className={`${isDark ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
       <Navbar user={user} />
 
       {/* Showcase */}
@@ -117,12 +130,20 @@ export default function Services() {
       </section>
 
       {/* 2) Flipbox Grid: Six services with 3D flip cards (freelancing version) */}
-      <section id="offerings" className="border-t border-black/10">
-        <div className="mx-auto max-w-6xl px-4 py-24">
+<section
+      id="offerings"
+      className={`border-t transition-colors duration-300 ${
+        isDark ? "border-gray-700 bg-gray-900 text-black" : "border-black/10 bg-white text-black"
+      }`}
+    >        <div className="mx-auto max-w-6xl px-4 py-24">
           <div className="flex items-end justify-between">
             <div>
-              <h2 className="text-3xl font-extrabold">{t('services.offerings.title')}</h2>
-              <p className="text-black/70 mt-1">{t('services.offerings.subtitle')}</p>
+              <h2 className={`text-3xl font-extrabold ${isDark ? "text-white" : "text-black"}`}>
+        {t('services.offerings.title')}
+      </h2>
+      <p className={`mt-1 ${isDark ? "text-white/70" : "text-black/70"}`}>
+        {t('services.offerings.subtitle')}
+      </p>
             </div>
             <a href="#cta" className="hidden md:inline-block text-sm underline hover:text-indigo-600">
               {t('services.offerings.startProjectButton')}
@@ -181,11 +202,16 @@ export default function Services() {
         </div>
       </section>
 
-      <section id="capabilities" className="bg-black text-white py-20">
-        <div className="mx-auto max-w-6xl px-4 text-center">
+ <section
+      id="capabilities"
+      className={`py-20 transition-colors duration-300 ${
+        isDark ? "bg-black text-white" : "bg-gray-100 text-black"
+      }`}
+    >        <div className="mx-auto max-w-6xl px-4 text-center">
           <h2 className="text-3xl font-extrabold">{t('services.capabilities.title')}</h2>
-          <p className="text-white/70 mt-2">{t('services.capabilities.subtitle')}</p>
-
+<p className={`mt-2 ${isDark ? "text-white/70" : "text-black/70"}`}>
+      {t('services.capabilities.subtitle')}
+    </p>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {capabilities.map(({ key, title, points }) => (
               <div
@@ -193,14 +219,14 @@ export default function Services() {
                 className="group relative bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-indigo-500/10 transition"
               >
                 <h3 className="text-lg font-semibold group-hover:text-indigo-400">{title}</h3>
-                <ul className="mt-4 space-y-2 text-sm text-white/70">
-                  {points.map((p, index) => (
-                    <li key={index} className="flex gap-2">
-                      <span className="h-2 w-2 mt-1 rounded-full bg-indigo-400"></span>
-                      <span>{p}</span>
-                    </li>
-                  ))}
-                </ul>
+                <ul className={`mt-4 space-y-2 text-sm ${isDark ? "text-white/70" : "text-black/70"}`}>
+      {points.map((p, index) => (
+        <li key={index} className="flex gap-2">
+          <span className="h-2 w-2 mt-1 rounded-full bg-indigo-400"></span>
+          <span>{p}</span>
+        </li>
+      ))}
+    </ul>
               </div>
             ))}
           </div>
@@ -208,11 +234,20 @@ export default function Services() {
       </section>
 
       {/* 4) Zooming Packages (Freelancing-focused, Light Mode) */}
-      <section id="packages" className="border-t border-black/10 bg-white text-black">
-        <div className="mx-auto max-w-6xl px-4 py-24">
-          <h2 className="text-3xl font-extrabold text-black">{t('services.packages.title')}</h2>
-          <p className="text-black/70 mt-1">{t('services.packages.subtitle')}</p>
-
+ <section
+      id="packages"
+      className={`border-t py-20 transition-colors duration-300 ${
+        isDark
+          ? "border-gray-700 bg-gray-900 text-white"
+          : "border-black/10 bg-white text-black"
+      }`}
+    >        <div className="mx-auto max-w-6xl px-4 py-24">
+          <h2 className={`text-3xl font-extrabold ${isDark ? "text-white" : "text-black"}`}>
+        {t('services.packages.title')}
+      </h2>
+      <p className={`mt-1 ${isDark ? "text-white/70" : "text-black/70"}`}>
+        {t('services.packages.subtitle')}
+      </p>
           <div className="mt-10 grid md:grid-cols-3 gap-6">
             {[
               [
@@ -281,15 +316,32 @@ export default function Services() {
       </section>
 
       {/* 5) Case Studies (mosaic gallery) */}
-      <section id="case-studies" className="border-t border-black/10 bg-black text-white">
-        <div className="mx-auto max-w-6xl px-4 py-24">
-          <div className="flex items-end justify-between">
-            <div>
-              <h2 className="text-3xl font-extrabold">{t('services.caseStudies.title')}</h2>
-              <p className="text-white/70 mt-1">{t('services.caseStudies.subtitle')}</p>
-            </div>
-            <a href="#cta" className="hidden md:inline-block text-sm underline hover:text-indigo-300">{t('services.caseStudies.workWithMeButton')}</a>
-          </div>
+<section
+      id="case-studies"
+      className={`border-t py-20 transition-colors duration-300 ${
+        isDark
+          ? "border-gray-700 bg-black text-white"
+          : "border-black/10 bg-gray-100 text-white"
+      }`}
+    >        <div className="mx-auto max-w-6xl px-4 py-24">
+            <div className="flex items-end justify-between">
+      <div>
+        <h2 className={`text-3xl font-extrabold ${isDark ? "text-white" : "text-black"}`}>
+          {t('services.caseStudies.title')}
+        </h2>
+        <p className={`mt-1 ${isDark ? "text-white/70" : "text-black/70"}`}>
+          {t('services.caseStudies.subtitle')}
+        </p>
+      </div>
+     <a
+      href="#cta"
+      className={`hidden md:inline-block text-sm underline transition-colors duration-300 ${
+        isDark ? "text-white hover:text-indigo-300" : "text-black hover:text-indigo-600"
+      }`}
+    >
+      {t('services.caseStudies.workWithMeButton')}
+    </a>
+    </div>
 
           <div className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-3">
             {[
@@ -327,22 +379,17 @@ export default function Services() {
         <div className="mx-auto max-w-6xl px-4 py-24 grid md:grid-cols-3 gap-10 items-center">
           <div className="md:col-span-2">
             <h2 className="text-3xl font-extrabold">{t('services.cta.title')}</h2>
-            <p className="text-black/70 mt-2">
-              {t('services.cta.description')}
-            </p>
+               <p className={`mt-2 ${isDark ? "text-white/70" : "text-black/70"}`}>
+      {t('services.cta.description')}
+    </p>
             <ul className="mt-5 grid sm:grid-cols-2 gap-3 text-sm">
-              {[
-                t('services.cta.benefits.verifiedProfessionals'),
-                t('services.cta.benefits.onTimeDelivery'),
-                t('services.cta.benefits.affordablePricing'),
-                t('services.cta.benefits.flexibleCollaboration')
-              ].map(b => (
-                <li key={b} className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-indigo-500" />
-                  <span className="text-black/80">{b}</span>
-                </li>
-              ))}
-            </ul>
+      {benefits.map((b) => (
+        <li key={b} className="flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-indigo-500" />
+          <span className={`${isDark ? "text-white/80" : "text-black/80"}`}>{b}</span>
+        </li>
+      ))}
+    </ul>
           </div>
           <div className="md:justify-self-end">
             <a

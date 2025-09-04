@@ -85,7 +85,7 @@ export default function BlogPost3() {
                   {t('blogPost3.content.section1.subtitle')}
                 </h3>
                 <ul className="mb-6 space-y-2">
-                  {t('blogPost3.content.section1.pitfalls', { returnObjects: true }).map((pitfall, index) => (
+                  {(Array.isArray(t('blogPost3.content.section1.pitfalls', { returnObjects: true })) ? t('blogPost3.content.section1.pitfalls', { returnObjects: true }) : []).map((pitfall, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <span className="text-indigo-500 text-lg">✗</span>
                       <span>{pitfall}</span>
@@ -105,7 +105,7 @@ export default function BlogPost3() {
                     {t('blogPost3.content.section2.matrixTitle')}
                   </h4>
                   <div className="grid md:grid-cols-2 gap-4">
-                    {t('blogPost3.content.section2.matrixItems', { returnObjects: true }).map((item, index) => (
+                    {(Array.isArray(t('blogPost3.content.section2.matrixItems', { returnObjects: true })) ? t('blogPost3.content.section2.matrixItems', { returnObjects: true }) : []).map((item, index) => (
                       <div key={index}>
                         <h5 className="font-semibold text-indigo-600">{item.title}</h5>
                         <p className="text-sm text-indigo-700 dark:text-indigo-300">
@@ -120,7 +120,7 @@ export default function BlogPost3() {
                   {t('blogPost3.content.section2.factorsTitle')}
                 </h3>
                 <ol className="mb-8 space-y-3 list-decimal list-inside">
-                  {t('blogPost3.content.section2.factors', { returnObjects: true }).map((factor, index) => (
+                  {(Array.isArray(t('blogPost3.content.section2.factors', { returnObjects: true })) ? t('blogPost3.content.section2.factors', { returnObjects: true }) : []).map((factor, index) => (
                     <li key={index}>
                       <strong>{factor.title}:</strong> {factor.description}
                     </li>
@@ -138,7 +138,7 @@ export default function BlogPost3() {
                   {t('blogPost3.content.section3.subtitle')}
                 </h3>
                 <ul className="mb-8 space-y-3">
-                  {t('blogPost3.content.section3.blocks', { returnObjects: true }).map((block, index) => (
+                  {(Array.isArray(t('blogPost3.content.section3.blocks', { returnObjects: true })) ? t('blogPost3.content.section3.blocks', { returnObjects: true }) : []).map((block, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <span className="text-indigo-500 text-lg">•</span>
                       <span><strong>{block.title}:</strong> {block.description}</span>
@@ -157,7 +157,7 @@ export default function BlogPost3() {
                   {t('blogPost3.content.section4.subtitle')}
                 </h3>
                 <div className="grid md:grid-cols-2 gap-4 mb-8">
-                  {t('blogPost3.content.section4.tools', { returnObjects: true }).map((tool, index) => (
+                  {(Array.isArray(t('blogPost3.content.section4.tools', { returnObjects: true })) ? t('blogPost3.content.section4.tools', { returnObjects: true }) : []).map((tool, index) => (
                     <div key={index} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
                       <h4 className="font-semibold mb-2">{tool.name}</h4>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -179,7 +179,7 @@ export default function BlogPost3() {
                     {t('blogPost3.content.section5.boundariesTitle')}
                   </h4>
                   <ul className="space-y-2 text-blue-700 dark:text-blue-300">
-                    {t('blogPost3.content.section5.boundaries', { returnObjects: true }).map((boundary, index) => (
+                    {(Array.isArray(t('blogPost3.content.section5.boundaries', { returnObjects: true })) ? t('blogPost3.content.section5.boundaries', { returnObjects: true }) : []).map((boundary, index) => (
                       <li key={index}>• {boundary}</li>
                     ))}
                   </ul>
@@ -203,7 +203,7 @@ export default function BlogPost3() {
                   {t('blogPost3.content.section6.subtitle')}
                 </h3>
                 <ul className="mb-8 space-y-3">
-                  {t('blogPost3.content.section6.examples', { returnObjects: true }).map((example, index) => (
+                  {(Array.isArray(t('blogPost3.content.section6.examples', { returnObjects: true })) ? t('blogPost3.content.section6.examples', { returnObjects: true }) : []).map((example, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <span className="text-indigo-500 text-lg">•</span>
                       <span><strong>{example.title}:</strong> {example.description}</span>
@@ -222,7 +222,7 @@ export default function BlogPost3() {
                   {t('blogPost3.content.section7.subtitle')}
                 </h3>
                 <ul className="mb-8 space-y-3">
-                  {t('blogPost3.content.section7.reasons', { returnObjects: true }).map((reason, index) => (
+                  {(Array.isArray(t('blogPost3.content.section7.reasons', { returnObjects: true })) ? t('blogPost3.content.section7.reasons', { returnObjects: true }) : []).map((reason, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <span className="text-indigo-500 text-lg">•</span>
                       <span>{reason}</span>
@@ -242,7 +242,7 @@ export default function BlogPost3() {
                     {t('blogPost3.content.section8.checklistTitle')}
                   </h4>
                   <ul className="space-y-2 text-indigo-700 dark:text-indigo-300">
-                    {t('blogPost3.content.section8.checklistItems', { returnObjects: true }).map((item, index) => (
+                    {(Array.isArray(t('blogPost3.content.section8.checklistItems', { returnObjects: true })) ? t('blogPost3.content.section8.checklistItems', { returnObjects: true }) : []).map((item, index) => (
                       <li key={index}>• {item}</li>
                     ))}
                   </ul>
@@ -259,7 +259,7 @@ export default function BlogPost3() {
                   {t('blogPost3.content.section9.subtitle')}
                 </h3>
                 <ul className="mb-8 space-y-3">
-                  {t('blogPost3.content.section9.strategies', { returnObjects: true }).map((strategy, index) => (
+                  {(Array.isArray(t('blogPost3.content.section9.strategies', { returnObjects: true })) ? t('blogPost3.content.section9.strategies', { returnObjects: true }) : []).map((strategy, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <span className="text-indigo-500 text-lg">•</span>
                       <span><strong>{strategy.title}:</strong> {strategy.description}</span>
@@ -291,7 +291,7 @@ export default function BlogPost3() {
                       {t('blogPost3.author.bio')}
                     </p>
                     <div className="flex gap-2">
-                      {t('blogPost3.author.expertise', { returnObjects: true }).map((expertise, index) => (
+                      {(Array.isArray(t('blogPost3.author.expertise', { returnObjects: true })) ? t('blogPost3.author.expertise', { returnObjects: true }) : []).map((expertise, index) => (
                         <span key={index} className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 text-sm rounded-full">
                           {expertise}
                         </span>

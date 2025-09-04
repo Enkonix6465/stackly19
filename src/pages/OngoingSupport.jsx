@@ -9,6 +9,15 @@ export default function OngoingSupport() {
   const [user, setUser] = useState(null)
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    const checkDark = () => setIsDark(document.documentElement.classList.contains('dark'))
+    checkDark()
+    const observer = new MutationObserver(checkDark)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -77,25 +86,32 @@ export default function OngoingSupport() {
 
 
 {/* 2 Services - Ongoing Support Hero */}
-<section id="hero" className="relative overflow-hidden border-t border-black/10 dark:border-gray-700">
-  <div className="mx-auto max-w-6xl px-4 py-28 grid md:grid-cols-2 gap-10 items-center">
+<section
+  id="hero"
+  className={`relative overflow-hidden border-t transition-colors duration-500 ${
+    isDark
+      ? 'bg-gray-900 border-gray-700'
+      : 'bg-white border-black/10'
+  }`}
+>  <div className="mx-auto max-w-6xl px-4 py-28 grid md:grid-cols-2 gap-10 items-center">
     <div className="animate-fade-in">
-      <p className="text-sm tracking-widest text-black dark:text-white">
-        {t('ongoingSupport.hero.tagline')}
-      </p>
-      
-      <h1 className="mt-2 text-4xl md:text-5xl font-extrabold leading-tight text-black dark:text-white">
-        {t('ongoingSupport.hero.title')}
-      </h1>
-      
-      <p className="mt-4 text-black dark:text-gray-300">
-        We don’t just deliver and disappear—we stay with you every step of the way. 
-        Our ongoing support services ensure your systems, websites, and digital tools 
-        continue to perform at their best. From regular updates and troubleshooting 
-        to proactive monitoring and quick assistance, we’ve got you covered so you can 
-        focus on growing your business with confidence.
-      </p>
-    </div>
+  <p className={`text-sm tracking-widest ${isDark ? 'text-white' : 'text-black'}`}>
+    {t('ongoingSupport.hero.tagline')}
+  </p>
+
+  <h1 className={`mt-2 text-4xl md:text-5xl font-extrabold leading-tight ${isDark ? 'text-white' : 'text-black'}`}>
+    {t('ongoingSupport.hero.title')}
+  </h1>
+
+  <p className={`mt-4 ${isDark ? 'text-gray-300' : 'text-black'}`}>
+    We don’t just deliver and disappear—we stay with you every step of the way. 
+    Our ongoing support services ensure your systems, websites, and digital tools 
+    continue to perform at their best. From regular updates and troubleshooting 
+    to proactive monitoring and quick assistance, we’ve got you covered so you can 
+    focus on growing your business with confidence.
+  </p>
+</div>
+
 
     <div className="justify-self-center relative">
       {/* image */}
@@ -113,16 +129,19 @@ export default function OngoingSupport() {
 
 
       {/* Service Overview */}
-      <section className="py-20 bg-black dark:bg-gray-800">
-        <div className="mx-auto max-w-7xl px-4">
+      <section
+      className={`py-20 transition-colors duration-300 ${
+        isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-black"
+      }`}
+    >         <div className="mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-white dark:text-white mb-6">
-                {t('ongoingSupport.serviceOverview.title')}
-              </h2>
-              <p className="text-lg text-white dark:text-gray-400 mb-6 leading-relaxed">
-                {t('ongoingSupport.serviceOverview.description')}
-              </p>
+              <h2 className={`text-4xl font-bold mb-6 ${isDark ? "text-white" : "text-black"}`}>
+        {t('contentCopywriting.serviceOverview.title')}
+      </h2>
+      <p className={`text-lg mb-6 leading-relaxed ${isDark ? "text-gray-400" : "text-black/70"}`}>
+        {t('contentCopywriting.serviceOverview.description')}
+      </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center">
@@ -180,15 +199,18 @@ export default function OngoingSupport() {
       </section>
 
       {/* 4 Process Section */}
-<section className="py-20 bg-white text-gray-900 transition-colors duration-500">
-  <div className="mx-auto max-w-7xl px-4">
+<section
+      className={`py-20 transition-colors duration-500 ${
+        isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+      }`}
+    >  <div className="mx-auto max-w-7xl px-4">
     {/* Heading */}
     <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold text-gray-900 mb-4">
-        {t('ongoingSupport.process.title')}
+      <h2 className={`text-4xl font-bold mb-4 ${isDark ? "text-white" : "text-gray-900"}`}>
+        {t('contentCopywriting.process.title')}
       </h2>
-      <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-        {t('ongoingSupport.process.subtitle')}
+      <p className={`text-lg max-w-2xl mx-auto ${isDark ? "text-gray-400" : "text-gray-600"}`}>
+        {t('contentCopywriting.process.subtitle')}
       </p>
     </div>
 
@@ -241,15 +263,18 @@ export default function OngoingSupport() {
   </div>
 </section>
 {/* Ongoing Support */}
-<section className="py-20 bg-black dark:bg-gray-900">
-  <div className="mx-auto max-w-7xl px-4">
+<section
+      className={`py-20 transition-colors duration-500 ${
+        isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-white"
+      }`}
+    >   <div className="mx-auto max-w-7xl px-4">
     <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold text-white dark:text-white mb-4">
-        {t('ongoingSupport.solutions.title')}
+     <h2 className={`text-4xl font-bold mb-4 ${isDark ? "text-white" : "text-black"}`}>
+        {t('contentCopywriting.tools.title')}
       </h2>
-              <p className="text-lg text-white  dark:text-gray-400 max-w-2xl mx-auto">
-          {t('ongoingSupport.solutions.subtitle')}
-        </p>
+      <p className={`text-lg max-w-2xl mx-auto ${isDark ? "text-gray-400" : "text-gray-700"}`}>
+        {t('contentCopywriting.tools.subtitle')}
+      </p>
     </div>
 
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
@@ -272,17 +297,18 @@ export default function OngoingSupport() {
 
       
       {/* Call to Action */}
-<section className="relative py-24 bg-white">
-  <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+<section
+      className={`relative py-24 transition-colors duration-500 ${
+        isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+      }`}
+    >   <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
     {/* Heading */}
-    <h2 className="text-5xl font-extrabold text-black mb-6 leading-tight">
-      {t('ongoingSupport.cta.title')}
-    </h2>
-
-    {/* Subtext */}
-    <p className="text-lg text-black max-w-2xl mx-auto mb-10">
-      {t('ongoingSupport.cta.subtitle')}
-    </p>
+    <h2 className={`text-5xl font-extrabold mb-6 leading-tight ${isDark ? "text-white" : "text-black"}`}>
+        {t('contentCopywriting.cta.title')}
+      </h2>
+      <p className={`text-lg max-w-2xl mx-auto mb-10 ${isDark ? "text-gray-400" : "text-gray-700"}`}>
+        {t('contentCopywriting.cta.subtitle')}
+      </p>
 
     {/* Buttons */}
     <div className="flex flex-col sm:flex-row gap-5 justify-center">

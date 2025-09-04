@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 
 export default function DigitalMarketing() {
   const [user, setUser] = useState(null)
+  const [isDark, setIsDark] = useState(document.documentElement.classList.contains('dark'))
   const navigate = useNavigate()
   const { t } = useTranslation()
 
@@ -22,19 +23,30 @@ export default function DigitalMarketing() {
     checkAuth()
   }, [navigate])
 
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'))
+    })
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
+  }, [])
+
   if (!user) {
     return null
   }
 
   return (
-    <div className="bg-white dark:bg-gray-900 text-black dark:text-white transition-colors">
+    <div className={isDark ? 'bg-gray-900 text-white transition-colors' : 'bg-white text-black transition-colors'}>
       <Navbar user={user} />
 
 
 {/*1 Showcase */}
 <section
   id="showcase"
-  className="relative overflow-hidden h-screen flex items-center justify-center text-center"
+  className={
+    'relative overflow-hidden h-screen flex items-center justify-center text-center ' +
+    (isDark ? '' : '')
+  }
 >
   {/* Background Video */}
   <video
@@ -76,18 +88,24 @@ export default function DigitalMarketing() {
       
      
 {/* 2 Services - Digital Marketing Hero */}
-<section id="hero" className="relative overflow-hidden border-t border-black/10 dark:border-gray-700">
+<section
+  id="hero"
+  className={
+    'relative overflow-hidden border-t border-black/10 dark:border-gray-700 ' +
+    (isDark ? 'bg-gray-900 text-white' : 'bg-white text-black')
+  }
+>
   <div className="mx-auto max-w-6xl px-4 py-28 grid md:grid-cols-2 gap-10 items-center">
     <div className="animate-fade-in">
-      <p className="text-sm tracking-widest text-black dark:text-white">
+      <p className={isDark ? 'text-sm tracking-widest text-white' : 'text-sm tracking-widest text-black'}>
         {t('digitalMarketing.servicesTitle')}
       </p>
       
-      <h1 className="mt-2 text-4xl md:text-5xl font-extrabold leading-tight text-black dark:text-white">
+      <h1 className={isDark ? 'mt-2 text-4xl md:text-5xl font-extrabold leading-tight text-white' : 'mt-2 text-4xl md:text-5xl font-extrabold leading-tight text-black'}>
         {t('digitalMarketing.strategiesTitle')}
       </h1>
       
-      <p className="mt-4 text-black dark:text-gray-300">
+      <p className={isDark ? 'mt-4 text-gray-300' : 'mt-4 text-black'}>
         {t('digitalMarketing.strategiesDescription')}
       </p>
     </div>
@@ -107,14 +125,14 @@ export default function DigitalMarketing() {
 
 
       {/* 3Service Overview */}
-      <section className="py-20 bg-black dark:bg-gray-800">
+      <section className={isDark ? 'py-20 bg-black' : 'py-20 bg-gray-100'}>
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-white dark:text-white mb-6">
+              <h2 className={isDark ? 'text-4xl font-bold text-white mb-6' : 'text-4xl font-bold text-black mb-6'}>
                 {t('digitalMarketing.strategicTitle')}
               </h2>
-              <p className="text-lg text-white dark:text-gray-400 mb-6 leading-relaxed">
+              <p className={isDark ? 'text-lg text-gray-400 mb-6 leading-relaxed' : 'text-lg text-black mb-6 leading-relaxed'}>
                 {t('digitalMarketing.strategicDescription')}
               </p>
               <div className="space-y-4">
@@ -124,7 +142,7 @@ export default function DigitalMarketing() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
                     </svg>
                   </div>
-                  <span className="text-white dark:text-gray-300">{t('digitalMarketing.dataDriven')}</span>
+                  <span className={isDark ? 'text-gray-300' : 'text-black'}>{t('digitalMarketing.dataDriven')}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center">
@@ -132,7 +150,7 @@ export default function DigitalMarketing() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
                     </svg>
                   </div>
-                  <span className="text-white dark:text-gray-300">{t('digitalMarketing.multiChannel')}</span>
+                  <span className={isDark ? 'text-gray-300' : 'text-black'}>{t('digitalMarketing.multiChannel')}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center">
@@ -140,34 +158,34 @@ export default function DigitalMarketing() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
                     </svg>
                   </div>
-                  <span className="text-white dark:text-gray-300">{t('digitalMarketing.roiFocused')}</span>
+                  <span className={isDark ? 'text-gray-300' : 'text-black'}>{t('digitalMarketing.roiFocused')}</span>
                 </div>
               </div>
             </div>
-            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            <div className={isDark ? 'bg-gray-900 rounded-2xl shadow-xl p-8' : 'bg-white rounded-2xl shadow-xl p-8'}>
+              <h3 className={isDark ? 'text-2xl font-bold text-white mb-4' : 'text-2xl font-bold text-gray-900 mb-4'}>
                 {t('digitalMarketing.marketingServicesTitle')}
               </h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2"></span>
-                  <span className="text-gray-600 dark:text-gray-400">{t('digitalMarketing.socialMediaManagement')}</span>
+                  <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('digitalMarketing.socialMediaManagement')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2"></span>
-                  <span className="text-gray-600 dark:text-gray-400">{t('digitalMarketing.ppcGoogleAds')}</span>
+                  <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('digitalMarketing.ppcGoogleAds')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2"></span>
-                  <span className="text-gray-600 dark:text-gray-400">{t('digitalMarketing.emailMarketing')}</span>
+                  <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('digitalMarketing.emailMarketing')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2"></span>
-                  <span className="text-gray-600 dark:text-gray-400">{t('digitalMarketing.contentMarketing')}</span>
+                  <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('digitalMarketing.contentMarketing')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2"></span>
-                  <span className="text-gray-600 dark:text-gray-400">{t('digitalMarketing.analyticsReporting')}</span>
+                  <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('digitalMarketing.analyticsReporting')}</span>
                 </li>
               </ul>
             </div>
@@ -177,86 +195,86 @@ export default function DigitalMarketing() {
 
 
       {/* 4 Process Section - Digital Marketing */}
-<section className="py-20 bg-white text-gray-900 transition-colors duration-500">
-  <div className="mx-auto max-w-7xl px-4">
-    {/* Heading */}
-    <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold text-gray-900 mb-4">
-        {t('digitalMarketing.marketingProcessTitle')}
-      </h2>
-      <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-        {t('digitalMarketing.marketingProcessDescription')}
-      </p>
-    </div>
+      <section className={isDark ? 'py-20 bg-gray-900 text-white transition-colors duration-500' : 'py-20 bg-white text-gray-900 transition-colors duration-500'}>
+        <div className="mx-auto max-w-7xl px-4">
+          {/* Heading */}
+          <div className="text-center mb-16">
+            <h2 className={isDark ? 'text-4xl font-bold text-white mb-4' : 'text-4xl font-bold text-gray-900 mb-4'}>
+              {t('digitalMarketing.marketingProcessTitle')}
+            </h2>
+            <p className={isDark ? 'text-lg text-gray-300 max-w-2xl mx-auto' : 'text-lg text-gray-600 max-w-2xl mx-auto'}>
+              {t('digitalMarketing.marketingProcessDescription')}
+            </p>
+          </div>
 
-    {/* Steps */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {/* Step 1 */}
-      <div className="text-center">
-        <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-          <span className="text-2xl font-bold text-white">1</span>
+          {/* Steps */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Step 1 */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
+                <span className="text-2xl font-bold text-white">1</span>
+              </div>
+              <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>
+                {t('digitalMarketing.researchStrategyTitle')}
+              </h3>
+              <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                {t('digitalMarketing.researchStrategyDescription')}
+              </p>
+            </div>
+
+            {/* Step 2 */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
+                <span className="text-2xl font-bold text-white">2</span>
+              </div>
+              <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>
+                {t('digitalMarketing.contentCreationTitle')}
+              </h3>
+              <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                {t('digitalMarketing.contentCreationDescription')}
+              </p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
+                <span className="text-2xl font-bold text-white">3</span>
+              </div>
+              <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>
+                {t('digitalMarketing.campaignExecutionTitle')}
+              </h3>
+              <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                {t('digitalMarketing.campaignExecutionDescription')}
+              </p>
+            </div>
+
+            {/* Step 4 */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
+                <span className="text-2xl font-bold text-white">4</span>
+              </div>
+              <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>
+                {t('digitalMarketing.optimizeScaleTitle')}
+              </h3>
+              <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                {t('digitalMarketing.optimizeScaleDescription')}
+              </p>
+            </div>
+          </div>
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-          {t('digitalMarketing.researchStrategyTitle')}
-        </h3>
-        <p className="text-gray-600">
-          {t('digitalMarketing.researchStrategyDescription')}
-        </p>
-      </div>
+      </section>
 
-      {/* Step 2 */}
-      <div className="text-center">
-        <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-          <span className="text-2xl font-bold text-white">2</span>
-        </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-          {t('digitalMarketing.contentCreationTitle')}
-        </h3>
-        <p className="text-gray-600">
-          {t('digitalMarketing.contentCreationDescription')}
-        </p>
-      </div>
-
-      {/* Step 3 */}
-      <div className="text-center">
-        <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-          <span className="text-2xl font-bold text-white">3</span>
-        </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-          {t('digitalMarketing.campaignExecutionTitle')}
-        </h3>
-        <p className="text-gray-600">
-          {t('digitalMarketing.campaignExecutionDescription')}
-        </p>
-      </div>
-
-      {/* Step 4 */}
-      <div className="text-center">
-        <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-          <span className="text-2xl font-bold text-white">4</span>
-        </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-          {t('digitalMarketing.optimizeScaleTitle')}
-        </h3>
-        <p className="text-gray-600">
-          {t('digitalMarketing.optimizeScaleDescription')}
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-{/* Digital Marketing Solutions */}
-<section className="py-20 bg-black dark:bg-gray-800">
-  <div className="mx-auto max-w-7xl px-4">
-    <div className="text-center mb-16">
-      <h2 className="text-4xl font-bold text-white mb-4">
-        {t('digitalMarketing.digitalMarketingSolutionsTitle')}
-      </h2>
-      <p className="text-lg text-white dark:text-gray-400 max-w-2xl mx-auto">
-        {t('digitalMarketing.digitalMarketingSolutionsDescription')}
-      </p>
-    </div>
+      {/* Digital Marketing Solutions */}
+      <section className={isDark ? 'py-20 bg-black text-white' : 'py-20 bg-gray-100 text-gray-900'}>
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="text-center mb-16">
+            <h2 className={isDark ? 'text-4xl font-bold text-white mb-4' : 'text-4xl font-bold text-gray-900 mb-4'}>
+              {t('digitalMarketing.digitalMarketingSolutionsTitle')}
+            </h2>
+            <p className={isDark ? 'text-lg text-gray-400 max-w-2xl mx-auto' : 'text-lg text-gray-600 max-w-2xl mx-auto'}>
+              {t('digitalMarketing.digitalMarketingSolutionsDescription')}
+            </p>
+          </div>
 
     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
       {[
@@ -287,17 +305,18 @@ export default function DigitalMarketing() {
 
       
        {/* Call to Action */}
-<section className="relative py-24 bg-white">
-  <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+<section
+      className={`relative py-24 transition-colors duration-500 ${
+        isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+      }`}
+    >  <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
     {/* Heading */}
-    <h2 className="text-5xl font-extrabold text-black mb-6 leading-tight">
-      {t('digitalMarketing.ctaTitle')}
-    </h2>
-
-    {/* Subtext */}
-    <p className="text-lg text-black max-w-2xl mx-auto mb-10">
-      {t('digitalMarketing.ctaDescription')}
-    </p>
+   <h2 className={`text-5xl font-extrabold mb-6 leading-tight ${isDark ? "text-white" : "text-black"}`}>
+        {t('digitalMarketing.ctaTitle')}
+      </h2>
+      <p className={`text-lg max-w-2xl mx-auto mb-10 ${isDark ? "text-gray-400" : "text-gray-700"}`}>
+        {t('digitalMarketing.ctaDescription')}
+      </p>
 
     {/* Buttons */}
     <div className="flex flex-col sm:flex-row gap-5 justify-center">
