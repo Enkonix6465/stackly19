@@ -48,7 +48,7 @@ export default function About() {
     playsInline
     className="absolute inset-0 w-full h-full object-cover"
   >
-    <source src="/public/vedi03.mp4" type="video/mp4" />
+    <source src="/vedi03.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
