@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getCurrentUser, logoutUser, isAuthenticated } from '../utils/auth'
 import Navbar from '../components/Navbar'
@@ -8,7 +8,6 @@ import { useTranslation } from 'react-i18next'
 
 export default function Home() {
   const navigate = useNavigate()
-  const [showAllBlogs, setShowAllBlogs] = useState(false)
   const { t } = useTranslation()
 
   useEffect(() => {
@@ -24,6 +23,8 @@ export default function Home() {
     navigate('/login', { replace: true })
   }
   const [isDark, setIsDark] = useState(false)
+  const [servicesSectionVisible, setServicesSectionVisible] = useState(false)
+  const servicesSectionRef = useRef(null)
 
   useEffect(() => {
     const checkDark = () => setIsDark(document.documentElement.classList.contains('dark'))
@@ -31,6 +32,33 @@ export default function Home() {
     const observer = new MutationObserver(checkDark)
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
     return () => observer.disconnect()
+  }, [])
+
+  // Intersection Observer for Services section animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setServicesSectionVisible(true)
+          }
+        })
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the section is visible
+        rootMargin: '0px 0px -50px 0px' // Start animation slightly before section is fully visible
+      }
+    )
+
+    if (servicesSectionRef.current) {
+      observer.observe(servicesSectionRef.current)
+    }
+
+    return () => {
+      if (servicesSectionRef.current) {
+        observer.unobserve(servicesSectionRef.current)
+      }
+    }
   }, [])
 
   const blogPosts = [
@@ -49,24 +77,9 @@ export default function Home() {
       excerpt: t('home.blog.posts.multipleProjects.excerpt'),
       image: "/images/project-balance.jpg",
     },
-    {
-      title: t('home.blog.posts.topSkills.title'),
-      excerpt: t('home.blog.posts.topSkills.excerpt'),
-      image: "/images/skills-demand.jpg",
-    },
-    {
-      title: t('home.blog.posts.successStories.title'),
-      excerpt: t('home.blog.posts.successStories.excerpt'),
-      image: "/images/success-stories.jpg",
-    },
-    {
-      title: t('home.blog.posts.clientExpectations.title'),
-      excerpt: t('home.blog.posts.clientExpectations.excerpt'),
-      image: "/images/client-management.jpg",
-    },
   ]
 
-  const displayedBlogs = showAllBlogs ? blogPosts : blogPosts.slice(0, 3)
+  const displayedBlogs = blogPosts
 
   return (
     <div className="bg-white dark:bg-gray-900 text-black dark:text-white transition-colors">
@@ -97,17 +110,17 @@ export default function Home() {
   {/* Content */}
   <div className="relative z-10 px-6 max-w-4xl">
     
-    <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
+    <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white animate-fade-in-up-strong animate-delay-100">
       {t('home.showcase.title')}
     </h1>
-    <p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto">
+    <p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up-strong animate-delay-200">
       {t('home.showcase.subtitle')}
     </p>
-    <div className="mt-8 flex gap-4 justify-center">
+    <div className="mt-8 flex gap-4 justify-center animate-fade-in-up-strong animate-delay-300">
       {/* Primary Button */}
       <a
         href="/services"
-        className="rounded-md bg-indigo-500 text-black px-5 py-2.5 hover:bg-indigo-600 hover:text-white transition"
+        className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
       >
         {t('home.showcase.exploreButton')}
       </a>
@@ -115,8 +128,7 @@ export default function Home() {
       {/* Secondary Button */}
       <a
         href="/contact"
-        className="rounded-md border border-white text-white px-5 py-2.5 
-                   hover:bg-white hover:text-indigo-500 transition"
+        className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
       >
         {t('home.showcase.reachOutButton')}
       </a>
@@ -132,95 +144,264 @@ export default function Home() {
       className={`relative overflow-hidden border-t transition-colors duration-300 ${
         isDark ? "bg-gray-900 text-white border-gray-700" : "bg-white text-black border-black/10"
       }`}
-    >  <div className="mx-auto max-w-6xl px-4 py-28 grid md:grid-cols-2 gap-10 items-center">
-    <div className="animate-fade-in">
- <p
-      className={`text-sm tracking-widest ${
-        isDark ? "text-white" : "text-black"
-      }`}
     >
-      {t("home.hero.tagline")}
-    </p>        
-      <h1
-        className={`mt-2 text-4xl md:text-5xl font-extrabold leading-tight ${
-          isDark ? "text-white" : "text-black"
-        }`}
-      >
-        {t("home.hero.title")}
-      </h1>
-
-      <p
-        className={`mt-4 ${
-          isDark ? "text-gray-300" : "text-black"
-        }`}
-      >
-        {t("home.hero.description")}
-      </p>
       
-      <div className="mt-6 flex gap-3">
+      <div className="mx-auto max-w-6xl px-4 py-28 grid md:grid-cols-2 gap-10 items-center relative z-10">
+    <div className="space-y-6">
+      {/* Tagline with line-by-line fade-in from left animation */}
+      <p
+        className={`text-sm tracking-widest animate-hero-line-1 ${
+          isDark ? "text-white" : "text-indigo-600 font-semibold"
+        }`}
+        style={{ width: 'fit-content' }}
+      >
+        {t("home.hero.tagline")}
+      </p>        
+      
+      {/* Title broken into lines with line-by-line fade-in from left animation */}
+      <div className="space-y-2">
+        <h1
+          className={`text-4xl md:text-5xl font-extrabold leading-tight animate-hero-line-2 ${
+            isDark ? "text-white text-glow" : "text-black text-glow-strong"
+          }`}
+        >
+          {t("home.hero.title").split(' ').slice(0, 3).join(' ')}
+        </h1>
+        <h1
+          className={`text-4xl md:text-5xl font-extrabold leading-tight animate-hero-line-3 ${
+            isDark ? "text-white text-glow" : "text-black text-glow-strong"
+          }`}
+        >
+          {t("home.hero.title").split(' ').slice(3).join(' ')}
+        </h1>
+      </div>
+
+      {/* Description broken into lines with line-by-line fade-in from left animation */}
+      <div className="space-y-2">
+        <p
+          className={`text-lg animate-hero-line-4 ${
+            isDark ? "text-gray-300" : "text-gray-700 font-medium"
+          }`}
+        >
+          {t("home.hero.description").split('. ')[0] + '.'}
+        </p>
+        {t("home.hero.description").split('. ').length > 1 && (
+          <p
+            className={`text-lg animate-hero-line-5 ${
+              isDark ? "text-gray-300" : "text-gray-700 font-medium"
+            }`}
+          >
+            {t("home.hero.description").split('. ').slice(1).join('. ')}
+          </p>
+        )}
+      </div>
+      
+      {/* Buttons with line-by-line fade-in from left animation */}
+      <div className="flex gap-4 animate-hero-line-enhanced animate-hero-delay-600">
         {/* Latest Blog Button */}
         <a
           href="/services"
-          className="rounded-md bg-indigo-500 px-6 py-3 font-semibold 
-          text-black transition-colors duration-300 
-          hover:bg-white hover:text-indigo-500 hover:border hover:border-black"
+          className={`btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 ${
+            isDark 
+              ? "bg-indigo-500 text-black hover:bg-white hover:text-indigo-500 hover:border hover:border-black" 
+              : "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+          }`}
         >
-                      {t('home.hero.exploreBlogsButton')}
+          {t('home.hero.exploreBlogsButton')}
         </a>
 
         {/* Contact Button */}
         <a
           href="/contact"
-          className="rounded-md bg-white px-6 py-3 font-semibold 
-          text-indigo-500 border border-black transition-colors duration-300 
-          hover:bg-indigo-500 hover:text-black hover:border-0"
+          className={`btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 ${
+            isDark 
+              ? "bg-white text-indigo-500 border border-black hover:bg-indigo-500 hover:text-black hover:border-0" 
+              : "bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
+          }`}
         >
-                      {t('home.hero.getStartedButton')}
+          {t('home.hero.getStartedButton')}
         </a>
       </div>
     </div>
 
-    <div className="justify-self-center relative">
-      {/* image */}
+    {/* Image with enhanced floating animation */}
+    <div className="justify-self-center relative animate-scale-in-strong animate-delay-500">
       <img
         src="/images/hero.jpg" 
         alt="Freelancing illustration"
-        className="h-56 w-56 md:h-72 md:w-72 rounded-full object-cover shadow-lg"
+        className={`h-56 w-56 md:h-72 md:w-72 rounded-full object-cover shadow-2xl hover-lift-strong animate-float-enhanced ${
+          isDark ? "shadow-gray-800" : "shadow-indigo-200"
+        }`}
       />
     </div>
   </div>
 </section>
 
 
-      {/* About */}
+      {/* About - Redesigned */}
 <section
       id="about"
-      className={`${
-        isDark ? "bg-black text-white border-gray-700" : "bg-gray-100 text-black border-black/10"
+      className={`relative overflow-hidden ${
+        isDark ? "bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white" : "bg-black text-white"
       } border-t transition-colors duration-300`}
-    >  <div className="mx-auto max-w-6xl px-4 py-24 grid md:grid-cols-3 gap-10">
-    {/* Heading */}
-    <div className="md:col-span-1">
-               <h2 className="text-3xl font-extrabold">
-        {t("home.about.title")}
-      </h2>
+    >
 
-      <p
-        className={`mt-2 ${
-          isDark ? "text-white/70" : "text-black/70"
-        }`}
-      >
-        {t("home.about.subtitle")}
-      </p>
-    </div>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-24">
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <h2 className={`text-4xl md:text-5xl font-extrabold ${
+            isDark ? "text-white" : "text-white"
+          } animate-fade-in-up animate-delay-100`}>
+            {t("home.about.title")}
+          </h2>
+          
+          <p className={`mt-4 text-lg ${
+            isDark ? "text-gray-300" : "text-gray-300"
+          } animate-fade-in-up animate-delay-200`}>
+            {t("home.about.subtitle")}
+          </p>
+          
+          <div className={`mt-4 w-24 h-1 mx-auto rounded-full ${
+            isDark ? "bg-gradient-to-r from-indigo-500 to-purple-500" : "bg-gradient-to-r from-indigo-500 to-purple-500"
+          } animate-fade-in-up animate-delay-250`}></div>
+        </div>
 
-    {/* Content */}
-    <div className="md:col-span-2">
-      <p className="text-justify leading-relaxed animate-slide-up">
-                  {t('home.about.description')}
-      </p>
-    </div>
-  </div>
+        {/* Main Content Grid */}
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Side - Description */}
+          <div className="space-y-8 animate-slide-in-left animate-delay-300">
+            <div className={`p-8 rounded-2xl ${
+              isDark 
+                ? "bg-gray-800/50 backdrop-blur-sm border border-gray-700" 
+                : "bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl"
+            } about-card`}>
+              <p className={`text-lg leading-relaxed ${
+                isDark ? "text-gray-300" : "text-gray-300"
+              }`}>
+                {t('home.about.description')}
+              </p>
+            </div>
+
+            {/* Stats Cards */}
+            <div className="grid grid-cols-2 gap-6">
+              <div className={`p-6 rounded-xl text-center ${
+                isDark 
+                  ? "bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30" 
+                  : "bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30"
+              } about-card animate-count-up animate-delay-400`}>
+                <div className="text-3xl font-bold text-indigo-500 mb-2">500+</div>
+                <div className={`text-sm font-medium ${
+                  isDark ? "text-gray-300" : "text-gray-300"
+                }`}>{t('home.about.stats.projectsCompleted')}</div>
+              </div>
+              
+              <div className={`p-6 rounded-xl text-center ${
+                isDark 
+                  ? "bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30" 
+                  : "bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30"
+              } about-card animate-count-up animate-delay-500`}>
+                <div className="text-3xl font-bold text-purple-500 mb-2">50+</div>
+                <div className={`text-sm font-medium ${
+                  isDark ? "text-gray-300" : "text-gray-300"
+                }`}>{t('home.about.stats.happyClients')}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side - Features */}
+          <div className="space-y-6 animate-slide-in-right animate-delay-600">
+            <div className="grid gap-6">
+              {/* Feature 1 */}
+              <div className={`p-6 rounded-xl ${
+                isDark 
+                  ? "bg-gray-800/50 backdrop-blur-sm border border-gray-700" 
+                  : "bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg"
+              } about-card group`}>
+                <div className="flex items-start space-x-4">
+                  <div className={`p-3 rounded-lg ${
+                    isDark ? "bg-indigo-500/20" : "bg-indigo-500/20"
+                  } group-hover:scale-110 transition-transform duration-300`}>
+                    <svg className="w-6 h-6 text-indigo-500 animate-icon-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className={`text-xl font-semibold mb-2 ${
+                      isDark ? "text-white" : "text-gray-900"
+                    }`}>{t('home.about.features.fastDelivery.title')}</h3>
+                    <p className={`text-sm ${
+                      isDark ? "text-gray-400" : "text-gray-400"
+                    }`}>{t('home.about.features.fastDelivery.description')}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Feature 2 */}
+              <div className={`p-6 rounded-xl ${
+                isDark 
+                  ? "bg-gray-800/50 backdrop-blur-sm border border-gray-700" 
+                  : "bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg"
+              } about-card group`}>
+                <div className="flex items-start space-x-4">
+                  <div className={`p-3 rounded-lg ${
+                    isDark ? "bg-purple-500/20" : "bg-purple-100"
+                  } group-hover:scale-110 transition-transform duration-300`}>
+                    <svg className="w-6 h-6 text-purple-500 animate-icon-bounce animate-delay-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className={`text-xl font-semibold mb-2 ${
+                      isDark ? "text-white" : "text-gray-900"
+                    }`}>{t('home.about.features.qualityAssurance.title')}</h3>
+                    <p className={`text-sm ${
+                      isDark ? "text-gray-400" : "text-gray-400"
+                    }`}>{t('home.about.features.qualityAssurance.description')}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Feature 3 */}
+              <div className={`p-6 rounded-xl ${
+                isDark 
+                  ? "bg-gray-800/50 backdrop-blur-sm border border-gray-700" 
+                  : "bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg"
+              } about-card group`}>
+                <div className="flex items-start space-x-4">
+                  <div className={`p-3 rounded-lg ${
+                    isDark ? "bg-pink-500/20" : "bg-pink-100"
+                  } group-hover:scale-110 transition-transform duration-300`}>
+                    <svg className="w-6 h-6 text-pink-500 animate-icon-bounce animate-delay-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className={`text-xl font-semibold mb-2 ${
+                      isDark ? "text-white" : "text-gray-900"
+                    }`}>{t('home.about.features.support24.title')}</h3>
+                    <p className={`text-sm ${
+                      isDark ? "text-gray-400" : "text-gray-400"
+                    }`}>{t('home.about.features.support24.description')}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA Button */}
+            <div className="pt-4 animate-fade-in-scale animate-delay-700">
+              <a
+                href="/about"
+                className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl inline-flex items-center"
+              >
+{t('home.about.ctaButton')}
+                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
 </section>
 
 
@@ -237,7 +418,7 @@ export default function Home() {
                  <h2
         className={`text-3xl font-extrabold ${
           isDark ? "text-white" : "text-black"
-        }`}
+        } animate-fade-in-up-fast animate-delay-fast-100`}
       >
         {t("home.services.title")}
       </h2>
@@ -245,7 +426,7 @@ export default function Home() {
       <p
         className={`mt-1 ${
           isDark ? "text-gray-300" : "text-black/70"
-        }`}
+        } animate-fade-in-up-fast animate-delay-fast-200`}
       >
         {t("home.services.subtitle")}
       </p>
@@ -257,10 +438,15 @@ export default function Home() {
          { t: t('home.services.digitalMarketing'), d: t('home.services.digitalMarketingDesc') },
          { t: t('home.services.videoAnimation'), d: t('home.services.videoAnimationDesc') },
          { t: t('home.services.businessSupport'), d: t('home.services.businessSupportDesc') },
-      ].map((card, idx) => (
+      ].map((card, idx) => {
+        // Create fast staggered delays for each card
+        const delays = ['animate-delay-fast-300', 'animate-delay-fast-400', 'animate-delay-fast-500', 'animate-delay-fast-600', 'animate-delay-fast-700', 'animate-delay-fast-800'];
+        const delayClass = delays[idx] || 'animate-delay-fast-300';
+        
+        return (
                  <div
            key={card.t}
-           className="rounded-xl border border-black/10 dark:border-gray-700 p-6 bg-white dark:bg-gray-800 transition-shadow hover:shadow-lg hover:shadow-indigo-500/70"
+           className={`rounded-xl border border-black/10 dark:border-gray-700 p-6 bg-white dark:bg-gray-800 transition-shadow hover:shadow-lg hover:shadow-indigo-500/70 animate-fade-in-up-fast ${delayClass}`}
          >
            <div className="h-10 w-10 rounded-md bg-indigo-500/90 text-white grid place-items-center font-bold">
              {idx + 1}
@@ -268,7 +454,8 @@ export default function Home() {
            <h3 className="mt-4 text-xl font-bold text-black dark:text-white">{card.t}</h3>
            <p className="mt-2 text-black/70 dark:text-gray-300">{card.d}</p>
          </div>
-      ))}
+        );
+      })}
     </div>
   </div>
 </section>
@@ -278,69 +465,102 @@ export default function Home() {
       {/* Blog */}
 <section
       id="blog"
-      className={`border-t transition-colors duration-300 ${
+      className={`relative overflow-hidden border-t transition-colors duration-300 ${
         isDark
-          ? "bg-gray-900 text-white border-gray-700"
-          : "bg-gray-100 text-black border-black/10"
+          ? "bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border-gray-700"
+          : "bg-black text-white border-black/10"
       }`}
     >
-      <div className="mx-auto max-w-6xl px-4 py-24">
-        <div className="flex items-end justify-between">
-          <div>
-            <h2 className="text-3xl font-extrabold">
-              {t("home.blog.title")}
-            </h2>
-            <p
-              className={`mt-1 ${
-                isDark ? "text-white/70" : "text-black/70"
-              }`}
-            >
-              {t("home.blog.subtitle")}
-            </p>
-          </div>
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className={`absolute top-1/4 right-1/4 w-32 h-32 rounded-full opacity-5 animate-float ${
+          isDark ? "bg-indigo-500" : "bg-indigo-200"
+        }`}></div>
+        <div className={`absolute bottom-1/3 left-1/4 w-24 h-24 rounded-full opacity-5 animate-pulse-slow ${
+          isDark ? "bg-purple-500" : "bg-purple-200"
+        }`}></div>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-6xl px-4 py-24">
+        {/* Header with enhanced styling */}
+        <div className="text-center mb-16">
+          <h2 className={`text-4xl md:text-5xl font-extrabold ${
+            isDark ? "text-white" : "text-white"
+          } animate-fade-in-up animate-delay-100`}>
+            {t("home.blog.title")}
+          </h2>
+          
+          <p
+            className={`mt-4 text-lg max-w-2xl mx-auto ${
+              isDark ? "text-gray-300" : "text-gray-300"
+            } animate-fade-in-up animate-delay-200`}
+          >
+            {t("home.blog.subtitle")}
+          </p>
+          
+          <div className={`mt-6 w-24 h-1 mx-auto rounded-full ${
+            isDark ? "bg-gradient-to-r from-indigo-500 to-purple-500" : "bg-gradient-to-r from-indigo-600 to-purple-600"
+          } animate-fade-in-up animate-delay-250`}></div>
         </div>
-    
 
-    {/* Blog Posts */}
-    <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {displayedBlogs.map((post, i) => (
-        <article
-          key={i}
-          className="group overflow-hidden rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
-        >
-          {/* Blog Image */}
-          <div className="aspect-video overflow-hidden">
-            <img
-              src={post.image}
-              alt={post.title}
-              className="h-full w-full object-cover group-hover:scale-105 transition-transform"
-            />
-          </div>
+        {/* Blog Posts with enhanced animations */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {displayedBlogs.map((post, i) => {
+            // Create staggered delays for each blog card
+            const delays = ['animate-delay-300', 'animate-delay-400', 'animate-delay-500'];
+            const delayClass = delays[i] || 'animate-delay-300';
+            
+            return (
+            <article
+              key={i}
+              className={`blog-card rounded-2xl border ${
+                isDark 
+                  ? "border-white/10 bg-white/5 hover:bg-white/10" 
+                  : "border-white/10 bg-white/5 hover:bg-white/10 shadow-lg hover:shadow-xl"
+              } transition-all duration-300 animate-fade-in-up ${delayClass}`}
+            >
+              {/* Blog Image with overlay */}
+              <div className="blog-image-container aspect-video overflow-hidden rounded-t-2xl">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="h-full w-full object-cover animate-blog-image"
+                />
+                <div className="blog-image-overlay"></div>
+              </div>
 
-          {/* Blog Content */}
-          <div className="p-4">
-            <h3 className="font-semibold">{post.title}</h3>
-  <p
-      className={`text-sm ${
-        isDark ? "text-white/70" : "text-black/70"
-      }`}
-    >
-      {post.excerpt}
-    </p>          </div>
-        </article>
-      ))}
-    </div>
-    
-    {/* See All Button for Mobile and Center */}
-    <div className="mt-8 text-center md:hidden">
-      <button 
-        onClick={() => setShowAllBlogs(!showAllBlogs)}
-        className="rounded-md bg-indigo-500 px-6 py-3 font-semibold text-black hover:bg-white hover:text-indigo-500 transition-colors duration-300 border border-transparent hover:border-black"
-      >
-                 {showAllBlogs ? t('home.blog.showLess') : t('home.blog.seeAllPosts')}
-      </button>
-    </div>
-  </div>
+              {/* Blog Content */}
+              <div className="p-6 animate-blog-content">
+                <h3 className={`text-xl font-bold mb-3 animate-blog-title ${
+                  isDark ? "text-white" : "text-white"
+                } group-hover:text-indigo-500 transition-colors duration-300`}>
+                  {post.title}
+                </h3>
+                <p
+                  className={`text-sm leading-relaxed ${
+                    isDark ? "text-gray-300" : "text-gray-300"
+                  }`}
+                >
+                  {post.excerpt}
+                </p>
+                
+                {/* Read more link */}
+                <div className="mt-4">
+                  <span className={`inline-flex items-center text-sm font-medium ${
+                    isDark ? "text-indigo-400 hover:text-indigo-300" : "text-indigo-400 hover:text-indigo-300"
+                  } transition-colors duration-300 cursor-pointer`}>
+                    Read More
+                    <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </article>
+            )
+          })}
+        </div>
+      </div>
 </section>
 
 
@@ -357,7 +577,7 @@ export default function Home() {
          <h2
         className={`text-3xl font-extrabold ${
           isDark ? "text-white" : "text-black"
-        }`}
+        } animate-fade-in-up animate-delay-100`}
       >
         {t("home.categories.title")}
       </h2>
@@ -365,7 +585,7 @@ export default function Home() {
       <p
         className={`mt-1 ${
           isDark ? "text-gray-300" : "text-black/70"
-        }`}
+        } animate-fade-in-up animate-delay-200`}
       >
         {t("home.categories.subtitle")}
       </p>
@@ -378,9 +598,14 @@ export default function Home() {
         { title: t('home.categories.marketingSales'), icon: <svg xmlns="http://www.w3.org/2000/svg" width={45} height={45} viewBox="0 0 24 24"><g fill="none"><path fill="#ffef5e" d="M1 4.826a.957.957 0 0 1 .957-.956h20.087a.956.956 0 0 1 .956.956v14.348a.956.956 0 0 1-.956.956H1.957A.956.956 0 0 1 1 19.174z"></path><path fill="#fff9bf" d="M1.957 3.87A.957.957 0 0 0 1 4.826v14.348a.94.94 0 0 0 .398.756l16.06-16.06z"></path><path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="m4.826 15.348l2.459-4.1a.48.48 0 0 1 .82 0l2.114 3.526a.478.478 0 0 0 .777.06l1.593-1.913a.478.478 0 0 1 .734 0l1.583 1.9a.478.478 0 0 0 .783-.07l3.484-6.099" strokeWidth={1}></path><path stroke="#191919" strokeLinecap="round" strokeLinejoin="round" d="M1 4.826a.957.957 0 0 1 .957-.956h20.087a.956.956 0 0 1 .956.956v14.348a.956.956 0 0 1-.956.956H1.957A.956.956 0 0 1 1 19.174z" strokeWidth={1}></path></g></svg> },
         { title: t('home.categories.videoAnimation'), icon: <svg xmlns="http://www.w3.org/2000/svg" width={45} height={45} viewBox="0 0 48 48"><g fill="none" strokeWidth={4}><path fill="#2f88ff" stroke="#000" strokeLinejoin="round" d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z"></path><path fill="#43ccf8" stroke="#fff" strokeLinejoin="round" d="M24 18C25.6569 18 27 16.6569 27 15C27 13.3431 25.6569 12 24 12C22.3431 12 21 13.3431 21 15C21 16.6569 22.3431 18 24 18Z"></path><path fill="#43ccf8" stroke="#fff" strokeLinejoin="round" d="M24 36C25.6569 36 27 34.6569 27 33C27 31.3431 25.6569 30 24 30C22.3431 30 21 31.3431 21 33C21 34.6569 22.3431 36 24 36Z"></path><path fill="#43ccf8" stroke="#fff" strokeLinejoin="round" d="M15 27C16.6569 27 18 25.6569 18 24C18 22.3431 16.6569 21 15 21C13.3431 21 12 22.3431 12 24C12 25.6569 13.3431 27 15 27Z"></path><path fill="#43ccf8" stroke="#fff" strokeLinejoin="round" d="M33 27C34.6569 27 36 25.6569 36 24C36 22.3431 34.6569 21 33 21C31.3431 21 30 22.3431 30 24C30 25.6569 31.3431 27 33 27Z"></path><path stroke="#000" strokeLinecap="round" d="M24 44H44"></path></g></svg>},
         { title: t('home.categories.adminSupport'), icon: <svg xmlns="http://www.w3.org/2000/svg" width={45} height={45} viewBox="0 0 64 64"><g fill="#f4ae7f"><path d="M52.11 58.32c0 3.056-2.289 5.531-5.116 5.531H14.379c-2.824 0-5.114-2.476-5.114-5.531V8.447c0-3.059 2.291-5.534 5.114-5.534h32.615c2.827 0 5.116 2.475 5.116 5.534z"></path><path d="M30.899 10.509c0 .581-1.158 1.051-2.58 1.051H11.848c-1.426 0-2.582-.47-2.582-1.051v-9.46C9.266.47 10.421 0 11.848 0h16.471c1.422 0 2.58.47 2.58 1.049z"></path></g><path fill="#d0d2d3" d="M54.662 56c0 2.593-2.312 4.69-5.167 4.69H16.536c-2.851 0-5.167-2.098-5.167-4.69V13.73c0-2.591 2.316-4.69 5.167-4.69h32.959c2.855 0 5.167 2.1 5.167 4.69z"></path><path fill="#fff" d="M54.662 52.694c0 2.593-2.312 4.69-5.167 4.69H16.536c-2.851 0-5.167-2.098-5.167-4.69v-42.27c0-2.591 2.316-4.688 5.167-4.688h32.959c2.855 0 5.167 2.098 5.167 4.688z"></path><path fill="#d0d2d3" d="M43.1 8.28c0 .312-1.538.566-3.43.566h-21.9c-1.896 0-3.434-.254-3.434-.566V3.185c0-.315 1.538-.566 3.434-.566h21.9c1.892 0 3.43.251 3.43.566z"></path><path fill="#35494d" d="M20.07 18.03h28.562c1.922 0 1.922-2.7 0-2.7H20.07c-1.915 0-1.915 2.7 0 2.7m0 5.485h28.562c1.922 0 1.922-2.698 0-2.698H20.07c-1.915 0-1.915 2.698 0 2.698m0 5.605h28.562c1.922 0 1.922-2.7 0-2.7H20.07c-1.915 0-1.915 2.7 0 2.7m0 5.48h28.562c1.922 0 1.922-2.698 0-2.698H20.07c-1.915 0-1.915 2.698 0 2.698m0 10.58h13.148c1.916 0 1.916-2.699 0-2.699H20.07c-1.915-.001-1.915 2.699 0 2.699"></path></svg> },
-      ].map((cat, i) => (
-        <div key={i} className="flex flex-col items-center">
-          <div className="h-16 w-16 flex items-center justify-center rounded-full bg-indigo-500/10 text-3xl">
+      ].map((cat, i) => {
+        // Create staggered delays for each category card (one by one) - faster timing
+        const delays = ['animate-delay-fast-100', 'animate-delay-fast-200', 'animate-delay-fast-300', 'animate-delay-fast-400', 'animate-delay-fast-500', 'animate-delay-fast-600'];
+        const delayClass = delays[i] || 'animate-delay-fast-100';
+        
+        return (
+        <div key={i} className={`flex flex-col items-center animate-fade-in-up ${delayClass}`}>
+          <div className="h-16 w-16 flex items-center justify-center rounded-full bg-indigo-500/10 text-3xl hover-lift-strong transition-all duration-300 cursor-pointer">
             {cat.icon}
           </div>
 <h3
@@ -390,7 +615,8 @@ export default function Home() {
     >
       {cat.title}
     </h3>        </div>
-      ))}
+        );
+      })}
     </div>
   </div>
 </section>
@@ -401,55 +627,74 @@ export default function Home() {
       {/* Contact */}
   <section
       id="contact"
-      className={`border-t transition-colors duration-300 ${
+      className={`relative overflow-hidden border-t transition-colors duration-300 ${
         isDark
           ? "bg-black text-white border-gray-700"
-          : "bg-gray-100 text-black border-black/10"
+          : "bg-black text-white border-black/10"
       }`}
     >
+
  <div
-      className={`mx-auto max-w-6xl px-4 py-24 grid md:grid-cols-2 gap-10 items-center ${
-        isDark ? "text-white" : "text-black"
+      className={`relative z-10 mx-auto max-w-6xl px-4 py-24 grid md:grid-cols-2 gap-10 items-center ${
+        isDark ? "text-white" : "text-white"
       }`}
     >    {/* Left - Text + Bullet Points */}
-    <div>
-      <h2 className="text-3xl font-extrabold">{t('home.contact.title')}</h2>
-      <p
-      className={`mt-2 ${
-        isDark ? "text-white/70" : "text-black/70"
-      }`}
-    >
-      {t("home.contact.description")}
-    </p>
+    <div className="space-y-6 animate-fade-in-up-strong animate-delay-200">
+      <div className="space-y-2">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-glow-strong animate-slide-in-left animate-delay-300">
+          {t('home.contact.title').split(' ').slice(0, 2).join(' ')}
+        </h2>
+        <h2 className="text-4xl md:text-5xl font-extrabold text-glow-strong animate-slide-in-left animate-delay-400">
+          {t('home.contact.title').split(' ').slice(2).join(' ')}
+        </h2>
+      </div>
+      <div className="space-y-2">
+        <p
+          className={`text-lg animate-slide-in-left animate-delay-500 ${
+            isDark ? "text-gray-300" : "text-gray-300"
+          }`}
+        >
+          {t("home.contact.description").split('. ')[0] + '.'}
+        </p>
+        {t("home.contact.description").split('. ').length > 1 && (
+          <p
+            className={`text-lg animate-slide-in-left animate-delay-600 ${
+              isDark ? "text-gray-300" : "text-gray-300"
+            }`}
+          >
+            {t("home.contact.description").split('. ').slice(1).join('. ')}
+          </p>
+        )}
+      </div>
 
 <ul
-      className={`mt-6 space-y-3 ${
-        isDark ? "text-white/80" : "text-black/80"
+      className={`mt-6 space-y-4 ${
+        isDark ? "text-gray-300" : "text-gray-300"
       }`}
-    >        <li className="flex items-center gap-2">
-          <span className="text-indigo-400 text-lg">✔</span>
-          {t('home.contact.features.webMobile')}
+    >        <li className="flex items-center gap-3 group animate-slide-in-left animate-delay-700">
+          <span className="text-indigo-400 text-xl group-hover:scale-110 transition-transform duration-300">✔</span>
+          <span className="group-hover:text-indigo-300 transition-colors duration-300">{t('home.contact.features.webMobile')}</span>
         </li>
-        <li className="flex items-center gap-2">
-          <span className="text-indigo-400 text-lg">✔</span>
-          {t('home.contact.features.futureReady')}
+        <li className="flex items-center gap-3 group animate-slide-in-left animate-delay-800">
+          <span className="text-indigo-400 text-xl group-hover:scale-110 transition-transform duration-300">✔</span>
+          <span className="group-hover:text-indigo-300 transition-colors duration-300">{t('home.contact.features.futureReady')}</span>
         </li>
-        <li className="flex items-center gap-2">
-          <span className="text-indigo-400 text-lg">✔</span>
-          {t('home.contact.features.transparent')}
+        <li className="flex items-center gap-3 group animate-slide-in-left animate-delay-900">
+          <span className="text-indigo-400 text-xl group-hover:scale-110 transition-transform duration-300">✔</span>
+          <span className="group-hover:text-indigo-300 transition-colors duration-300">{t('home.contact.features.transparent')}</span>
         </li>
-        <li className="flex items-center gap-2">
-          <span className="text-indigo-400 text-lg">✔</span>
-          {t('home.contact.features.support')}
+        <li className="flex items-center gap-3 group animate-slide-in-left animate-delay-1000">
+          <span className="text-indigo-400 text-xl group-hover:scale-110 transition-transform duration-300">✔</span>
+          <span className="group-hover:text-indigo-300 transition-colors duration-300">{t('home.contact.features.support')}</span>
         </li>
       </ul>
 
  <a
       href="/contact"
-      className={`mt-10 rounded-md px-6 py-3 font-semibold transition-colors duration-300 inline-block ${
+      className={`mt-10 rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 inline-block btn-animate-strong animate-slide-in-left animate-delay-1100 ${
         isDark
-          ? "bg-white text-black hover:bg-indigo-500 hover:text-white"
-          : "bg-black text-white hover:bg-indigo-500 hover:text-white"
+          ? "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+          : "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
       }`}
     >
       {t("home.contact.startProjectButton")}
@@ -459,11 +704,11 @@ export default function Home() {
     </div>
 
     {/* Right - Image */}
-    <div className="justify-self-center">
+    <div className="justify-self-center animate-slide-in-right animate-delay-300">
       <img
         src="/images/contact-side.jpg" // image
         alt="Team collaboration illustration"
-        className="rounded-xl shadow-lg object-cover w-[350px] h-[350px]"
+        className="rounded-xl shadow-2xl object-cover w-[350px] h-[350px] hover-lift-strong transition-all duration-300"
       />
     </div>
   </div>

@@ -82,22 +82,41 @@
   },
   "home": {
     "showcase": {
-      "title": "Find the Right Freelancer for Your Project",
+      "title": "Find the Right Freelancer",
       "subtitle": "Connect with top talent, get work done faster, and grow your business seamlessly.",
       "exploreButton": "Explore",
       "reachOutButton": "Reach out"
     },
     "hero": {
       "tagline": "FREELANCING MADE SIMPLE",
-      "title": "Connect with Clients & Grow Your Freelance Career",
+      "title": "Connect with Clients & Grow",
       "description": "A platform built for freelancers to showcase skills, land high-paying projects, and collaborate with clients worldwide.",
       "exploreBlogsButton": "Explore Blogs",
       "getStartedButton": "Get Started"
     },
     "about": {
       "title": "About Us",
-      "subtitle": "Empowering businesses & freelancers worldwide",
-      "description": "We are a global freelancing platform built to connect businesses with skilled professionals across every industry. Our mission is to simplify collaboration by offering secure payments, milestone protection, and real-time communication. With experts in design, development, writing, marketing, and more, we make it easy to find the right talent for every project. By combining transparency, accessibility, and innovation, we ensure that both clients and freelancers can thrive. Together, we are shaping the future of work through trust, opportunity, and growth."
+      "subtitle": "Empowering Your Digital Success",
+      "description": "We are a global freelancing platform built to connect businesses with skilled professionals across every industry. Our mission is to simplify collaboration by offering secure payments, milestone protection, and real-time communication. With experts in design, development, writing, marketing, and more, we make it easy to find the right talent for every project. By combining transparency, accessibility, and innovation, we ensure that both clients and freelancers can thrive. Together, we are shaping the future of work through trust, opportunity, and growth.",
+      "stats": {
+        "projectsCompleted": "Projects Completed",
+        "happyClients": "Happy Clients"
+      },
+      "features": {
+        "fastDelivery": {
+          "title": "Fast Delivery",
+          "description": "Quick turnaround times without compromising quality"
+        },
+        "qualityAssurance": {
+          "title": "Quality Assurance",
+          "description": "Rigorous testing and quality control processes"
+        },
+        "support24": {
+          "title": "24/7 Support",
+          "description": "Round-the-clock assistance for all your needs"
+        }
+      },
+      "ctaButton": "Learn More About Us"
     },
     "services": {
       "title": "Our Services",
@@ -126,7 +145,7 @@
           "excerpt": "A step-by-step guide to landing your first project online."
         },
         "highPayingClients": {
-          "title": "How to Attract High-Paying Clients",
+          "title": "Attract High-Paying Clients",
           "excerpt": "Proven strategies to build trust and grow your income."
         },
         "multipleProjects": {
@@ -172,7 +191,7 @@
   "home2": {
     "showcase": {
       "featuredWork": "FEATURED WORK",
-      "title": "Designing Impactful Digital Experiences",
+      "title": "Crafting Digital Excellence",
       "subtitle": "Showcasing projects that blend creativity, technology, and strategy to deliver meaningful results.",
       "exploreButton": "Explore",
       "reachOutButton": "Reach out"

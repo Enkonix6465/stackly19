@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar'
 import Counter from '../components/Counter'
 import Footer from '../components/Footer'
 import { useTranslation } from 'react-i18next'
+import { motion } from 'framer-motion'
 
 export default function Home2() {
   const navigate = useNavigate()
@@ -58,16 +59,28 @@ export default function Home2() {
 
         {/* Content */}
         <div className="relative z-10 px-6 max-w-4xl">
-          <p className="text-sm tracking-widest text-indigo-300 font-medium">
-            {t('home2.showcase.featuredWork')}
-          </p>
-          <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
+          <motion.h1 
+            className="text-5xl md:text-6xl font-extrabold leading-tight text-white"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             {t('home2.showcase.title')}
-          </h1>
-          <p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto">
+          </motion.h1>
+          <motion.p 
+            className="mt-6 text-xl text-white/80 max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             {t('home2.showcase.subtitle')}
-          </p>
-          <div className="mt-8 flex gap-4 justify-center">
+          </motion.p>
+          <motion.div 
+            className="mt-8 flex gap-4 justify-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
             {/* Primary Button */}
             <a
               href="/services"
@@ -84,7 +97,7 @@ export default function Home2() {
             >
               {t('home2.showcase.reachOutButton')}
             </a>
-          </div>
+          </motion.div>
         </div>
       </section>
 
