@@ -4,6 +4,7 @@ import { getCurrentUser, logoutUser, isAuthenticated } from '../utils/auth'
 import Navbar from '../components/Navbar'
 import { ThemeDebug } from '../components/theme-debug'
 import Footer from '../components/Footer'
+import ScrollAnimation from '../components/ScrollAnimation'
 import { useTranslation } from 'react-i18next'
 
 export default function Home() {
@@ -109,30 +110,37 @@ export default function Home() {
 
   {/* Content */}
   <div className="relative z-10 px-6 max-w-4xl">
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+      <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
+        {t('home.showcase.title')}
+      </h1>
+    </ScrollAnimation>
     
-    <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white animate-fade-in-up-strong animate-delay-100">
-      {t('home.showcase.title')}
-    </h1>
-    <p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up-strong animate-delay-200">
-      {t('home.showcase.subtitle')}
-    </p>
-    <div className="mt-8 flex gap-4 justify-center animate-fade-in-up-strong animate-delay-300">
-      {/* Primary Button */}
-      <a
-        href="/services"
-        className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
-      >
-        {t('home.showcase.exploreButton')}
-      </a>
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+      <p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto">
+        {t('home.showcase.subtitle')}
+      </p>
+    </ScrollAnimation>
+    
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-3">
+      <div className="mt-8 flex gap-4 justify-center">
+        {/* Primary Button */}
+        <a
+          href="/services"
+          className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+        >
+          {t('home.showcase.exploreButton')}
+        </a>
 
-      {/* Secondary Button */}
-      <a
-        href="/contact"
-        className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
-      >
-        {t('home.showcase.reachOutButton')}
-      </a>
-    </div>
+        {/* Secondary Button */}
+        <a
+          href="/contact"
+          className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
+        >
+          {t('home.showcase.reachOutButton')}
+        </a>
+      </div>
+    </ScrollAnimation>
   </div>
 </section>
 
@@ -148,92 +156,106 @@ export default function Home() {
       
       <div className="mx-auto max-w-6xl px-4 py-28 grid md:grid-cols-2 gap-10 items-center relative z-10">
     <div className="space-y-6">
-      {/* Tagline with line-by-line fade-in from left animation */}
-      <p
-        className={`text-sm tracking-widest animate-hero-line-1 ${
-          isDark ? "text-white" : "text-indigo-600 font-semibold"
-        }`}
-        style={{ width: 'fit-content' }}
-      >
-        {t("home.hero.tagline")}
-      </p>        
+      {/* Tagline with scroll-triggered animation */}
+      <ScrollAnimation animation="slide-in-left" stagger="scroll-stagger-1">
+        <p
+          className={`text-sm tracking-widest ${
+            isDark ? "text-white" : "text-indigo-600 font-semibold"
+          }`}
+          style={{ width: 'fit-content' }}
+        >
+          {t("home.hero.tagline")}
+        </p>
+      </ScrollAnimation>
       
-      {/* Title broken into lines with line-by-line fade-in from left animation */}
+      {/* Title with scroll-triggered animations */}
       <div className="space-y-2">
-        <h1
-          className={`text-4xl md:text-5xl font-extrabold leading-tight animate-hero-line-2 ${
-            isDark ? "text-white text-glow" : "text-black text-glow-strong"
-          }`}
-        >
-          {t("home.hero.title").split(' ').slice(0, 3).join(' ')}
-        </h1>
-        <h1
-          className={`text-4xl md:text-5xl font-extrabold leading-tight animate-hero-line-3 ${
-            isDark ? "text-white text-glow" : "text-black text-glow-strong"
-          }`}
-        >
-          {t("home.hero.title").split(' ').slice(3).join(' ')}
-        </h1>
+        <ScrollAnimation animation="slide-in-left" stagger="scroll-stagger-2">
+          <h1
+            className={`text-4xl md:text-5xl font-extrabold leading-tight ${
+              isDark ? "text-white text-glow" : "text-black text-glow-strong"
+            }`}
+          >
+            {t("home.hero.title").split(' ').slice(0, 3).join(' ')}
+          </h1>
+        </ScrollAnimation>
+        <ScrollAnimation animation="slide-in-left" stagger="scroll-stagger-3">
+          <h1
+            className={`text-4xl md:text-5xl font-extrabold leading-tight ${
+              isDark ? "text-white text-glow" : "text-black text-glow-strong"
+            }`}
+          >
+            {t("home.hero.title").split(' ').slice(3).join(' ')}
+          </h1>
+        </ScrollAnimation>
       </div>
 
-      {/* Description broken into lines with line-by-line fade-in from left animation */}
+      {/* Description with scroll-triggered animations */}
       <div className="space-y-2">
-        <p
-          className={`text-lg animate-hero-line-4 ${
-            isDark ? "text-gray-300" : "text-gray-700 font-medium"
-          }`}
-        >
-          {t("home.hero.description").split('. ')[0] + '.'}
-        </p>
-        {t("home.hero.description").split('. ').length > 1 && (
+        <ScrollAnimation animation="slide-in-left" stagger="scroll-stagger-4">
           <p
-            className={`text-lg animate-hero-line-5 ${
+            className={`text-lg ${
               isDark ? "text-gray-300" : "text-gray-700 font-medium"
             }`}
           >
-            {t("home.hero.description").split('. ').slice(1).join('. ')}
+            {t("home.hero.description").split('. ')[0] + '.'}
           </p>
+        </ScrollAnimation>
+        {t("home.hero.description").split('. ').length > 1 && (
+          <ScrollAnimation animation="slide-in-left" stagger="scroll-stagger-5">
+            <p
+              className={`text-lg ${
+                isDark ? "text-gray-300" : "text-gray-700 font-medium"
+              }`}
+            >
+              {t("home.hero.description").split('. ').slice(1).join('. ')}
+            </p>
+          </ScrollAnimation>
         )}
       </div>
       
-      {/* Buttons with line-by-line fade-in from left animation */}
-      <div className="flex gap-4 animate-hero-line-enhanced animate-hero-delay-600">
-        {/* Latest Blog Button */}
-        <a
-          href="/services"
-          className={`btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 ${
-            isDark 
-              ? "bg-indigo-500 text-black hover:bg-white hover:text-indigo-500 hover:border hover:border-black" 
-              : "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
-          }`}
-        >
-          {t('home.hero.exploreBlogsButton')}
-        </a>
+      {/* Buttons with scroll-triggered animation */}
+      <ScrollAnimation animation="slide-in-left" stagger="scroll-stagger-6">
+        <div className="flex gap-4">
+          {/* Latest Blog Button */}
+          <a
+            href="/services"
+            className={`btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 ${
+              isDark 
+                ? "bg-indigo-500 text-black hover:bg-white hover:text-indigo-500 hover:border hover:border-black" 
+                : "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+            }`}
+          >
+            {t('home.hero.exploreBlogsButton')}
+          </a>
 
-        {/* Contact Button */}
-        <a
-          href="/contact"
-          className={`btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 ${
-            isDark 
-              ? "bg-white text-indigo-500 border border-black hover:bg-indigo-500 hover:text-black hover:border-0" 
-              : "bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
+          {/* Contact Button */}
+          <a
+            href="/contact"
+            className={`btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 ${
+              isDark 
+                ? "bg-white text-indigo-500 border border-black hover:bg-indigo-500 hover:text-black hover:border-0" 
+                : "bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
+            }`}
+          >
+            {t('home.hero.getStartedButton')}
+          </a>
+        </div>
+      </ScrollAnimation>
+    </div>
+
+    {/* Image with scroll-triggered animation */}
+    <ScrollAnimation animation="scale-in" stagger="scroll-stagger-4">
+      <div className="justify-self-center relative">
+        <img
+          src="/images/hero.jpg" 
+          alt="Freelancing illustration"
+          className={`h-56 w-56 md:h-72 md:w-72 rounded-full object-cover shadow-2xl hover-lift-strong animate-float-enhanced ${
+            isDark ? "shadow-gray-800" : "shadow-indigo-200"
           }`}
-        >
-          {t('home.hero.getStartedButton')}
-        </a>
+        />
       </div>
-    </div>
-
-    {/* Image with enhanced floating animation */}
-    <div className="justify-self-center relative animate-scale-in-strong animate-delay-500">
-      <img
-        src="/images/hero.jpg" 
-        alt="Freelancing illustration"
-        className={`h-56 w-56 md:h-72 md:w-72 rounded-full object-cover shadow-2xl hover-lift-strong animate-float-enhanced ${
-          isDark ? "shadow-gray-800" : "shadow-indigo-200"
-        }`}
-      />
-    </div>
+    </ScrollAnimation>
   </div>
 </section>
 
@@ -249,157 +271,179 @@ export default function Home() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-24">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-extrabold ${
-            isDark ? "text-white" : "text-white"
-          } animate-fade-in-up animate-delay-100`}>
-            {t("home.about.title")}
-          </h2>
+          <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+            <h2 className={`text-4xl md:text-5xl font-extrabold ${
+              isDark ? "text-white" : "text-white"
+            }`}>
+              {t("home.about.title")}
+            </h2>
+          </ScrollAnimation>
           
-          <p className={`mt-4 text-lg ${
-            isDark ? "text-gray-300" : "text-gray-300"
-          } animate-fade-in-up animate-delay-200`}>
-            {t("home.about.subtitle")}
-          </p>
+          <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+            <p className={`mt-4 text-lg ${
+              isDark ? "text-gray-300" : "text-gray-300"
+            }`}>
+              {t("home.about.subtitle")}
+            </p>
+          </ScrollAnimation>
           
-          <div className={`mt-4 w-24 h-1 mx-auto rounded-full ${
-            isDark ? "bg-gradient-to-r from-indigo-500 to-purple-500" : "bg-gradient-to-r from-indigo-500 to-purple-500"
-          } animate-fade-in-up animate-delay-250`}></div>
+          <ScrollAnimation animation="fade-in" stagger="scroll-stagger-3">
+            <div className={`mt-4 w-24 h-1 mx-auto rounded-full ${
+              isDark ? "bg-gradient-to-r from-indigo-500 to-purple-500" : "bg-gradient-to-r from-indigo-500 to-purple-500"
+            }`}></div>
+          </ScrollAnimation>
         </div>
 
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Description */}
-          <div className="space-y-8 animate-slide-in-left animate-delay-300">
-            <div className={`p-8 rounded-2xl ${
-              isDark 
-                ? "bg-gray-800/50 backdrop-blur-sm border border-gray-700" 
-                : "bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl"
-            } about-card`}>
-              <p className={`text-lg leading-relaxed ${
-                isDark ? "text-gray-300" : "text-gray-300"
-              }`}>
-                {t('home.about.description')}
-              </p>
-            </div>
+          <ScrollAnimation animation="slide-in-left" stagger="scroll-stagger-1">
+            <div className="space-y-8">
+              <div className={`p-8 rounded-2xl ${
+                isDark 
+                  ? "bg-gray-800/50 backdrop-blur-sm border border-gray-700" 
+                  : "bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl"
+              } about-card`}>
+                <p className={`text-lg leading-relaxed ${
+                  isDark ? "text-gray-300" : "text-gray-300"
+                }`}>
+                  {t('home.about.description')}
+                </p>
+              </div>
 
-            {/* Stats Cards */}
-            <div className="grid grid-cols-2 gap-6">
-              <div className={`p-6 rounded-xl text-center ${
-                isDark 
-                  ? "bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30" 
-                  : "bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30"
-              } about-card animate-count-up animate-delay-400`}>
-                <div className="text-3xl font-bold text-indigo-500 mb-2">500+</div>
-                <div className={`text-sm font-medium ${
-                  isDark ? "text-gray-300" : "text-gray-300"
-                }`}>{t('home.about.stats.projectsCompleted')}</div>
-              </div>
-              
-              <div className={`p-6 rounded-xl text-center ${
-                isDark 
-                  ? "bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30" 
-                  : "bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30"
-              } about-card animate-count-up animate-delay-500`}>
-                <div className="text-3xl font-bold text-purple-500 mb-2">50+</div>
-                <div className={`text-sm font-medium ${
-                  isDark ? "text-gray-300" : "text-gray-300"
-                }`}>{t('home.about.stats.happyClients')}</div>
+              {/* Stats Cards */}
+              <div className="grid grid-cols-2 gap-6">
+                <ScrollAnimation animation="scale-in" stagger="scroll-stagger-2">
+                  <div className={`p-6 rounded-xl text-center ${
+                    isDark 
+                      ? "bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30" 
+                      : "bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30"
+                  } about-card`}>
+                    <div className="text-3xl font-bold text-indigo-500 mb-2">500+</div>
+                    <div className={`text-sm font-medium ${
+                      isDark ? "text-gray-300" : "text-gray-300"
+                    }`}>{t('home.about.stats.projectsCompleted')}</div>
+                  </div>
+                </ScrollAnimation>
+                
+                <ScrollAnimation animation="scale-in" stagger="scroll-stagger-3">
+                  <div className={`p-6 rounded-xl text-center ${
+                    isDark 
+                      ? "bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30" 
+                      : "bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30"
+                  } about-card`}>
+                    <div className="text-3xl font-bold text-purple-500 mb-2">50+</div>
+                    <div className={`text-sm font-medium ${
+                      isDark ? "text-gray-300" : "text-gray-300"
+                    }`}>{t('home.about.stats.happyClients')}</div>
+                  </div>
+                </ScrollAnimation>
               </div>
             </div>
-          </div>
+          </ScrollAnimation>
 
           {/* Right Side - Features */}
-          <div className="space-y-6 animate-slide-in-right animate-delay-600">
-            <div className="grid gap-6">
-              {/* Feature 1 */}
-              <div className={`p-6 rounded-xl ${
-                isDark 
-                  ? "bg-gray-800/50 backdrop-blur-sm border border-gray-700" 
-                  : "bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg"
-              } about-card group`}>
-                <div className="flex items-start space-x-4">
-                  <div className={`p-3 rounded-lg ${
-                    isDark ? "bg-indigo-500/20" : "bg-indigo-500/20"
-                  } group-hover:scale-110 transition-transform duration-300`}>
-                    <svg className="w-6 h-6 text-indigo-500 animate-icon-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
+          <ScrollAnimation animation="slide-in-right" stagger="scroll-stagger-1">
+            <div className="space-y-6">
+              <div className="grid gap-6">
+                {/* Feature 1 */}
+                <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+                  <div className={`p-6 rounded-xl ${
+                    isDark 
+                      ? "bg-gray-800/50 backdrop-blur-sm border border-gray-700" 
+                      : "bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg"
+                  } about-card group`}>
+                    <div className="flex items-start space-x-4">
+                      <div className={`p-3 rounded-lg ${
+                        isDark ? "bg-indigo-500/20" : "bg-indigo-500/20"
+                      } group-hover:scale-110 transition-transform duration-300`}>
+                        <svg className="w-6 h-6 text-indigo-500 animate-icon-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className={`text-xl font-semibold mb-2 ${
+                          isDark ? "text-white" : "text-gray-900"
+                        }`}>{t('home.about.features.fastDelivery.title')}</h3>
+                        <p className={`text-sm ${
+                          isDark ? "text-gray-400" : "text-gray-400"
+                        }`}>{t('home.about.features.fastDelivery.description')}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className={`text-xl font-semibold mb-2 ${
-                      isDark ? "text-white" : "text-gray-900"
-                    }`}>{t('home.about.features.fastDelivery.title')}</h3>
-                    <p className={`text-sm ${
-                      isDark ? "text-gray-400" : "text-gray-400"
-                    }`}>{t('home.about.features.fastDelivery.description')}</p>
+                </ScrollAnimation>
+
+                {/* Feature 2 */}
+                <ScrollAnimation animation="fade-in" stagger="scroll-stagger-3">
+                  <div className={`p-6 rounded-xl ${
+                    isDark 
+                      ? "bg-gray-800/50 backdrop-blur-sm border border-gray-700" 
+                      : "bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg"
+                  } about-card group`}>
+                    <div className="flex items-start space-x-4">
+                      <div className={`p-3 rounded-lg ${
+                        isDark ? "bg-purple-500/20" : "bg-purple-100"
+                      } group-hover:scale-110 transition-transform duration-300`}>
+                        <svg className="w-6 h-6 text-purple-500 animate-icon-bounce animate-delay-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className={`text-xl font-semibold mb-2 ${
+                          isDark ? "text-white" : "text-gray-900"
+                        }`}>{t('home.about.features.qualityAssurance.title')}</h3>
+                        <p className={`text-sm ${
+                          isDark ? "text-gray-400" : "text-gray-400"
+                        }`}>{t('home.about.features.qualityAssurance.description')}</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </ScrollAnimation>
+
+                {/* Feature 3 */}
+                <ScrollAnimation animation="fade-in" stagger="scroll-stagger-4">
+                  <div className={`p-6 rounded-xl ${
+                    isDark 
+                      ? "bg-gray-800/50 backdrop-blur-sm border border-gray-700" 
+                      : "bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg"
+                  } about-card group`}>
+                    <div className="flex items-start space-x-4">
+                      <div className={`p-3 rounded-lg ${
+                        isDark ? "bg-pink-500/20" : "bg-pink-100"
+                      } group-hover:scale-110 transition-transform duration-300`}>
+                        <svg className="w-6 h-6 text-pink-500 animate-icon-bounce animate-delay-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h3 className={`text-xl font-semibold mb-2 ${
+                          isDark ? "text-white" : "text-gray-900"
+                        }`}>{t('home.about.features.support24.title')}</h3>
+                        <p className={`text-sm ${
+                          isDark ? "text-gray-400" : "text-gray-400"
+                        }`}>{t('home.about.features.support24.description')}</p>
+                      </div>
+                    </div>
+                  </div>
+                </ScrollAnimation>
               </div>
 
-              {/* Feature 2 */}
-              <div className={`p-6 rounded-xl ${
-                isDark 
-                  ? "bg-gray-800/50 backdrop-blur-sm border border-gray-700" 
-                  : "bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg"
-              } about-card group`}>
-                <div className="flex items-start space-x-4">
-                  <div className={`p-3 rounded-lg ${
-                    isDark ? "bg-purple-500/20" : "bg-purple-100"
-                  } group-hover:scale-110 transition-transform duration-300`}>
-                    <svg className="w-6 h-6 text-purple-500 animate-icon-bounce animate-delay-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className={`text-xl font-semibold mb-2 ${
-                      isDark ? "text-white" : "text-gray-900"
-                    }`}>{t('home.about.features.qualityAssurance.title')}</h3>
-                    <p className={`text-sm ${
-                      isDark ? "text-gray-400" : "text-gray-400"
-                    }`}>{t('home.about.features.qualityAssurance.description')}</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Feature 3 */}
-              <div className={`p-6 rounded-xl ${
-                isDark 
-                  ? "bg-gray-800/50 backdrop-blur-sm border border-gray-700" 
-                  : "bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg"
-              } about-card group`}>
-                <div className="flex items-start space-x-4">
-                  <div className={`p-3 rounded-lg ${
-                    isDark ? "bg-pink-500/20" : "bg-pink-100"
-                  } group-hover:scale-110 transition-transform duration-300`}>
-                    <svg className="w-6 h-6 text-pink-500 animate-icon-bounce animate-delay-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className={`text-xl font-semibold mb-2 ${
-                      isDark ? "text-white" : "text-gray-900"
-                    }`}>{t('home.about.features.support24.title')}</h3>
-                    <p className={`text-sm ${
-                      isDark ? "text-gray-400" : "text-gray-400"
-                    }`}>{t('home.about.features.support24.description')}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* CTA Button */}
-            <div className="pt-4 animate-fade-in-scale animate-delay-700">
-              <a
-                href="/about"
-                className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl inline-flex items-center"
-              >
+              {/* CTA Button */}
+              <ScrollAnimation animation="fade-in" stagger="scroll-stagger-5">
+                <div className="pt-4">
+                  <a
+                    href="/about"
+                    className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl inline-flex items-center"
+                  >
 {t('home.about.ctaButton')}
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
+                    <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </a>
+                </div>
+              </ScrollAnimation>
             </div>
-          </div>
+          </ScrollAnimation>
         </div>
       </div>
 </section>
@@ -415,21 +459,26 @@ export default function Home() {
           : "bg-white text-black border-black/10"
       } border-t transition-colors duration-300`}
     >  <div className="mx-auto max-w-6xl px-4 py-24">
-                 <h2
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+      <h2
         className={`text-3xl font-extrabold ${
           isDark ? "text-white" : "text-black"
-        } animate-fade-in-up-fast animate-delay-fast-100`}
+        }`}
       >
         {t("home.services.title")}
       </h2>
+    </ScrollAnimation>
 
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
       <p
         className={`mt-1 ${
           isDark ? "text-gray-300" : "text-black/70"
-        } animate-fade-in-up-fast animate-delay-fast-200`}
+        }`}
       >
         {t("home.services.subtitle")}
       </p>
+    </ScrollAnimation>
+    
     <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {[
                  { t: t('home.services.webDevelopment'), d: t('home.services.webDevelopmentDesc') },
@@ -439,21 +488,22 @@ export default function Home() {
          { t: t('home.services.videoAnimation'), d: t('home.services.videoAnimationDesc') },
          { t: t('home.services.businessSupport'), d: t('home.services.businessSupportDesc') },
       ].map((card, idx) => {
-        // Create fast staggered delays for each card
-        const delays = ['animate-delay-fast-300', 'animate-delay-fast-400', 'animate-delay-fast-500', 'animate-delay-fast-600', 'animate-delay-fast-700', 'animate-delay-fast-800'];
-        const delayClass = delays[idx] || 'animate-delay-fast-300';
+        // Create staggered delays for each card
+        const staggerClasses = ['scroll-stagger-3', 'scroll-stagger-4', 'scroll-stagger-5', 'scroll-stagger-6', 'scroll-stagger-1', 'scroll-stagger-2'];
+        const staggerClass = staggerClasses[idx] || 'scroll-stagger-3';
         
         return (
-                 <div
-           key={card.t}
-           className={`rounded-xl border border-black/10 dark:border-gray-700 p-6 bg-white dark:bg-gray-800 transition-shadow hover:shadow-lg hover:shadow-indigo-500/70 animate-fade-in-up-fast ${delayClass}`}
-         >
-           <div className="h-10 w-10 rounded-md bg-indigo-500/90 text-white grid place-items-center font-bold">
-             {idx + 1}
-           </div>
-           <h3 className="mt-4 text-xl font-bold text-black dark:text-white">{card.t}</h3>
-           <p className="mt-2 text-black/70 dark:text-gray-300">{card.d}</p>
-         </div>
+          <ScrollAnimation key={card.t} animation="fade-in" stagger={staggerClass}>
+            <div
+              className={`rounded-xl border border-black/10 dark:border-gray-700 p-6 bg-white dark:bg-gray-800 transition-shadow hover:shadow-lg hover:shadow-indigo-500/70`}
+            >
+              <div className="h-10 w-10 rounded-md bg-indigo-500/90 text-white grid place-items-center font-bold">
+                {idx + 1}
+              </div>
+              <h3 className="mt-4 text-xl font-bold text-black dark:text-white">{card.t}</h3>
+              <p className="mt-2 text-black/70 dark:text-gray-300">{card.d}</p>
+            </div>
+          </ScrollAnimation>
         );
       })}
     </div>
@@ -484,79 +534,86 @@ export default function Home() {
       <div className="relative z-10 mx-auto max-w-6xl px-4 py-24">
         {/* Header with enhanced styling */}
         <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-extrabold ${
-            isDark ? "text-white" : "text-white"
-          } animate-fade-in-up animate-delay-100`}>
-            {t("home.blog.title")}
-          </h2>
+          <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+            <h2 className={`text-4xl md:text-5xl font-extrabold ${
+              isDark ? "text-white" : "text-white"
+            }`}>
+              {t("home.blog.title")}
+            </h2>
+          </ScrollAnimation>
           
-          <p
-            className={`mt-4 text-lg max-w-2xl mx-auto ${
-              isDark ? "text-gray-300" : "text-gray-300"
-            } animate-fade-in-up animate-delay-200`}
-          >
-            {t("home.blog.subtitle")}
-          </p>
+          <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+            <p
+              className={`mt-4 text-lg max-w-2xl mx-auto ${
+                isDark ? "text-gray-300" : "text-gray-300"
+              }`}
+            >
+              {t("home.blog.subtitle")}
+            </p>
+          </ScrollAnimation>
           
-          <div className={`mt-6 w-24 h-1 mx-auto rounded-full ${
-            isDark ? "bg-gradient-to-r from-indigo-500 to-purple-500" : "bg-gradient-to-r from-indigo-600 to-purple-600"
-          } animate-fade-in-up animate-delay-250`}></div>
+          <ScrollAnimation animation="fade-in" stagger="scroll-stagger-3">
+            <div className={`mt-6 w-24 h-1 mx-auto rounded-full ${
+              isDark ? "bg-gradient-to-r from-indigo-500 to-purple-500" : "bg-gradient-to-r from-indigo-600 to-purple-600"
+            }`}></div>
+          </ScrollAnimation>
         </div>
 
         {/* Blog Posts with enhanced animations */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayedBlogs.map((post, i) => {
             // Create staggered delays for each blog card
-            const delays = ['animate-delay-300', 'animate-delay-400', 'animate-delay-500'];
-            const delayClass = delays[i] || 'animate-delay-300';
+            const staggerClasses = ['scroll-stagger-4', 'scroll-stagger-5', 'scroll-stagger-6'];
+            const staggerClass = staggerClasses[i] || 'scroll-stagger-4';
             
             return (
-            <article
-              key={i}
-              className={`blog-card rounded-2xl border ${
-                isDark 
-                  ? "border-white/10 bg-white/5 hover:bg-white/10" 
-                  : "border-white/10 bg-white/5 hover:bg-white/10 shadow-lg hover:shadow-xl"
-              } transition-all duration-300 animate-fade-in-up ${delayClass}`}
-            >
-              {/* Blog Image with overlay */}
-              <div className="blog-image-container aspect-video overflow-hidden rounded-t-2xl">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="h-full w-full object-cover animate-blog-image"
-                />
-                <div className="blog-image-overlay"></div>
-              </div>
-
-              {/* Blog Content */}
-              <div className="p-6 animate-blog-content">
-                <h3 className={`text-xl font-bold mb-3 animate-blog-title ${
-                  isDark ? "text-white" : "text-white"
-                } group-hover:text-indigo-500 transition-colors duration-300`}>
-                  {post.title}
-                </h3>
-                <p
-                  className={`text-sm leading-relaxed ${
-                    isDark ? "text-gray-300" : "text-gray-300"
-                  }`}
-                >
-                  {post.excerpt}
-                </p>
-                
-                {/* Read more link */}
-                <div className="mt-4">
-                  <span className={`inline-flex items-center text-sm font-medium ${
-                    isDark ? "text-indigo-400 hover:text-indigo-300" : "text-indigo-400 hover:text-indigo-300"
-                  } transition-colors duration-300 cursor-pointer`}>
-                    Read More
-                    <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </span>
+            <ScrollAnimation key={i} animation="fade-in" stagger={staggerClass}>
+              <article
+                className={`blog-card rounded-2xl border ${
+                  isDark 
+                    ? "border-white/10 bg-white/5 hover:bg-white/10" 
+                    : "border-white/10 bg-white/5 hover:bg-white/10 shadow-lg hover:shadow-xl"
+                } transition-all duration-300`}
+              >
+                {/* Blog Image with overlay */}
+                <div className="blog-image-container aspect-video overflow-hidden rounded-t-2xl">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="h-full w-full object-cover animate-blog-image"
+                  />
+                  <div className="blog-image-overlay"></div>
                 </div>
-              </div>
-            </article>
+
+                {/* Blog Content */}
+                <div className="p-6 animate-blog-content">
+                  <h3 className={`text-xl font-bold mb-3 animate-blog-title ${
+                    isDark ? "text-white" : "text-white"
+                  } group-hover:text-indigo-500 transition-colors duration-300`}>
+                    {post.title}
+                  </h3>
+                  <p
+                    className={`text-sm leading-relaxed ${
+                      isDark ? "text-gray-300" : "text-gray-300"
+                    }`}
+                  >
+                    {post.excerpt}
+                  </p>
+                  
+                  {/* Read more link */}
+                  <div className="mt-4">
+                    <span className={`inline-flex items-center text-sm font-medium ${
+                      isDark ? "text-indigo-400 hover:text-indigo-300" : "text-indigo-400 hover:text-indigo-300"
+                    } transition-colors duration-300 cursor-pointer`}>
+                      Read More
+                      <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </article>
+            </ScrollAnimation>
             )
           })}
         </div>
@@ -574,21 +631,25 @@ export default function Home() {
           : "bg-gray-50 text-black border-black/10"
       }`}
     >  <div className="mx-auto max-w-6xl px-4 py-24 text-center">
-         <h2
-        className={`text-3xl font-extrabold ${
-          isDark ? "text-white" : "text-black"
-        } animate-fade-in-up animate-delay-100`}
-      >
-        {t("home.categories.title")}
-      </h2>
+      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+        <h2
+          className={`text-3xl font-extrabold ${
+            isDark ? "text-white" : "text-black"
+          }`}
+        >
+          {t("home.categories.title")}
+        </h2>
+      </ScrollAnimation>
 
-      <p
-        className={`mt-1 ${
-          isDark ? "text-gray-300" : "text-black/70"
-        } animate-fade-in-up animate-delay-200`}
-      >
-        {t("home.categories.subtitle")}
-      </p>
+      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+        <p
+          className={`mt-1 ${
+            isDark ? "text-gray-300" : "text-black/70"
+          }`}
+        >
+          {t("home.categories.subtitle")}
+        </p>
+      </ScrollAnimation>
 
     <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-10">
       {[
@@ -599,22 +660,25 @@ export default function Home() {
         { title: t('home.categories.videoAnimation'), icon: <svg xmlns="http://www.w3.org/2000/svg" width={45} height={45} viewBox="0 0 48 48"><g fill="none" strokeWidth={4}><path fill="#2f88ff" stroke="#000" strokeLinejoin="round" d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z"></path><path fill="#43ccf8" stroke="#fff" strokeLinejoin="round" d="M24 18C25.6569 18 27 16.6569 27 15C27 13.3431 25.6569 12 24 12C22.3431 12 21 13.3431 21 15C21 16.6569 22.3431 18 24 18Z"></path><path fill="#43ccf8" stroke="#fff" strokeLinejoin="round" d="M24 36C25.6569 36 27 34.6569 27 33C27 31.3431 25.6569 30 24 30C22.3431 30 21 31.3431 21 33C21 34.6569 22.3431 36 24 36Z"></path><path fill="#43ccf8" stroke="#fff" strokeLinejoin="round" d="M15 27C16.6569 27 18 25.6569 18 24C18 22.3431 16.6569 21 15 21C13.3431 21 12 22.3431 12 24C12 25.6569 13.3431 27 15 27Z"></path><path fill="#43ccf8" stroke="#fff" strokeLinejoin="round" d="M33 27C34.6569 27 36 25.6569 36 24C36 22.3431 34.6569 21 33 21C31.3431 21 30 22.3431 30 24C30 25.6569 31.3431 27 33 27Z"></path><path stroke="#000" strokeLinecap="round" d="M24 44H44"></path></g></svg>},
         { title: t('home.categories.adminSupport'), icon: <svg xmlns="http://www.w3.org/2000/svg" width={45} height={45} viewBox="0 0 64 64"><g fill="#f4ae7f"><path d="M52.11 58.32c0 3.056-2.289 5.531-5.116 5.531H14.379c-2.824 0-5.114-2.476-5.114-5.531V8.447c0-3.059 2.291-5.534 5.114-5.534h32.615c2.827 0 5.116 2.475 5.116 5.534z"></path><path d="M30.899 10.509c0 .581-1.158 1.051-2.58 1.051H11.848c-1.426 0-2.582-.47-2.582-1.051v-9.46C9.266.47 10.421 0 11.848 0h16.471c1.422 0 2.58.47 2.58 1.049z"></path></g><path fill="#d0d2d3" d="M54.662 56c0 2.593-2.312 4.69-5.167 4.69H16.536c-2.851 0-5.167-2.098-5.167-4.69V13.73c0-2.591 2.316-4.69 5.167-4.69h32.959c2.855 0 5.167 2.1 5.167 4.69z"></path><path fill="#fff" d="M54.662 52.694c0 2.593-2.312 4.69-5.167 4.69H16.536c-2.851 0-5.167-2.098-5.167-4.69v-42.27c0-2.591 2.316-4.688 5.167-4.688h32.959c2.855 0 5.167 2.098 5.167 4.688z"></path><path fill="#d0d2d3" d="M43.1 8.28c0 .312-1.538.566-3.43.566h-21.9c-1.896 0-3.434-.254-3.434-.566V3.185c0-.315 1.538-.566 3.434-.566h21.9c1.892 0 3.43.251 3.43.566z"></path><path fill="#35494d" d="M20.07 18.03h28.562c1.922 0 1.922-2.7 0-2.7H20.07c-1.915 0-1.915 2.7 0 2.7m0 5.485h28.562c1.922 0 1.922-2.698 0-2.698H20.07c-1.915 0-1.915 2.698 0 2.698m0 5.605h28.562c1.922 0 1.922-2.7 0-2.7H20.07c-1.915 0-1.915 2.7 0 2.7m0 5.48h28.562c1.922 0 1.922-2.698 0-2.698H20.07c-1.915 0-1.915 2.698 0 2.698m0 10.58h13.148c1.916 0 1.916-2.699 0-2.699H20.07c-1.915-.001-1.915 2.699 0 2.699"></path></svg> },
       ].map((cat, i) => {
-        // Create staggered delays for each category card (one by one) - faster timing
-        const delays = ['animate-delay-fast-100', 'animate-delay-fast-200', 'animate-delay-fast-300', 'animate-delay-fast-400', 'animate-delay-fast-500', 'animate-delay-fast-600'];
-        const delayClass = delays[i] || 'animate-delay-fast-100';
+        // Create staggered delays for each category card
+        const staggerClasses = ['scroll-stagger-3', 'scroll-stagger-4', 'scroll-stagger-5', 'scroll-stagger-6', 'scroll-stagger-1', 'scroll-stagger-2'];
+        const staggerClass = staggerClasses[i] || 'scroll-stagger-3';
         
         return (
-        <div key={i} className={`flex flex-col items-center animate-fade-in-up ${delayClass}`}>
-          <div className="h-16 w-16 flex items-center justify-center rounded-full bg-indigo-500/10 text-3xl hover-lift-strong transition-all duration-300 cursor-pointer">
-            {cat.icon}
-          </div>
-<h3
-      className={`mt-3 text-lg font-semibold ${
-        isDark ? "text-white" : "text-black"
-      }`}
-    >
-      {cat.title}
-    </h3>        </div>
+          <ScrollAnimation key={i} animation="fade-in" stagger={staggerClass}>
+            <div className="flex flex-col items-center">
+              <div className="h-16 w-16 flex items-center justify-center rounded-full bg-indigo-500/10 text-3xl hover-lift-strong transition-all duration-300 cursor-pointer">
+                {cat.icon}
+              </div>
+              <h3
+                className={`mt-3 text-lg font-semibold ${
+                  isDark ? "text-white" : "text-black"
+                }`}
+              >
+                {cat.title}
+              </h3>
+            </div>
+          </ScrollAnimation>
         );
       })}
     </div>
@@ -625,96 +689,106 @@ export default function Home() {
 
 
       {/* Contact */}
-  <section
-      id="contact"
-      className={`relative overflow-hidden border-t transition-colors duration-300 ${
-        isDark
-          ? "bg-black text-white border-gray-700"
-          : "bg-black text-white border-black/10"
-      }`}
-    >
-
- <div
-      className={`relative z-10 mx-auto max-w-6xl px-4 py-24 grid md:grid-cols-2 gap-10 items-center ${
-        isDark ? "text-white" : "text-white"
-      }`}
-    >    {/* Left - Text + Bullet Points */}
-    <div className="space-y-6 animate-fade-in-up-strong animate-delay-200">
-      <div className="space-y-2">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-glow-strong animate-slide-in-left animate-delay-300">
-          {t('home.contact.title').split(' ').slice(0, 2).join(' ')}
-        </h2>
-        <h2 className="text-4xl md:text-5xl font-extrabold text-glow-strong animate-slide-in-left animate-delay-400">
-          {t('home.contact.title').split(' ').slice(2).join(' ')}
-        </h2>
-      </div>
-      <div className="space-y-2">
-        <p
-          className={`text-lg animate-slide-in-left animate-delay-500 ${
-            isDark ? "text-gray-300" : "text-gray-300"
+      <section
+        id="contact"
+        className={`relative overflow-hidden border-t transition-colors duration-300 ${
+          isDark
+            ? "bg-black text-white border-gray-700"
+            : "bg-black text-white border-black/10"
+        }`}
+      >
+        <div
+          className={`relative z-10 mx-auto max-w-6xl px-4 py-24 grid md:grid-cols-2 gap-10 items-center ${
+            isDark ? "text-white" : "text-white"
           }`}
         >
-          {t("home.contact.description").split('. ')[0] + '.'}
-        </p>
-        {t("home.contact.description").split('. ').length > 1 && (
-          <p
-            className={`text-lg animate-slide-in-left animate-delay-600 ${
-              isDark ? "text-gray-300" : "text-gray-300"
-            }`}
-          >
-            {t("home.contact.description").split('. ').slice(1).join('. ')}
-          </p>
-        )}
-      </div>
+          {/* Left - Text + Bullet Points */}
+          <div className="space-y-6">
+            <ScrollAnimation animation="slide-in-left" stagger="scroll-stagger-1">
+              <div className="space-y-2">
+                <h2 className="text-4xl md:text-5xl font-extrabold text-glow-strong">
+                  {t('home.contact.title').split(' ').slice(0, 2).join(' ')}
+                </h2>
+                <h2 className="text-4xl md:text-5xl font-extrabold text-glow-strong">
+                  {t('home.contact.title').split(' ').slice(2).join(' ')}
+                </h2>
+              </div>
+            </ScrollAnimation>
+            
+            <ScrollAnimation animation="slide-in-left" stagger="scroll-stagger-2">
+              <div className="space-y-2">
+                <p
+                  className={`text-lg ${
+                    isDark ? "text-gray-300" : "text-gray-300"
+                  }`}
+                >
+                  {t("home.contact.description").split('. ')[0] + '.'}
+                </p>
+                {t("home.contact.description").split('. ').length > 1 && (
+                  <p
+                    className={`text-lg ${
+                      isDark ? "text-gray-300" : "text-gray-300"
+                    }`}
+                  >
+                    {t("home.contact.description").split('. ').slice(1).join('. ')}
+                  </p>
+                )}
+              </div>
+            </ScrollAnimation>
 
-<ul
-      className={`mt-6 space-y-4 ${
-        isDark ? "text-gray-300" : "text-gray-300"
-      }`}
-    >        <li className="flex items-center gap-3 group animate-slide-in-left animate-delay-700">
-          <span className="text-indigo-400 text-xl group-hover:scale-110 transition-transform duration-300">✔</span>
-          <span className="group-hover:text-indigo-300 transition-colors duration-300">{t('home.contact.features.webMobile')}</span>
-        </li>
-        <li className="flex items-center gap-3 group animate-slide-in-left animate-delay-800">
-          <span className="text-indigo-400 text-xl group-hover:scale-110 transition-transform duration-300">✔</span>
-          <span className="group-hover:text-indigo-300 transition-colors duration-300">{t('home.contact.features.futureReady')}</span>
-        </li>
-        <li className="flex items-center gap-3 group animate-slide-in-left animate-delay-900">
-          <span className="text-indigo-400 text-xl group-hover:scale-110 transition-transform duration-300">✔</span>
-          <span className="group-hover:text-indigo-300 transition-colors duration-300">{t('home.contact.features.transparent')}</span>
-        </li>
-        <li className="flex items-center gap-3 group animate-slide-in-left animate-delay-1000">
-          <span className="text-indigo-400 text-xl group-hover:scale-110 transition-transform duration-300">✔</span>
-          <span className="group-hover:text-indigo-300 transition-colors duration-300">{t('home.contact.features.support')}</span>
-        </li>
-      </ul>
+            <ScrollAnimation animation="slide-in-left" stagger="scroll-stagger-3">
+              <ul
+                className={`mt-6 space-y-4 ${
+                  isDark ? "text-gray-300" : "text-gray-300"
+                }`}
+              >
+                <li className="flex items-center gap-3 group">
+                  <span className="text-indigo-400 text-xl group-hover:scale-110 transition-transform duration-300">✔</span>
+                  <span className="group-hover:text-indigo-300 transition-colors duration-300">{t('home.contact.features.webMobile')}</span>
+                </li>
+                <li className="flex items-center gap-3 group">
+                  <span className="text-indigo-400 text-xl group-hover:scale-110 transition-transform duration-300">✔</span>
+                  <span className="group-hover:text-indigo-300 transition-colors duration-300">{t('home.contact.features.futureReady')}</span>
+                </li>
+                <li className="flex items-center gap-3 group">
+                  <span className="text-indigo-400 text-xl group-hover:scale-110 transition-transform duration-300">✔</span>
+                  <span className="group-hover:text-indigo-300 transition-colors duration-300">{t('home.contact.features.transparent')}</span>
+                </li>
+                <li className="flex items-center gap-3 group">
+                  <span className="text-indigo-400 text-xl group-hover:scale-110 transition-transform duration-300">✔</span>
+                  <span className="group-hover:text-indigo-300 transition-colors duration-300">{t('home.contact.features.support')}</span>
+                </li>
+              </ul>
+            </ScrollAnimation>
 
- <a
-      href="/contact"
-      className={`mt-10 rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 inline-block btn-animate-strong animate-slide-in-left animate-delay-1100 ${
-        isDark
-          ? "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
-          : "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
-      }`}
-    >
-      {t("home.contact.startProjectButton")}
-    </a>
+            <ScrollAnimation animation="slide-in-left" stagger="scroll-stagger-4">
+              <a
+                href="/contact"
+                className={`mt-10 rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 inline-block btn-animate-strong ${
+                  isDark
+                    ? "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+                    : "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+                }`}
+              >
+                {t("home.contact.startProjectButton")}
+              </a>
+            </ScrollAnimation>
+          </div>
 
+          {/* Right - Image */}
+          <ScrollAnimation animation="slide-in-right" stagger="scroll-stagger-1">
+            <div className="justify-self-center">
+              <img
+                src="/images/contact-side.jpg"
+                alt="Team collaboration illustration"
+                className="rounded-xl shadow-2xl object-cover w-[350px] h-[350px] hover-lift-strong transition-all duration-300"
+              />
+            </div>
+          </ScrollAnimation>
+        </div>
+      </section>
 
-    </div>
-
-    {/* Right - Image */}
-    <div className="justify-self-center animate-slide-in-right animate-delay-300">
-      <img
-        src="/images/contact-side.jpg" // image
-        alt="Team collaboration illustration"
-        className="rounded-xl shadow-2xl object-cover w-[350px] h-[350px] hover-lift-strong transition-all duration-300"
-      />
-    </div>
-  </div>
-</section>
-
-             
+   
 
               <Footer />
     </div>
