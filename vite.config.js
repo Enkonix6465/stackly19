@@ -6,5 +6,14 @@ export default defineConfig({
   plugins: [react()],
   server: {
     open: true,  // 👈 this will auto open browser
+    port: 5173,
+    host: true
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
   }
 })
