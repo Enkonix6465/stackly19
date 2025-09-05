@@ -19,6 +19,7 @@ export default function Contact() {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const [isDark, setIsDark] = useState(false)
+  const [videoLoading, setVideoLoading] = useState(false)
 
   useEffect(() => {
     const checkDark = () => setIsDark(document.documentElement.classList.contains('dark'))
@@ -86,6 +87,9 @@ export default function Contact() {
   id="showcase"
   className="relative overflow-hidden h-screen flex items-center justify-center text-center"
 >
+  {/* Fallback Background */}
+  <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900"></div>
+  
   {/* Background Video */}
   <video
     autoPlay
@@ -93,9 +97,15 @@ export default function Contact() {
     muted
     playsInline
     className="absolute inset-0 w-full h-full object-cover"
+    onLoadedData={() => {
+      console.log('Video loaded successfully')
+    }}
+    onError={(e) => {
+      console.error('Video error:', e)
+    }}
   >
-    <source src="/vedio6.mp4" type="video/mp4" />
-    {t('contact.video.notSupported')}
+    <source src="/showcase-video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
   </video>
 
   {/* Overlay (darken video for readability) */}
