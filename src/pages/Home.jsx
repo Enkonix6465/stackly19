@@ -518,7 +518,7 @@ export default function Home() {
       className={`relative overflow-hidden border-t transition-colors duration-300 ${
         isDark
           ? "bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border-gray-700"
-          : "bg-black text-white border-black/10"
+          : "bg-indigo-50 text-black border-black/10"
       }`}
     >
       {/* Background decorative elements */}
@@ -536,7 +536,7 @@ export default function Home() {
         <div className="text-center mb-16">
           <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
             <h2 className={`text-4xl md:text-5xl font-extrabold ${
-              isDark ? "text-white" : "text-white"
+              isDark ? "text-white" : "text-gray-900"
             }`}>
               {t("home.blog.title")}
             </h2>
@@ -545,7 +545,7 @@ export default function Home() {
           <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
             <p
               className={`mt-4 text-lg max-w-2xl mx-auto ${
-                isDark ? "text-gray-300" : "text-gray-300"
+                isDark ? "text-gray-300" : "text-gray-700"
               }`}
             >
               {t("home.blog.subtitle")}
@@ -572,7 +572,7 @@ export default function Home() {
                 className={`blog-card rounded-2xl border ${
                   isDark 
                     ? "border-white/10 bg-white/5 hover:bg-white/10" 
-                    : "border-white/10 bg-white/5 hover:bg-white/10 shadow-lg hover:shadow-xl"
+                    : "border-indigo-200 bg-white hover:bg-indigo-50 shadow-lg hover:shadow-xl"
                 } transition-all duration-300`}
               >
                 {/* Blog Image with overlay */}
@@ -588,13 +588,13 @@ export default function Home() {
                 {/* Blog Content */}
                 <div className="p-6 animate-blog-content">
                   <h3 className={`text-xl font-bold mb-3 animate-blog-title ${
-                    isDark ? "text-white" : "text-white"
+                    isDark ? "text-white" : "text-gray-900"
                   } group-hover:text-indigo-500 transition-colors duration-300`}>
                     {post.title}
                   </h3>
                   <p
                     className={`text-sm leading-relaxed ${
-                      isDark ? "text-gray-300" : "text-gray-300"
+                      isDark ? "text-gray-300" : "text-gray-600"
                     }`}
                   >
                     {post.excerpt}
@@ -603,7 +603,7 @@ export default function Home() {
                   {/* Read more link */}
                   <div className="mt-4">
                     <span className={`inline-flex items-center text-sm font-medium ${
-                      isDark ? "text-indigo-400 hover:text-indigo-300" : "text-indigo-400 hover:text-indigo-300"
+                      isDark ? "text-indigo-400 hover:text-indigo-300" : "text-indigo-600 hover:text-indigo-500"
                     } transition-colors duration-300 cursor-pointer`}>
                       Read More
                       <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

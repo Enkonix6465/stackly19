@@ -20,7 +20,9 @@
     "language": "Language",
     "english": "English",
     "arabic": "Arabic",
-    "hebrew": "Hebrew"
+    "hebrew": "Hebrew",
+    "videoNotSupported": "Your browser does not support the video tag.",
+    "viewDetails": "View Details"
   },
   "footer": {
     "companyDescription": "Connecting businesses with top talent worldwide to get projects done efficiently and effectively.",
@@ -224,11 +226,13 @@
           "title": "E-Commerce Solutions",
           "category": "Shopify, WooCommerce & custom stores"
         }
-      }
+      },
+      "exploreAllServices": "Explore All Services"
     },
     "testimonials": {
       "title": "Client Testimonials",
       "subtitle": "What businesses say about our freelancers",
+      "verifiedClient": "Verified Client",
       "clients": {
         "sophia": {
           "name": "Sophia Martinez",
@@ -281,13 +285,14 @@
     },
     "contactCta": {
       "title": "Interested in collaborating",
+      "subtitle": "Ready to bring your ideas to life? Let's discuss your project and create something amazing together.",
       "button": "Let's Connect"
     }
   },
   "about": {
     "showcase": {
-      "title": "we design and build clear, modern web experiences",
-      "subtitle": "Showcasing projects that blend creativity, technology, and strategy to deliver meaningful results.",
+      "title": "Modern web experiences",
+      "subtitle": "Creative projects that blend technology and strategy for meaningful results",
       "connectButton": "connect"
     },
     "mission": {
@@ -405,6 +410,10 @@
     "faq": {
       "title": "FAQ",
       "subtitle": "Answers to questions clients often ask",
+      "cta": {
+        "text": "Still have questions? We're here to help!",
+        "button": "Get in Touch"
+      },
       "questions": [
         {
           "question": "What types of projects do you take on?",
@@ -455,7 +464,7 @@
         },
         "ecommerceSolutions": {
           "title": "E-Commerce Solutions",
-          "description": "Online stores with secure checkout, product management, and seamless user experience."
+          "description": "Online stores with secure checkout,<br/>product management, and seamless."
         },
         "brandingDesign": {
           "title": "Branding & Design",
@@ -924,7 +933,7 @@
   },
   "blogPage": {
     "showcase": {
-      "tagline": "Freelancer Blog",
+      "tagline": "",
       "title": "Stay Ahead, Stay Inspired",
       "subtitle": "Tips, tools, and trends to fuel your freelancing journey.",
       "subscribeButton": "Subscribe"
@@ -967,7 +976,7 @@
     },
     "whyChoosePlatform": {
       "title": "Why Choose Our Freelancing Platform?",
-      "subtitle": "Designed for freelancers & clients to connect, collaborate, and grow 🚀",
+      "subtitle": "Designed for freelancers & clients to connect, collaborate, and grow",
       "features": {
         "globalTalent": {
           "title": "Global Talent",

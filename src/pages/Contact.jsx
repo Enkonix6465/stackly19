@@ -327,13 +327,13 @@ export default function Contact() {
       </section>
 
       {/* Contact Information Section */}
-<section className={`py-20 transition-colors duration-500 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
+<section className={`py-20 transition-colors duration-500 ${isDark ? 'bg-indigo-900' : 'bg-indigo-100'}`}>
         <div className="mx-auto max-w-7xl px-4">
           <div className="text-center mb-16">
-            <h2 className={`text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className={`text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-black'}`}>
     {t('contact.contactInfo.title')}
   </h2>
-  <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+  <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-white' : 'text-black'}`}>
     {t('contact.contactInfo.subtitle')}
   </p>
           </div>
