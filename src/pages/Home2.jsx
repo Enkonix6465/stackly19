@@ -175,15 +175,15 @@ export default function Home2() {
       className={`border-t transition-colors duration-300 ${
         isDark
           ? "bg-black text-white border-gray-700"
-          : "bg-gray-100 text-black border-black/10"
+          : "bg-black text-white border-gray-700"
       }`}
     >
         <div className="mx-auto max-w-6xl px-4 py-24">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold">{t('home2.testimonials.title')}</h2>
+            <h2 className="text-4xl font-extrabold text-white">{t('home2.testimonials.title')}</h2>
              <p
       className={`mt-2 ${
-        isDark ? "text-white/70" : "text-black/70"
+        isDark ? "text-white/70" : "text-white/70"
       }`}
     >
       {t("home2.testimonials.subtitle")}
@@ -245,7 +245,7 @@ export default function Home2() {
                 {/* Testimonial Text */}
                  <p
         className={`mb-4 text-justify ${
-          isDark ? "text-white/80" : "text-black/80"
+          isDark ? "text-white/80" : "text-white/80"
         }`}
       >
         "{testimonial.content}"
@@ -253,10 +253,10 @@ export default function Home2() {
 
       {/* Name + Role */}
       <div>
-        <p className="font-semibold">{testimonial.name}</p>
+        <p className="font-semibold text-white">{testimonial.name}</p>
         <p
           className={`text-sm ${
-            isDark ? "text-white/60" : "text-black/60"
+            isDark ? "text-white/60" : "text-white/60"
           }`}
         >
           {testimonial.role}

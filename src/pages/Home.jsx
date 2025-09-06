@@ -363,7 +363,7 @@ export default function Home() {
                       </div>
                       <div>
                         <h3 className={`text-xl font-semibold mb-2 ${
-                          isDark ? "text-white" : "text-gray-900"
+                          isDark ? "text-white" : "text-white"
                         }`}>{t('home.about.features.fastDelivery.title')}</h3>
                         <p className={`text-sm ${
                           isDark ? "text-gray-400" : "text-gray-400"
@@ -390,7 +390,7 @@ export default function Home() {
                       </div>
                       <div>
                         <h3 className={`text-xl font-semibold mb-2 ${
-                          isDark ? "text-white" : "text-gray-900"
+                          isDark ? "text-white" : "text-white"
                         }`}>{t('home.about.features.qualityAssurance.title')}</h3>
                         <p className={`text-sm ${
                           isDark ? "text-gray-400" : "text-gray-400"
@@ -417,7 +417,7 @@ export default function Home() {
                       </div>
                       <div>
                         <h3 className={`text-xl font-semibold mb-2 ${
-                          isDark ? "text-white" : "text-gray-900"
+                          isDark ? "text-white" : "text-white"
                         }`}>{t('home.about.features.support24.title')}</h3>
                         <p className={`text-sm ${
                           isDark ? "text-gray-400" : "text-gray-400"
