@@ -613,10 +613,32 @@ export default function Home2() {
         {/* Content */}
         <div className="relative mx-auto max-w-6xl px-4 py-24 text-white">
           {/* Heading */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold">{t('home2.process.title')}</h2>
-            <p className="text-gray-200 mt-2">{t('home2.process.subtitle')}</p>
-          </div>
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <motion.h2 
+              className="text-4xl font-extrabold"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              {t('home2.process.title')}
+            </motion.h2>
+            <motion.p 
+              className="text-gray-200 mt-2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              {t('home2.process.subtitle')}
+            </motion.p>
+          </motion.div>
 
           {/* Steps */}
           <div className="grid md:grid-cols-4 gap-8">
@@ -662,13 +684,46 @@ export default function Home2() {
                 )
               }
             ].map((process, idx) => (
-              <div key={idx} className="text-center group">
-                <div className="w-16 h-16 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <motion.div 
+                key={idx} 
+                className="text-center group"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.2 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10 }}
+              >
+                <motion.div 
+                  className="w-16 h-16 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform"
+                  initial={{ scale: 0, rotate: -180 }}
+                  whileInView={{ scale: 1, rotate: 0 }}
+                  transition={{ duration: 0.6, delay: idx * 0.2 + 0.3 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                >
                   {process.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-2">{process.title}</h3>
-                <p className="text-gray-200">{process.desc}</p>
-              </div>
+                </motion.div>
+                <motion.h3 
+                  className="text-xl font-bold mb-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: idx * 0.2 + 0.4 }}
+                  viewport={{ once: true }}
+                  whileHover={{ x: 5 }}
+                >
+                  {process.title}
+                </motion.h3>
+                <motion.p 
+                  className="text-gray-200"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: idx * 0.2 + 0.5 }}
+                  viewport={{ once: true }}
+                  whileHover={{ x: 5 }}
+                >
+                  {process.desc}
+                </motion.p>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -689,24 +744,42 @@ export default function Home2() {
         
         {/* Content */}
         <div className="relative z-10 max-w-2xl px-6 flex flex-col items-center justify-center text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4">
+          <motion.h2 
+            className="text-2xl md:text-3xl font-semibold text-white mb-4"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
             {t('home2.contactCta.title')}
-          </h2>
+          </motion.h2>
           
           {/* Subtext */}
-          <p className="text-lg text-white/80 mb-8 whitespace-nowrap">
+          <motion.p 
+            className="text-lg text-white/80 mb-8 whitespace-nowrap"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
             {t('home2.contactCta.subtitle')}
-          </p>
+          </motion.p>
 
           {/* Button */}
-          <button
+          <motion.button
             className="px-10 py-4 rounded-full bg-indigo-500 
                        text-black font-semibold shadow-md 
                        transition-all duration-300
                        hover:bg-white hover:text-indigo-500 hover:border hover:border-black"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
           >
             {t('home2.contactCta.button')}
-          </button>
+          </motion.button>
         </div>
       </section>
 
