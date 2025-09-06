@@ -199,7 +199,7 @@ export default function AdminDashboard() {
                 </p>
               </div>
               
-              <button className="flex items-center space-x-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
+              <button className="btn-animate-strong flex items-center space-x-2 rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl">
                 <Download className="h-4 w-4" />
                 <span>{t('admin.actions.export')}</span>
               </button>

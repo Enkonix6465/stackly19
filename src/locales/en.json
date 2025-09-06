@@ -606,7 +606,7 @@
     },
     "form": {
       "title": "Send Us a Message",
-      "subtitle": "Fill out the form below and we'll get back to you within 24 hours. We're excited to hear about your project!",
+      "subtitle": "Fill out the form below and we'll get back to you within 24 hours.",
       "successMessage": "Thank you! Your message has been sent successfully. We'll get back to you soon.",
       "fullName": "Full Name *",
       "fullNamePlaceholder": "Enter your full name",

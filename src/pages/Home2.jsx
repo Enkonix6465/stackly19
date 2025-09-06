@@ -84,7 +84,7 @@ export default function Home2() {
             {/* Primary Button */}
             <a
               href="/services"
-              className="rounded-md bg-indigo-500 text-black px-5 py-2.5 hover:bg-indigo-600 hover:text-white transition"
+              className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
             >
               {t('home2.showcase.exploreButton')}
             </a>
@@ -92,8 +92,7 @@ export default function Home2() {
             {/* Secondary Button */}
             <a
               href="/contact"
-              className="rounded-md border border-white text-white px-5 py-2.5 
-                         hover:bg-white hover:text-indigo-500 transition"
+              className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
             >
               {t('home2.showcase.reachOutButton')}
             </a>
@@ -233,7 +232,7 @@ export default function Home2() {
                     {/* Hover Overlay with CTA */}
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
                       <motion.button
-                        className="px-6 py-3 bg-white text-gray-900 font-semibold rounded-full shadow-lg"
+                        className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
                         initial={{ scale: 0 }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -283,10 +282,10 @@ export default function Home2() {
           >
             <motion.button
               onClick={() => navigate('/services')}
-              className={`px-8 py-4 rounded-full font-semibold text-lg shadow-lg transition-all duration-300 ${
+              className={`btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl ${
                 isDark 
-                  ? 'bg-indigo-600 text-white hover:bg-indigo-700 hover:shadow-indigo-500/25' 
-                  : 'bg-indigo-600 text-white hover:bg-indigo-700 hover:shadow-indigo-500/25'
+                  ? 'bg-indigo-500 text-white hover:bg-indigo-600' 
+                  : 'bg-indigo-500 text-white hover:bg-indigo-600'
               }`}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
@@ -767,10 +766,7 @@ export default function Home2() {
 
           {/* Button */}
           <motion.button
-            className="px-10 py-4 rounded-full bg-indigo-500 
-                       text-black font-semibold shadow-md 
-                       transition-all duration-300
-                       hover:bg-white hover:text-indigo-500 hover:border hover:border-black"
+            className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}

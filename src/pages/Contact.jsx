@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { getCurrentUser, isAuthenticated } from '../utils/auth'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import ScrollAnimation from '../components/ScrollAnimation'
 import { useTranslation } from 'react-i18next'
 
 export default function Contact() {
@@ -114,23 +115,29 @@ export default function Contact() {
   {/* Content */}
   <div className="relative z-10 px-6 max-w-4xl">
     
-    <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
-       {t('contact.showcase.title')}
-    </h1>
-    <p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto">
-      {t('contact.showcase.subtitle')}
-    </p>
-    <div className="mt-8 flex gap-4 justify-center">
-      {/* Primary Button */}
-      <a
-        href="#contact"
-        className="rounded-md bg-indigo-500 text-black px-5 py-2.5 hover:bg-indigo-600 hover:text-white transition"
-      >
-        {t('contact.showcase.contactButton')}
-      </a>
-
-      
-    </div>
+    <ScrollAnimation animation="slide-up" stagger="scroll-stagger-1">
+      <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
+         {t('contact.showcase.title')}
+      </h1>
+    </ScrollAnimation>
+    
+    <ScrollAnimation animation="slide-up" stagger="scroll-stagger-2">
+      <p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto">
+        {t('contact.showcase.subtitle')}
+      </p>
+    </ScrollAnimation>
+    
+    <ScrollAnimation animation="slide-up" stagger="scroll-stagger-3">
+      <div className="mt-8 flex gap-4 justify-center">
+        {/* Primary Button */}
+        <a
+          href="#contact"
+          className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+        >
+          {t('contact.showcase.contactButton')}
+        </a>
+      </div>
+    </ScrollAnimation>
   </div>
 </section>
       
@@ -141,20 +148,23 @@ export default function Contact() {
   className={`py-20 transition-colors duration-500 ${
     isDark ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
   }`}>        <div className="mx-auto max-w-4xl px-4">
-          <div
-  className={`text-center mb-16 transition-colors duration-500 ${
-    isDark ? "text-white" : "text-gray-900"
-  }`}
->
-  <h2 className="text-4xl font-bold mb-4" id="contact2">
-    {t('contact.form.title')}
-  </h2>
-  <p className={`text-lg max-w-2xl mx-auto ${isDark ? "text-gray-300" : "text-gray-600"}`}>
-    {t('contact.form.subtitle')}
-  </p>
-</div>
+          <ScrollAnimation animation="slide-up" stagger="scroll-stagger-1">
+            <div
+      className={`text-center mb-16 transition-colors duration-500 ${
+        isDark ? "text-white" : "text-gray-900"
+      }`}
+    >
+      <h2 className="text-4xl font-bold mb-4" id="contact2">
+        {t('contact.form.title')}
+      </h2>
+      <p className={`text-lg max-w-2xl mx-auto ${isDark ? "text-gray-300" : "text-gray-600"}`}>
+        {t('contact.form.subtitle')}
+      </p>
+    </div>
+          </ScrollAnimation>
 
-          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 md:p-12">
+          <ScrollAnimation animation="slide-up" stagger="scroll-stagger-2">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 md:p-12">
             {submitSuccess && (
               <div className="mb-8 p-4 bg-green-100 dark:bg-green-900 border border-green-400 dark:border-green-700 text-green-700 dark:text-green-300 rounded-lg">
                 <div className="flex items-center">
@@ -252,9 +262,7 @@ export default function Contact() {
                 <button
   type="submit"
   disabled={isSubmitting}
-  className="inline-flex items-center px-8 py-4 bg-indigo-600 text-white font-semibold rounded-lg 
-             hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-800 
-             transition-all duration-300 transform hover:scale-105 
+  className="btn-animate-strong inline-flex items-center px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl 
              disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
 >
   {isSubmitting ? (
@@ -291,22 +299,26 @@ export default function Contact() {
               </div>
             </form>
           </div>
+          </ScrollAnimation>
         </div>
       </section>
 
       {/* Map Section */}
 <section className={`py-20 transition-colors duration-500 ${isDark ? 'bg-gray-900' : 'bg-gray-100'}`}>
         <div className="mx-auto max-w-7xl px-4">
-          <div className="text-center mb-16">
-            <h2 className={`text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-    {t('contact.map.title')}
-  </h2>
-  <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-    {t('contact.map.subtitle')}
-  </p>
-          </div>
+          <ScrollAnimation animation="slide-up" stagger="scroll-stagger-1">
+            <div className="text-center mb-16">
+              <h2 className={`text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+        {t('contact.map.title')}
+      </h2>
+      <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+        {t('contact.map.subtitle')}
+      </p>
+            </div>
+          </ScrollAnimation>
 
-          <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl">
+          <ScrollAnimation animation="slide-up" stagger="scroll-stagger-2">
+            <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl">
             <div className="aspect-w-16 aspect-h-9 h-96 md:h-[500px]">
               {/* Placeholder for Google Maps - Replace with actual map integration */}
               <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 flex items-center justify-center">
@@ -323,22 +335,26 @@ export default function Contact() {
               </div>
             </div>
           </div>
+          </ScrollAnimation>
         </div>
       </section>
 
       {/* Contact Information Section */}
 <section className={`py-20 transition-colors duration-500 ${isDark ? 'bg-indigo-900' : 'bg-indigo-100'}`}>
         <div className="mx-auto max-w-7xl px-4">
-          <div className="text-center mb-16">
-            <h2 className={`text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-black'}`}>
-    {t('contact.contactInfo.title')}
-  </h2>
-  <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-white' : 'text-black'}`}>
-    {t('contact.contactInfo.subtitle')}
-  </p>
-          </div>
+          <ScrollAnimation animation="slide-up" stagger="scroll-stagger-1">
+            <div className="text-center mb-16">
+              <h2 className={`text-4xl font-bold mb-4 ${isDark ? 'text-white' : 'text-black'}`}>
+        {t('contact.contactInfo.title')}
+      </h2>
+      <p className={`text-lg max-w-2xl mx-auto ${isDark ? 'text-white' : 'text-black'}`}>
+        {t('contact.contactInfo.subtitle')}
+      </p>
+            </div>
+          </ScrollAnimation>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <ScrollAnimation animation="slide-up" stagger="scroll-stagger-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Phone */}
             <div className="bg-white dark:bg-gray-900 rounded-xl p-8 text-center shadow-lg hover:shadow-xl transition-shadow duration-300">
               <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -394,6 +410,7 @@ export default function Contact() {
               </p>
             </div>
           </div>
+          </ScrollAnimation>
         </div>
       </section>
 
@@ -411,9 +428,7 @@ export default function Contact() {
     </p>
     <a
       href='#contact2'
-      className="px-10 py-4 bg-purple-600 text-white font-semibold rounded-lg 
-                 shadow-lg hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 
-                 transition-all duration-300 transform hover:scale-105"
+      className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
     >
       {t('contact.cta.getStartedButton')}
     </a>

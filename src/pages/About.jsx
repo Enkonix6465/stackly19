@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { getCurrentUser, logoutUser, isAuthenticated } from '../utils/auth'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import ScrollAnimation from '../components/ScrollAnimation'
 import { useTranslation } from 'react-i18next'
 
 export default function About() {
@@ -59,23 +60,31 @@ export default function About() {
   {/* Content */}
   <div className="relative z-10 px-6 max-w-4xl">
     
-    <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
-      {t('about.showcase.title')}
-    </h1>
-    <p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto">
-      {t('about.showcase.subtitle')}
-    </p>
-    <div className="mt-8 flex gap-4 justify-center">
-      {/* Primary Button */}
-      <a
-        href="/contact"
-        className="rounded-md bg-indigo-500 text-black px-5 py-2.5 hover:bg-indigo-600 hover:text-white transition"
-      >
-        {t('about.showcase.connectButton')}
-      </a>
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+      <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
+        {t('about.showcase.title')}
+      </h1>
+    </ScrollAnimation>
+    
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+      <p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto">
+        {t('about.showcase.subtitle')}
+      </p>
+    </ScrollAnimation>
+    
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-3">
+      <div className="mt-8 flex gap-4 justify-center">
+        {/* Primary Button */}
+        <a
+          href="/contact"
+          className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+        >
+          {t('about.showcase.connectButton')}
+        </a>
 
-      
-    </div>
+        
+      </div>
+    </ScrollAnimation>
   </div>
 </section>
 
@@ -91,14 +100,20 @@ export default function About() {
           : "bg-gradient-to-b from-white to-indigo-50 text-black border-black/10"
       }`}
     >  <div className="mx-auto max-w-6xl px-4 py-24">
-    <h2 className="text-3xl font-extrabold">{t('about.mission.title')}</h2>
-  <p
-      className={`mt-1 ${
-        isDark ? "text-gray-300" : "text-black/70"
-      }`}
-    >
-      {t("about.mission.subtitle")}
-    </p>
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+      <h2 className="text-3xl font-extrabold">{t('about.mission.title')}</h2>
+    </ScrollAnimation>
+    
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+      <p
+        className={`mt-1 ${
+          isDark ? "text-gray-300" : "text-black/70"
+        }`}
+      >
+        {t("about.mission.subtitle")}
+      </p>
+    </ScrollAnimation>
+    
     <div className="mt-12 grid md:grid-cols-3 gap-8">
       {[{
         t: t('about.mission.trust.title'), 
@@ -112,18 +127,22 @@ export default function About() {
         t: t('about.mission.collaboration.title'), 
         d: t('about.mission.collaboration.description'), 
         icon: <svg xmlns="http://www.w3.org/2000/svg" width={45} height={45} viewBox="0 0 48 48"><g fill="none" strokeLinecap="round" strokeWidth={4}><path stroke="#000" strokeLinejoin="round" d="M33 38H22V30H36V22H44V38H39L36 41L33 38Z"></path><path fill="#2f88ff" stroke="#000" strokeLinejoin="round" d="M4 6H36V30H17L13 34L9 30H4V6Z"></path><path stroke="#fff" d="M19 18H20"></path><path stroke="#fff" d="M26 18H27"></path><path stroke="#fff" d="M12 18H13"></path></g></svg>
-      }].map((item) => (
-        <div 
+      }].map((item, index) => (
+        <ScrollAnimation 
           key={item.t} 
-          className="group relative rounded-2xl bg-white p-8 border border-black/10 shadow-sm 
-                     hover:shadow-2xl hover:-translate-y-2 hover:scale-105 
-                     transition-all duration-500 ease-out cursor-pointer
-                     hover:border-indigo-300 hover:bg-gradient-to-br hover:from-white hover:to-indigo-50
-                     before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-r 
-                     before:from-indigo-500/10 before:to-purple-500/10 before:opacity-0 
-                     hover:before:opacity-100 before:transition-opacity before:duration-500
-                     overflow-hidden"
+          animation="fade-in" 
+          stagger={`scroll-stagger-${index + 3}`}
         >
+          <div 
+            className="group relative rounded-2xl bg-white p-8 border border-black/10 shadow-sm 
+                       hover:shadow-2xl hover:-translate-y-2 hover:scale-105 
+                       transition-all duration-500 ease-out cursor-pointer
+                       hover:border-indigo-300 hover:bg-gradient-to-br hover:from-white hover:to-indigo-50
+                       before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-r 
+                       before:from-indigo-500/10 before:to-purple-500/10 before:opacity-0 
+                       hover:before:opacity-100 before:transition-opacity before:duration-500
+                       overflow-hidden"
+          >
           {/* Enhanced Accent bar with gradient animation */}
           <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-t-2xl 
                          group-hover:from-pink-500 group-hover:via-purple-500 group-hover:to-indigo-500
@@ -164,7 +183,8 @@ export default function About() {
           <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-tr from-purple-500/10 to-pink-500/10 
                          rounded-full blur-xl scale-0 group-hover:scale-100 
                          transition-all duration-700 ease-out delay-100" />
-        </div>
+          </div>
+        </ScrollAnimation>
       ))}
     </div>
   </div>
@@ -172,14 +192,14 @@ export default function About() {
 
 
       {/* 3) About (new section) */}
-  <section
-      id="about"
-      className={`relative border-t transition-colors duration-300 overflow-hidden ${
-        isDark
-          ? "bg-black text-white border-gray-700"
-          : "bg-white text-black border-black/10"
-      }`}
-    >  
+      <section
+        id="about"
+        className={`relative border-t transition-colors duration-300 overflow-hidden ${
+          isDark
+            ? "bg-black text-white border-gray-700"
+            : "bg-white text-black border-black/10"
+        }`}
+      >  
     {/* Animated background elements */}
     <div className="absolute -top-20 -right-20 w-80 h-80 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-full blur-3xl animate-pulse" />
     <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-gradient-to-tr from-purple-500/5 to-pink-500/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}} />
@@ -192,47 +212,49 @@ export default function About() {
         isDark ? "text-white" : "text-black"
       }`}
     >
-      <h2 className="text-3xl font-extrabold mb-6 opacity-0 animate-fade-in-up" 
-          style={{animationDelay: '0.2s', animationFillMode: 'forwards'}}>
-        {t('about.aboutSection.title')}
-      </h2>
-     <p
-        className={`mt-3 opacity-0 animate-fade-in-up ${
-          isDark ? "text-white/70" : "text-black/70"
-        }`}
-        style={{animationDelay: '0.4s', animationFillMode: 'forwards'}}
-      >
-        {t("about.aboutSection.description1")}
-      </p>
-      <p
-        className={`mt-3 opacity-0 animate-fade-in-up ${
-          isDark ? "text-white/70" : "text-black/70"
-        }`}
-        style={{animationDelay: '0.6s', animationFillMode: 'forwards'}}
-      >
-        {t("about.aboutSection.description2")}
-      </p>
+      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+        <h2 className="text-3xl font-extrabold mb-6">
+          {t('about.aboutSection.title')}
+        </h2>
+      </ScrollAnimation>
+      
+      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+        <p
+          className={`mt-3 ${
+            isDark ? "text-white/70" : "text-black/70"
+          }`}
+        >
+          {t("about.aboutSection.description1")}
+        </p>
+      </ScrollAnimation>
+      
+      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-3">
+        <p
+          className={`mt-3 ${
+            isDark ? "text-white/70" : "text-black/70"
+          }`}
+        >
+          {t("about.aboutSection.description2")}
+        </p>
+      </ScrollAnimation>
 
        {/* Key Highlights */}
-       <ul className="mt-8 grid grid-cols-2 gap-4 text-sm">
-         {highlights.map((b, index) => {
-           const indigoVariations = [
-             { bg: 'bg-indigo-500/10', border: 'border-indigo-500/30', text: 'text-indigo-700 dark:text-indigo-300', hover: 'hover:bg-indigo-500/20' },
-             { bg: 'bg-indigo-400/10', border: 'border-indigo-400/30', text: 'text-indigo-600 dark:text-indigo-400', hover: 'hover:bg-indigo-400/20' },
-             { bg: 'bg-indigo-600/10', border: 'border-indigo-600/30', text: 'text-indigo-800 dark:text-indigo-200', hover: 'hover:bg-indigo-600/20' },
-             { bg: 'bg-indigo-300/10', border: 'border-indigo-300/30', text: 'text-indigo-500 dark:text-indigo-500', hover: 'hover:bg-indigo-300/20' }
-           ];
-           const colorScheme = indigoVariations[index % indigoVariations.length];
-           
-           return (
-             <li
-               key={b}
-               className={`rounded-xl px-5 py-3 opacity-0 animate-fade-in-up hover:scale-105 hover:shadow-lg transition-all duration-300 cursor-pointer border-2 ${colorScheme.bg} ${colorScheme.border} ${colorScheme.text} ${colorScheme.hover}`}
-               style={{
-                 animationDelay: `${0.8 + index * 0.1}s`,
-                 animationFillMode: 'forwards'
-               }}
-             >
+       <ScrollAnimation animation="fade-in" stagger="scroll-stagger-4">
+         <ul className="mt-8 grid grid-cols-2 gap-4 text-sm">
+           {highlights.map((b, index) => {
+             const indigoVariations = [
+               { bg: 'bg-indigo-500/10', border: 'border-indigo-500/30', text: 'text-indigo-700 dark:text-indigo-300', hover: 'hover:bg-indigo-500/20' },
+               { bg: 'bg-indigo-400/10', border: 'border-indigo-400/30', text: 'text-indigo-600 dark:text-indigo-400', hover: 'hover:bg-indigo-400/20' },
+               { bg: 'bg-indigo-600/10', border: 'border-indigo-600/30', text: 'text-indigo-800 dark:text-indigo-200', hover: 'hover:bg-indigo-600/20' },
+               { bg: 'bg-indigo-300/10', border: 'border-indigo-300/30', text: 'text-indigo-500 dark:text-indigo-500', hover: 'hover:bg-indigo-300/20' }
+             ];
+             const colorScheme = indigoVariations[index % indigoVariations.length];
+             
+             return (
+               <li
+                 key={b}
+                 className={`rounded-xl px-5 py-3 hover:scale-105 hover:shadow-lg transition-all duration-300 cursor-pointer border-2 ${colorScheme.bg} ${colorScheme.border} ${colorScheme.text} ${colorScheme.hover}`}
+               >
                <div className="flex items-center gap-3">
                  <div className={`w-8 h-8 rounded-lg ${colorScheme.bg.replace('/10', '/20')} flex items-center justify-center`}>
                    {index === 0 && (
@@ -261,13 +283,14 @@ export default function About() {
              </li>
            );
          })}
-       </ul>
+         </ul>
+       </ScrollAnimation>
     </div>
 
      {/* Right Image */}
      <div className="order-1 md:order-2 justify-self-center group">
-       <div className="relative h-80 w-80 md:h-96 md:w-96 lg:h-[28rem] lg:w-[28rem] opacity-0 animate-fade-in-up" 
-            style={{animationDelay: '0.3s', animationFillMode: 'forwards'}}>
+       <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+         <div className="relative h-80 w-80 md:h-96 md:w-96 lg:h-[28rem] lg:w-[28rem]">
         {/* Decorative background elements */}
         <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-3xl blur-xl scale-0 group-hover:scale-100 transition-all duration-700 ease-out" />
         <div className="absolute -inset-2 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl blur-lg scale-0 group-hover:scale-100 transition-all duration-500 ease-out delay-100" />
@@ -282,88 +305,130 @@ export default function About() {
           
           {/* Overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        </div>
-      </div>
+         </div>
+       </div>
+       </ScrollAnimation>
+     </div>
     </div>
-
-  </div>
 </section>
 
-     {/* 4) Journey (Timeline) */}
-<section id="journey" className="border-t border-black/10">
-  <div className="mx-auto max-w-6xl px-4 py-24">
-    <h2 className="text-3xl font-extrabold">{t('about.journey.title')}</h2>
- <p
-      className={`mt-1 ${
-        isDark ? "text-white/70" : "text-black/70"
-      }`}
-    >
-      {t("about.journey.subtitle")}
-    </p>
-    <div className="mt-10 grid md:grid-cols-2 gap-8 items-stretch">
-      
-      {/* Left Timeline Box */}
-      <div className="flex flex-col justify-between rounded-xl border border-black/10 p-8 bg-gradient-to-br from-white to-indigo-50 shadow-lg animate-fade-in">
-        <div className="space-y-8">
-          {[
-            { y: '2018', h: t('about.journey.timeline.2018.title'), d: t('about.journey.timeline.2018.description') },
-            { y: '2020', h: t('about.journey.timeline.2020.title'), d: t('about.journey.timeline.2020.description') },
-            { y: '2022', h: t('about.journey.timeline.2022.title'), d: t('about.journey.timeline.2022.description') },
-            { y: '2024', h: t('about.journey.timeline.2024.title'), d: t('about.journey.timeline.2024.description') }
-          ].map((it, i) => (
-            <div key={it.y} className="relative pl-6 group transition-all hover:translate-x-2">
-              <div className="absolute left-0 top-2 h-3 w-3 rounded-full bg-indigo-500 group-hover:scale-125 transition-transform" />
-              {i !== 3 && ( // hides last line
-                <div className="absolute left-1.5 top-5 bottom-[-2rem] w-[2px] bg-black/10" />
-              )}
-<div
-      className={`font-bold ${
-        isDark ? "text-black" : "text-black"
-      }`}
-    >
-      {it.y} — {it.h}
-    </div>              <p className="text-black/70">{it.d}</p>
-            </div>
-          ))}
-        </div>
+      {/* 4) Journey (Timeline) */}
+      <section id="journey" className="border-t border-black/10">
+        <div className="mx-auto max-w-6xl px-4 py-24">
+          <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+            <h2 className="text-3xl font-extrabold">{t('about.journey.title')}</h2>
+          </ScrollAnimation>
+          
+          <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+            <p
+              className={`mt-1 ${
+                isDark ? "text-white/70" : "text-black/70"
+              }`}
+            >
+              {t("about.journey.subtitle")}
+            </p>
+          </ScrollAnimation>
+          <div className="mt-10 grid md:grid-cols-2 gap-8 items-stretch">
+            
+            {/* Left Timeline Box */}
+            <ScrollAnimation animation="slide-in-left" stagger="scroll-stagger-3">
+              <div className="flex flex-col justify-between rounded-xl border border-black/10 p-8 bg-gradient-to-br from-white to-indigo-50 shadow-lg">
+                <div className="space-y-8">
+                  {[
+                    { y: '2018', h: t('about.journey.timeline.2018.title'), d: t('about.journey.timeline.2018.description') },
+                    { y: '2020', h: t('about.journey.timeline.2020.title'), d: t('about.journey.timeline.2020.description') },
+                    { y: '2022', h: t('about.journey.timeline.2022.title'), d: t('about.journey.timeline.2022.description') },
+                    { y: '2024', h: t('about.journey.timeline.2024.title'), d: t('about.journey.timeline.2024.description') }
+                  ].map((it, i) => (
+                    <ScrollAnimation key={it.y} animation="fade-in" stagger={`scroll-stagger-${i + 4}`}>
+                      <div className="relative pl-6 group transition-all hover:translate-x-2">
+                        <div className="absolute left-0 top-2 h-3 w-3 rounded-full bg-indigo-500 group-hover:scale-125 transition-transform" />
+                        {i !== 3 && ( // hides last line
+                          <div className="absolute left-1.5 top-5 bottom-[-2rem] w-[2px] bg-black/10" />
+                        )}
+                        <div
+                          className={`font-bold ${
+                            isDark ? "text-black" : "text-black"
+                          }`}
+                        >
+                          {it.y} — {it.h}
+                        </div>
+                        <p className="text-black/70">{it.d}</p>
+                      </div>
+                    </ScrollAnimation>
+                  ))}
+                </div>
 
-        <div className="mt-8">
-          <a 
-    href="/services"  // 🔗 replace with your page link or external URL
-    className="px-5 py-3 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-colors shadow-md animate-bounce inline-block"
-  >
-    {t('about.journey.exploreButton')}
-  </a>
-        </div>
-      </div>
+                <ScrollAnimation animation="fade-in" stagger="scroll-stagger-8">
+                  <div className="mt-8">
+                    <a 
+                      href="/services"  // 🔗 replace with your page link or external URL
+                      className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-600 text-white hover:bg-indigo-700 shadow-lg hover:shadow-xl inline-block"
+                    >
+                      {t('about.journey.exploreButton')}
+                    </a>
+                  </div>
+                </ScrollAnimation>
+              </div>
+            </ScrollAnimation>
 
-      {/* Right Content Box */}
-      <div className="flex flex-col justify-between rounded-xl border border-black/10 p-8 bg-gradient-to-br from-indigo-50 to-white shadow-lg animate-fade-in">
-        <div>
-  <h3
-      className={`font-semibold text-lg ${
-        isDark ? "text-black" : "text-black"
-      }`}
-    >
-      {t('about.journey.whatMeansTitle')}
-    </h3>          <ul className="mt-4 space-y-3 text-black/80 text-sm">
-            {t('about.journey.benefits', { returnObjects: true }).map((benefit, index) => (
-              <li key={index} className="flex items-start gap-2">
-                <span className="text-indigo-500">▸</span> {benefit}
-              </li>
-            ))}
-          </ul>
-        </div>
+            {/* Right Content Box */}
+            <ScrollAnimation animation="slide-in-right" stagger="scroll-stagger-3">
+              <div className="flex flex-col justify-between rounded-xl border border-black/10 p-8 bg-gradient-to-br from-indigo-50 to-white shadow-lg">
+                <ScrollAnimation animation="fade-in" stagger="scroll-stagger-4">
+                  <div>
+                    <h3
+                      className={`font-semibold text-lg ${
+                        isDark ? "text-black" : "text-black"
+                      }`}
+                    >
+                      {t('about.journey.whatMeansTitle')}
+                    </h3>
+                    <ul className="mt-4 space-y-3 text-black/80 text-sm">
+                      {t('about.journey.benefits', { returnObjects: true }).map((benefit, index) => (
+                        <ScrollAnimation key={index} animation="fade-in" stagger={`scroll-stagger-${index + 5}`}>
+                          <li className="flex items-start gap-2">
+                            <span className="text-indigo-500">▸</span> {benefit}
+                          </li>
+                        </ScrollAnimation>
+                      ))}
+                      {/* Additional 5 bullet points */}
+                      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-12">
+                        <li className="flex items-start gap-2">
+                          <span className="text-indigo-500">▸</span> Real-time project tracking and communication tools
+                        </li>
+                      </ScrollAnimation>
+                      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-13">
+                        <li className="flex items-start gap-2">
+                          <span className="text-indigo-500">▸</span> Flexible payment terms and milestone-based billing
+                        </li>
+                      </ScrollAnimation>
+                      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-14">
+                        <li className="flex items-start gap-2">
+                          <span className="text-indigo-500">▸</span> Comprehensive project management dashboard
+                        </li>
+                      </ScrollAnimation>
+                      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-15">
+                        <li className="flex items-start gap-2">
+                          <span className="text-indigo-500">▸</span> Advanced analytics and performance insights
+                        </li>
+                      </ScrollAnimation>
+                    </ul>
+                  </div>
+                </ScrollAnimation>
 
-        <div className="mt-6">
-          <a 
-    href="/contact" 
-    className="px-5 py-3 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-colors shadow-md animate-bounce inline-block"
-  >
-    {t('about.journey.getInTouchButton')}
-  </a>
-        </div>
-      </div>
+                <ScrollAnimation animation="fade-in" stagger="scroll-stagger-9">
+                  <div className="mt-6">
+                    <a 
+                      href="/contact" 
+                      className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-600 text-white hover:bg-indigo-700 shadow-lg hover:shadow-xl inline-block"
+                    >
+                      {t('about.journey.getInTouchButton')}
+                    </a>
+                  </div>
+                </ScrollAnimation>
+              </div>
+            </ScrollAnimation>
 
     </div>
   </div>
@@ -374,53 +439,56 @@ export default function About() {
 
 
       {/* 5) Engagement Models - Freelancing Focused */}
-    <section
-      id="engagement"
-      className={`border-t relative overflow-hidden ${
-        isDark ? "bg-gradient-to-br from-indigo-900 via-indigo-800 to-indigo-900 text-white border-gray-700" : "bg-gradient-to-br from-indigo-50 to-indigo-100 text-black border-black/10"
-      }`}
-    >
+      <section
+        id="engagement"
+        className={`border-t relative overflow-hidden ${
+          isDark ? "bg-gradient-to-br from-indigo-900 via-indigo-800 to-indigo-900 text-white border-gray-700" : "bg-gradient-to-br from-indigo-50 to-indigo-100 text-black border-black/10"
+        }`}
+      >
       {/* Background decorative elements */}
       <div className="absolute -right-20 top-20 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
       <div className="absolute -left-20 bottom-20 h-48 w-48 rounded-full bg-indigo-400/5 blur-2xl pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-32 w-32 rounded-full bg-indigo-300/5 blur-xl pointer-events-none" />
       
       <div className="mx-auto max-w-6xl px-4 py-24 relative">
-    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-     <div>
-      <h2
-        className={`text-3xl font-extrabold ${
-          isDark ? "text-white" : "text-black"
-        }`}
-      >
-        {t('about.engagement.title')}
-      </h2>
-      <p
-        className={`mt-1 ${
-          isDark ? "text-white/70" : "text-black/70"
-        }`}
-      >
-        {t('about.engagement.subtitle')}
-      </p>
-    </div>
-      <div className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm ${
-        isDark 
-          ? "border-white/20 bg-white text-black" 
-          : "border-black/10 bg-white text-black"
-      }`}>
-        <span className="h-2 w-2 rounded-full bg-indigo-500" />
-        {t('about.engagement.remoteBadge')}
-      </div>
-    </div>
+        <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div>
+              <h2
+                className={`text-3xl font-extrabold ${
+                  isDark ? "text-white" : "text-black"
+                }`}
+              >
+                {t('about.engagement.title')}
+              </h2>
+              <p
+                className={`mt-1 ${
+                  isDark ? "text-white/70" : "text-black/70"
+                }`}
+              >
+                {t('about.engagement.subtitle')}
+              </p>
+            </div>
+            <div className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm ${
+              isDark 
+                ? "border-white/20 bg-white text-black" 
+                : "border-black/10 bg-white text-black"
+            }`}>
+              <span className="h-2 w-2 rounded-full bg-indigo-500" />
+              {t('about.engagement.remoteBadge')}
+            </div>
+          </div>
+        </ScrollAnimation>
 
-    <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-      {/* Project-Based */}
-      <div className={`group relative rounded-2xl border-2 p-6 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl animate-slide-up ${
-        isDark 
-          ? "bg-white/5 border-indigo-400/40 hover:border-indigo-400/70 hover:shadow-indigo-500/30 backdrop-blur-sm hover:bg-white/10" 
-          : "bg-white border-black/10 hover:border-indigo-300 hover:shadow-indigo-500/20"
-      }`}>
+          {/* Project-Based */}
+          <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+            <div className={`group relative rounded-2xl border-2 p-6 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${
+              isDark 
+                ? "bg-white/5 border-indigo-400/40 hover:border-indigo-400/70 hover:shadow-indigo-500/30 backdrop-blur-sm hover:bg-white/10" 
+                : "bg-white border-black/10 hover:border-indigo-300 hover:shadow-indigo-500/20"
+            }`}>
         <div className={`absolute right-4 top-4 rounded-full border px-3 py-1 text-xs font-bold ${
           isDark 
             ? "border-indigo-400 bg-indigo-400/30 text-white shadow-lg" 
@@ -463,24 +531,26 @@ export default function About() {
             </li>
           ))}
         </ul>
-        <button className={`mt-5 inline-flex items-center gap-2 font-semibold transition-colors ${
+        <button className={`mt-5 btn-animate-strong inline-flex items-center gap-2 rounded-lg px-6 py-3 font-bold text-lg transition-all duration-300 ${
           isDark 
-            ? "text-indigo-300 hover:text-indigo-200" 
-            : "text-indigo-600 hover:text-indigo-700"
+            ? "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl" 
+            : "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
         }`}>
           {t('about.engagement.models.projectBased.button')}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 group-hover:translate-x-1 transition-transform">
             <path d="M5 12h14M13 5l7 7-7 7" />
           </svg>
-        </button>
-      </div>
+            </button>
+            </div>
+          </ScrollAnimation>
 
-      {/* Hourly Work */}
-      <div className={`group relative rounded-2xl border-2 p-6 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl animate-slide-up [animation-delay:80ms] ${
-        isDark 
-          ? "bg-white/5 border-indigo-400/40 hover:border-indigo-400/70 hover:shadow-indigo-500/30 backdrop-blur-sm hover:bg-white/10" 
-          : "bg-white border-black/10 hover:border-indigo-300 hover:shadow-indigo-500/20"
-      }`}>
+          {/* Hourly Work */}
+          <ScrollAnimation animation="fade-in" stagger="scroll-stagger-3">
+            <div className={`group relative rounded-2xl border-2 p-6 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${
+              isDark 
+                ? "bg-white/5 border-indigo-400/40 hover:border-indigo-400/70 hover:shadow-indigo-500/30 backdrop-blur-sm hover:bg-white/10" 
+                : "bg-white border-black/10 hover:border-indigo-300 hover:shadow-indigo-500/20"
+            }`}>
         <div className={`absolute right-4 top-4 rounded-full border px-3 py-1 text-xs font-bold ${
           isDark 
             ? "border-indigo-400 bg-indigo-400/30 text-white shadow-lg" 
@@ -519,24 +589,26 @@ export default function About() {
             </li>
           ))}
         </ul>
-        <button className={`mt-5 inline-flex items-center gap-2 font-semibold transition-colors ${
+        <button className={`mt-5 btn-animate-strong inline-flex items-center gap-2 rounded-lg px-6 py-3 font-bold text-lg transition-all duration-300 ${
           isDark 
-            ? "text-indigo-300 hover:text-indigo-200" 
-            : "text-indigo-600 hover:text-indigo-700"
+            ? "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl" 
+            : "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
         }`}>
           {t('about.engagement.models.hourlyWork.button')}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 group-hover:translate-x-1 transition-transform">
             <path d="M5 12h14M13 5l7 7-7 7" />
           </svg>
-        </button>
-      </div>
+            </button>
+            </div>
+          </ScrollAnimation>
 
-      {/* Monthly Retainer */}
-      <div className={`group relative rounded-2xl border-2 p-6 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl animate-slide-up [animation-delay:160ms] ${
-        isDark 
-          ? "bg-white/5 border-indigo-400/40 hover:border-indigo-400/70 hover:shadow-indigo-500/30 backdrop-blur-sm hover:bg-white/10" 
-          : "bg-white border-black/10 hover:border-indigo-300 hover:shadow-indigo-500/20"
-      }`}>
+          {/* Monthly Retainer */}
+          <ScrollAnimation animation="fade-in" stagger="scroll-stagger-4">
+            <div className={`group relative rounded-2xl border-2 p-6 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${
+              isDark 
+                ? "bg-white/5 border-indigo-400/40 hover:border-indigo-400/70 hover:shadow-indigo-500/30 backdrop-blur-sm hover:bg-white/10" 
+                : "bg-white border-black/10 hover:border-indigo-300 hover:shadow-indigo-500/20"
+            }`}>
         <div className={`absolute right-4 top-4 rounded-full border px-3 py-1 text-xs font-bold ${
           isDark 
             ? "border-indigo-400 bg-indigo-400/30 text-white shadow-lg" 
@@ -583,24 +655,26 @@ export default function About() {
             </li>
           ))}
         </ul>
-        <button className={`mt-5 inline-flex items-center gap-2 font-semibold transition-colors ${
+        <button className={`mt-5 btn-animate-strong inline-flex items-center gap-2 rounded-lg px-6 py-3 font-bold text-lg transition-all duration-300 ${
           isDark 
-            ? "text-indigo-300 hover:text-indigo-200" 
-            : "text-indigo-600 hover:text-indigo-700"
+            ? "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl" 
+            : "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
         }`}>
           {t('about.engagement.models.monthlyRetainer.button')}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 group-hover:translate-x-1 transition-transform">
             <path d="M5 12h14M13 5l7 7-7 7" />
           </svg>
-        </button>
-      </div>
+            </button>
+            </div>
+          </ScrollAnimation>
 
-      {/* Sprint / Weekly Packages */}
-      <div className={`group relative rounded-2xl border-2 p-6 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl animate-slide-up [animation-delay:240ms] ${
-        isDark 
-          ? "bg-white/5 border-indigo-400/40 hover:border-indigo-400/70 hover:shadow-indigo-500/30 backdrop-blur-sm hover:bg-white/10" 
-          : "bg-white border-black/10 hover:border-indigo-300 hover:shadow-indigo-500/20"
-      }`}>
+          {/* Sprint / Weekly Packages */}
+          <ScrollAnimation animation="fade-in" stagger="scroll-stagger-5">
+            <div className={`group relative rounded-2xl border-2 p-6 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${
+              isDark 
+                ? "bg-white/5 border-indigo-400/40 hover:border-indigo-400/70 hover:shadow-indigo-500/30 backdrop-blur-sm hover:bg-white/10" 
+                : "bg-white border-black/10 hover:border-indigo-300 hover:shadow-indigo-500/20"
+            }`}>
         <div className={`absolute right-4 top-4 rounded-full border px-3 py-1 text-xs font-bold ${
           isDark 
             ? "border-indigo-400 bg-indigo-400/30 text-white shadow-lg" 
@@ -638,21 +712,22 @@ export default function About() {
             </li>
           ))}
         </ul>
-        <button className={`mt-5 inline-flex items-center gap-2 font-semibold transition-colors ${
+        <button className={`mt-5 btn-animate-strong inline-flex items-center gap-2 rounded-lg px-6 py-3 font-bold text-lg transition-all duration-300 ${
           isDark 
-            ? "text-indigo-300 hover:text-indigo-200" 
-            : "text-indigo-600 hover:text-indigo-700"
+            ? "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl" 
+            : "bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
         }`}>
           {t('about.engagement.models.weeklySprints.button')}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4 group-hover:translate-x-1 transition-transform">
             <path d="M5 12h14M13 5l7 7-7 7" />
           </svg>
-        </button>
-      </div>
+            </button>
+            </div>
+          </ScrollAnimation>
 
-    </div>
-  </div>
-</section>
+        </div>
+      </div>
+    </section>
 
 
       {/* 6) FAQ - Redesigned */}
@@ -670,34 +745,36 @@ export default function About() {
         
         <div className="mx-auto max-w-5xl px-4 py-24 relative z-10">
           {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent">
-              {t('about.faq.title')}
-            </h2>
-            <p className={`text-lg max-w-2xl mx-auto ${
-              isDark ? "text-gray-300" : "text-gray-600"
-            }`}>
-              {t("about.faq.subtitle")}
-            </p>
-          </div>
+          <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent">
+                {t('about.faq.title')}
+              </h2>
+              <p className={`text-lg max-w-2xl mx-auto ${
+                isDark ? "text-gray-300" : "text-gray-600"
+              }`}>
+                {t("about.faq.subtitle")}
+              </p>
+            </div>
+          </ScrollAnimation>
           
           {/* FAQ Grid */}
           <div className="space-y-4">
             {t("about.faq.questions", { returnObjects: true }).map((item, index) => {
               const isOpen = openFAQ === index
               return (
-                <div
-                  key={index}
-                  className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 ease-out ${
-                    isOpen 
-                      ? (isDark 
-                          ? "border-indigo-400/50 bg-gradient-to-r from-indigo-900/20 to-purple-900/20 shadow-2xl shadow-indigo-500/10" 
-                          : "border-indigo-300 bg-gradient-to-r from-indigo-50/50 to-purple-50/50 shadow-xl shadow-indigo-500/5")
-                      : (isDark 
-                          ? "border-gray-700/50 bg-gray-800/30 hover:border-indigo-400/30 hover:bg-gray-800/50 hover:shadow-lg" 
-                          : "border-gray-200 bg-white/50 hover:border-indigo-200 hover:bg-white hover:shadow-lg")
-                  }`}
-                >
+                <ScrollAnimation key={index} animation="fade-in" stagger={`scroll-stagger-${index + 2}`}>
+                  <div
+                    className={`group relative overflow-hidden rounded-2xl border transition-all duration-500 ease-out ${
+                      isOpen 
+                        ? (isDark 
+                            ? "border-indigo-400/50 bg-gradient-to-r from-indigo-900/20 to-purple-900/20 shadow-2xl shadow-indigo-500/10" 
+                            : "border-indigo-300 bg-gradient-to-r from-indigo-50/50 to-purple-50/50 shadow-xl shadow-indigo-500/5")
+                        : (isDark 
+                            ? "border-gray-700/50 bg-gray-800/30 hover:border-indigo-400/30 hover:bg-gray-800/50 hover:shadow-lg" 
+                            : "border-gray-200 bg-white/50 hover:border-indigo-200 hover:bg-white hover:shadow-lg")
+                    }`}
+                  >
                   {/* Question */}
                   <button
                     className={`w-full text-left p-6 transition-all duration-300 ${
@@ -772,26 +849,29 @@ export default function About() {
                         </p>
                       </div>
                     </div>
+                    </div>
                   </div>
-                </div>
+                </ScrollAnimation>
               )
             })}
           </div>
           
           {/* Bottom CTA */}
-          <div className="text-center mt-12">
-            <p className={`text-lg mb-6 ${
-              isDark ? "text-gray-300" : "text-gray-600"
-            }`}>
-              {t('about.faq.cta.text')}
-            </p>
-            <a
-              href="/contact"
-              className="inline-flex items-center px-8 py-4 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
-            >
-              {t('about.faq.cta.button')}
-            </a>
-          </div>
+          <ScrollAnimation animation="fade-in" stagger="scroll-stagger-6">
+            <div className="text-center mt-12">
+              <p className={`text-lg mb-6 ${
+                isDark ? "text-gray-300" : "text-gray-600"
+              }`}>
+                {t('about.faq.cta.text')}
+              </p>
+              <a
+                href="/contact"
+                className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+              >
+                {t('about.faq.cta.button')}
+              </a>
+            </div>
+          </ScrollAnimation>
         </div>
       </section>
 

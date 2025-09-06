@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { getCurrentUser, isAuthenticated } from '../utils/auth'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import ScrollAnimation from '../components/ScrollAnimation'
 import { useTranslation } from 'react-i18next'
 
 export default function Blog() {
@@ -106,26 +107,35 @@ export default function Blog() {
 
   {/* Content */}
   <div className="relative z-10 px-6 max-w-4xl">
-    <p className="text-sm tracking-widest text-indigo-300 font-medium">
-      {t('blogPage.showcase.tagline')}
-    </p>
-    <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
-      {t('blogPage.showcase.title')}
-    </h1>
-    <p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto">
-      {t('blogPage.showcase.subtitle')}
-    </p>
-    <div className="mt-8 flex gap-4 justify-center">
-      {/* Primary Button */}
-      <a
-        href="/services"
-        className="rounded-md bg-indigo-500 text-black px-5 py-2.5 hover:bg-indigo-600 hover:text-white transition"
-      >
-        {t('blogPage.showcase.subscribeButton')}
-      </a>
-
-      
-    </div>
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+      <p className="text-sm tracking-widest text-indigo-300 font-medium">
+        {t('blogPage.showcase.tagline')}
+      </p>
+    </ScrollAnimation>
+    
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+      <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
+        {t('blogPage.showcase.title')}
+      </h1>
+    </ScrollAnimation>
+    
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-3">
+      <p className="mt-6 text-xl text-white/80 max-w-3xl mx-auto">
+        {t('blogPage.showcase.subtitle')}
+      </p>
+    </ScrollAnimation>
+    
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-4">
+      <div className="mt-8 flex gap-4 justify-center">
+        {/* Primary Button */}
+        <a
+          href="/services"
+          className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+        >
+          {t('blogPage.showcase.subscribeButton')}
+        </a>
+      </div>
+    </ScrollAnimation>
   </div>
 </section>
 
@@ -139,17 +149,26 @@ export default function Blog() {
       <section className="py-20 border-b border-gray-200 dark:border-gray-700">
         <div className="mx-auto max-w-6xl px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">{t('blogPage.featuredArticles.title')}</h2>
-            <p className={`${isDark ? 'text-white' : 'text-black'}`}>{t('blogPage.featuredArticles.subtitle')}</p>
+            <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+              <h2 className="text-3xl font-bold mb-4">{t('blogPage.featuredArticles.title')}</h2>
+            </ScrollAnimation>
+            <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+              <p className={`${isDark ? 'text-white' : 'text-black'}`}>{t('blogPage.featuredArticles.subtitle')}</p>
+            </ScrollAnimation>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
-              <article 
-                key={post.id}
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-300"
-                onClick={() => handleBlogClick(post.id)}
-              >
+            {blogPosts.map((post, index) => {
+              // Create staggered delays for each blog card
+              const staggerClasses = ['scroll-stagger-3', 'scroll-stagger-4', 'scroll-stagger-5'];
+              const staggerClass = staggerClasses[index] || 'scroll-stagger-3';
+              
+              return (
+              <ScrollAnimation key={post.id} animation="fade-in" stagger={staggerClass}>
+                <article 
+                  className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-300"
+                  onClick={() => handleBlogClick(post.id)}
+                >
                 <div className="aspect-video overflow-hidden">
                   <img
                     src={post.image}
@@ -176,8 +195,10 @@ export default function Blog() {
                     <span className="text-sm text-gray-500">{post.date}</span>
                   </div>
                 </div>
-              </article>
-            ))}
+                </article>
+              </ScrollAnimation>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -190,12 +211,16 @@ export default function Blog() {
 >  <div className="mx-auto max-w-6xl px-6">
     {/* Heading */}
     <div className="text-center mb-16">
-      <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
-        {t('blogPage.whyChoosePlatform.title')}
-      </h2>
-      <p className={`${isDark ? 'text-white' : 'text-black'}`}>
-        {t('blogPage.whyChoosePlatform.subtitle')}
-      </p>
+      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+        <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
+          {t('blogPage.whyChoosePlatform.title')}
+        </h2>
+      </ScrollAnimation>
+      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+        <p className={`${isDark ? 'text-white' : 'text-black'}`}>
+          {t('blogPage.whyChoosePlatform.subtitle')}
+        </p>
+      </ScrollAnimation>
     </div>
 
     {/* Features Grid */}
@@ -273,12 +298,16 @@ export default function Blog() {
             </svg>
           ),
         },
-      ].map((feature, index) => (
-        <div
-          key={index}
-          className={`bg-gradient-to-b from-gray-800 to-gray-700 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-8 flex flex-col items-center text-center border border-gray-700 hover:border-indigo-500 transform hover:scale-105 hover:-translate-y-2 animate-fade-in-up hover:animate-glow`}
-          style={{ animationDelay: `${index * 50}ms` }}
-        >
+      ].map((feature, index) => {
+        // Create staggered delays for each feature card
+        const staggerClasses = ['scroll-stagger-3', 'scroll-stagger-4', 'scroll-stagger-5', 'scroll-stagger-6', 'scroll-stagger-1', 'scroll-stagger-2'];
+        const staggerClass = staggerClasses[index] || 'scroll-stagger-3';
+        
+        return (
+        <ScrollAnimation key={index} animation="fade-in" stagger={staggerClass}>
+          <div
+            className={`bg-gradient-to-b from-gray-800 to-gray-700 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-8 flex flex-col items-center text-center border border-gray-700 hover:border-indigo-500 transform hover:scale-105 hover:-translate-y-2 hover:animate-glow`}
+          >
           {/* Icon */}
           <div className="mb-4 transform transition-transform duration-200 hover:scale-110 hover:rotate-6 hover:animate-flip animate-bounce-gentle">
             {feature.icon}
@@ -294,7 +323,9 @@ export default function Blog() {
             {feature.desc}
           </p>
         </div>
-      ))}
+        </ScrollAnimation>
+        );
+      })}
     </div>
   </div>
 </section>
@@ -312,27 +343,38 @@ export default function Blog() {
 >  <div className="mx-auto max-w-6xl px-6">
     {/* Heading */}
     <div className={`text-center mb-16 transition-colors duration-500 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-  <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
-    {t('blogPage.trendingTopics.title')}
-  </h2>
-  <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}>
-    {t('blogPage.trendingTopics.subtitle')}
-  </p>
-</div>
+      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+        <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
+          {t('blogPage.trendingTopics.title')}
+        </h2>
+      </ScrollAnimation>
+      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+        <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}>
+          {t('blogPage.trendingTopics.subtitle')}
+        </p>
+      </ScrollAnimation>
+    </div>
 
     {/* Topics Grid */}
     <div className="grid md:grid-cols-5 sm:grid-cols-2 gap-6">
-      {trendingTopics.map((topic, index) => (
-        <div
-          key={index}
-          className="p-6 rounded-xl shadow-md cursor-pointer text-center 
-                     transform transition-transform duration-300 
-                     bg-gradient-to-br from-indigo-600 via-indigo-400 to-indigo-200 text-white 
-                     hover:scale-105 hover:shadow-xl hover:from-indigo-700 hover:via-indigo-500 hover:to-indigo-300"
-        >
-          <h3 className="font-semibold text-lg">{topic}</h3>
-        </div>
-      ))}
+      {trendingTopics.map((topic, index) => {
+        // Create staggered delays for each topic card
+        const staggerClasses = ['scroll-stagger-3', 'scroll-stagger-4', 'scroll-stagger-5', 'scroll-stagger-6', 'scroll-stagger-1'];
+        const staggerClass = staggerClasses[index] || 'scroll-stagger-3';
+        
+        return (
+        <ScrollAnimation key={index} animation="fade-in" stagger={staggerClass}>
+          <div
+            className="p-6 rounded-xl shadow-md cursor-pointer text-center 
+                       transform transition-transform duration-300 
+                       bg-gradient-to-br from-indigo-600 via-indigo-400 to-indigo-200 text-white 
+                       hover:scale-105 hover:shadow-xl hover:from-indigo-700 hover:via-indigo-500 hover:to-indigo-300"
+          >
+            <h3 className="font-semibold text-lg">{topic}</h3>
+          </div>
+        </ScrollAnimation>
+        );
+      })}
     </div>
   </div>
 </section>
@@ -346,13 +388,17 @@ export default function Blog() {
 >  <div className="mx-auto max-w-6xl px-6">
     {/* Heading */}
    <div className="text-center mb-16">
-  <h2 className={`text-3xl md:text-4xl font-extrabold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-    {t('blogPage.authors.title')}
-  </h2>
-  <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-    {t('blogPage.authors.subtitle')}
-  </p>
-</div>
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+      <h2 className={`text-3xl md:text-4xl font-extrabold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+        {t('blogPage.authors.title')}
+      </h2>
+    </ScrollAnimation>
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+      <p className={`${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+        {t('blogPage.authors.subtitle')}
+      </p>
+    </ScrollAnimation>
+  </div>
 
     {/* Authors Grid */}
     <div className="grid md:grid-cols-3 gap-8">
@@ -378,11 +424,26 @@ export default function Blog() {
           image: "https://randomuser.me/api/portraits/women/65.jpg",
           expertise: t('blogPage.authors.emma.expertise', { returnObjects: true })
         }
-      ].map((author, index) => (
-        <div
-          key={index}
-          className="text-center p-6 bg-gray-800 rounded-xl border border-gray-700 hover:shadow-xl hover:scale-105 transform transition duration-300"
-        >
+      ].map((author, index) => {
+        // Assign different animations based on card position
+        const getAnimationType = (index) => {
+          switch(index) {
+            case 0: return 'slide-in-left';
+            case 1: return 'fade-in';
+            case 2: return 'slide-in-right';
+            default: return 'fade-in';
+          }
+        };
+        
+        // Create staggered delays for each author card
+        const staggerClasses = ['scroll-stagger-3', 'scroll-stagger-4', 'scroll-stagger-5'];
+        const staggerClass = staggerClasses[index] || 'scroll-stagger-3';
+
+        return (
+        <ScrollAnimation key={index} animation={getAnimationType(index)} stagger={staggerClass}>
+          <div
+            className={`text-center p-6 bg-gray-800 rounded-xl border border-gray-700 hover:shadow-xl hover:scale-105 transform transition duration-300`}
+          >
           {/* Author Image */}
           <img
             src={author.image}
@@ -405,7 +466,9 @@ export default function Blog() {
             ))}
           </div>
         </div>
-      ))}
+        </ScrollAnimation>
+        );
+      })}
     </div>
   </div>
 </section>
@@ -415,30 +478,35 @@ export default function Blog() {
   <div className="absolute inset-0 opacity-10 bg-[url('/pattern.svg')] bg-cover"></div>
 
   <div className="relative mx-auto max-w-4xl px-6 text-center">
-    <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
-      {t('blogPage.cta.title')}
-    </h2>
-    <p className="text-lg md:text-xl text-gray-300 mb-10">
-      {t('blogPage.cta.description')}
-    </p>
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+      <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
+        {t('blogPage.cta.title')}
+      </h2>
+    </ScrollAnimation>
+    
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+      <p className="text-lg md:text-xl text-gray-300 mb-10">
+        {t('blogPage.cta.description')}
+      </p>
+    </ScrollAnimation>
 
     {/* CTA Buttons */}
-    <div className="flex flex-col sm:flex-row gap-5 justify-center">
-      <a
-        href="/contact"
-        className="px-8 py-3 rounded-xl bg-white text-black font-semibold 
-                 shadow-md hover:shadow-xl hover:bg-gray-100 transition duration-300"
-      >
-        {t('blogPage.cta.startFreelancingButton')}
-      </a>
-      <a
-        href="/about"
-        className="px-8 py-3 rounded-xl border-2 border-white text-white font-semibold 
-                 hover:bg-white hover:text-black transition duration-300"
-      >
-        {t('blogPage.cta.learnMoreButton')}
-      </a>
-    </div>
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-3">
+      <div className="flex flex-col sm:flex-row gap-5 justify-center">
+        <a
+          href="/contact"
+          className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+        >
+          {t('blogPage.cta.startFreelancingButton')}
+        </a>
+        <a
+          href="/about"
+          className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
+        >
+          {t('blogPage.cta.learnMoreButton')}
+        </a>
+      </div>
+    </ScrollAnimation>
   </div>
 </section>
 

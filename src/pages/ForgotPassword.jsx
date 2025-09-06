@@ -122,7 +122,7 @@ export default function ForgotPassword() {
                   <div className="text-red-300 bg-red-900/40 border border-red-700/50 rounded-md px-3 py-2 text-sm">{error}</div>
                 )}
 
-                <button type="submit" className="w-full rounded-lg bg-indigo-500 hover:bg-indigo-400 transition-colors px-4 py-2 font-semibold">
+                <button type="submit" className="w-full btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl">
                   {t('forgotPassword.continue')}
                 </button>
               </form>
@@ -164,11 +164,11 @@ export default function ForgotPassword() {
                   <button
                     type="button"
                     onClick={handleBackToEmail}
-                    className="flex-1 rounded-lg bg-white/20 hover:bg-white/30 border border-white/30 transition-colors px-4 py-2 font-semibold"
+                    className="flex-1 btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
                   >
                     {t('forgotPassword.back')}
                   </button>
-                  <button type="submit" className="flex-1 rounded-lg bg-indigo-500 hover:bg-indigo-400 transition-colors px-4 py-2 font-semibold">
+                  <button type="submit" className="flex-1 btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl">
                     {t('forgotPassword.resetPasswordButton')}
                   </button>
                 </div>

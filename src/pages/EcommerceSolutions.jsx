@@ -294,6 +294,17 @@ export default function EcommerceSolutions() {
       
 {/* Call to Action */}
 <section className={isDark ? 'relative py-24 bg-gray-900' : 'relative py-24 bg-white'}>
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+          style={{
+            backgroundImage: `url('/images/CTAc.jpg')`
+          }}
+        ></div>
+        
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/50"></div>
+        
   <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
     {/* Heading */}
     <h2 className={isDark ? 'text-5xl font-extrabold text-white mb-6 leading-tight' : 'text-5xl font-extrabold text-black mb-6 leading-tight'}>
@@ -309,17 +320,13 @@ export default function EcommerceSolutions() {
     <div className="flex flex-col sm:flex-row gap-5 justify-center">
       <button
         onClick={() => navigate('/contact')}
-        className="px-8 py-4 bg-indigo-600 text-white font-semibold \
-                 rounded-lg shadow-md hover:bg-indigo-700 \
-                 transition-all duration-300 transform hover:scale-105"
+        className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
       >
         {t('ecommerceSolutions.cta.startProjectButton')}
       </button>
       <button
         onClick={() => navigate('/services')}
-        className="px-8 py-4 border border-indigo-600 text-indigo-600 font-semibold \
-                 rounded-lg hover:bg-indigo-600 hover:text-white \
-                 transition-all duration-300 transform hover:scale-105"
+        className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
       >
         {t('ecommerceSolutions.cta.viewServicesButton')}
       </button>

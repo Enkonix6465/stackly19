@@ -47,7 +47,6 @@ export default function Services() {
   const [activeCapability, setActiveCapability] = useState(capabilities[0])
   const [activeIndex, setActiveIndex] = useState(0)
   const [isWheelHovered, setIsWheelHovered] = useState(false)
-  const [isIconsDancing, setIsIconsDancing] = useState(false)
   const servicesSectionRef = useRef(null)
 
   // Auto-cycle active capability when not hovered
@@ -64,26 +63,6 @@ export default function Services() {
     setActiveCapability(capabilities[activeIndex])
   }, [activeIndex])
 
-  // Scroll detection for dancing icons
-  useEffect(() => {
-    const handleScroll = () => {
-      if (servicesSectionRef.current) {
-        const rect = servicesSectionRef.current.getBoundingClientRect()
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0
-        
-        if (isVisible && !isIconsDancing) {
-          setIsIconsDancing(true)
-          // Stop dancing after 3 seconds
-          setTimeout(() => {
-            setIsIconsDancing(false)
-          }, 3000)
-        }
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [isIconsDancing])
 
   function handleLogout() {
     logoutUser()
@@ -132,7 +111,7 @@ export default function Services() {
             {/* Primary Button */}
             <a
               href="/services"
-              className="rounded-md bg-indigo-500 text-black px-5 py-2.5 hover:bg-indigo-600 hover:text-white transition"
+              className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
             >
               {t('services.showcase.exploreButton')}
             </a>
@@ -140,8 +119,7 @@ export default function Services() {
             {/* Secondary Button */}
             <a
               href="/contact"
-              className="rounded-md border border-white text-white px-5 py-2.5 
-                         hover:bg-white hover:text-indigo-500 transition"
+              className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
             >
               {t('services.showcase.reachOutButton')}
             </a>
@@ -294,11 +272,7 @@ export default function Services() {
                 <div className="group relative h-56 w-full rounded-2xl border border-black/10 [transform-style:preserve-3d] transition-transform duration-500 hover:[transform:rotateY(180deg)]">
                   {/* front */}
                   <div className="absolute inset-0 rounded-2xl bg-white p-6 [backface-visibility:hidden]">
-                    <div className={`h-20 w-20 rounded-lg border-2 border-indigo-500 grid place-items-center transition-all duration-500 ${
-                      isIconsDancing 
-                        ? 'animate-dance' 
-                        : 'hover:scale-110 hover:rotate-6 hover:border-indigo-600'
-                    }`}>
+                    <div className="h-20 w-20 rounded-lg border-2 border-indigo-500 grid place-items-center transition-all duration-500 hover:scale-110 hover:rotate-6 hover:border-indigo-600">
                       {card.icon}
                     </div>
                     <h3 className="mt-4 text-xl font-bold">{card.t}</h3>
@@ -312,7 +286,7 @@ export default function Services() {
                     </p>
                     <button
                       onClick={() => navigate(card.path)}
-                      className="mt-4 inline-flex items-center gap-2 text-indigo-300 font-semibold"
+                      className="btn-animate-strong mt-4 inline-flex items-center gap-2 rounded-lg px-6 py-3 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
                     >
                       Know More
                       <svg
@@ -430,7 +404,7 @@ export default function Services() {
                 {/* CTA */}
                 <a
                   href="/contact"
-                  className="mt-5 inline-flex items-center gap-2 text-indigo-600 font-semibold hover:text-indigo-500 transition-colors"
+                  className="btn-animate-strong mt-5 inline-flex items-center gap-2 rounded-lg px-6 py-3 font-bold text-lg transition-all duration-300 bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
                 >
                   Connect Us
                   <svg
@@ -527,7 +501,7 @@ export default function Services() {
           <div className="md:justify-self-end">
             <a
               href="/contact"
-              className="inline-flex items-center justify-center rounded-md bg-indigo-500 px-6 py-3 font-semibold text-black transition-colors duration-300 hover:bg-white hover:text-indigo-600 border border-white/20"
+              className="btn-animate-strong inline-flex items-center justify-center rounded-lg bg-indigo-500 px-8 py-4 font-bold text-lg text-white transition-all duration-300 hover:bg-indigo-600 shadow-lg hover:shadow-xl"
             >
               {t('services.cta.postProjectButton')}
             </a>
