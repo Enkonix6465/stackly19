@@ -864,12 +864,15 @@
     "showcase": {
       "title": "Branding & Design",
       "subtitle": "Logos and color palettes that make your brand unforgettable.",
-      "connectButton": "connect"
+      "connectButton": "connect",
+      "exploreServicesButton": "Explore Services"
     },
     "hero": {
       "tagline": "BRANDING & DESIGN SERVICES",
-      "title": "Craft Memorable Brands with Creative & Strategic Design",
-      "description": "We help businesses stand out with impactful branding and visually stunning designs. From logo creation and brand identity to complete design systems, our solutions ensure your brand communicates trust, creativity, and consistency — leaving a lasting impression on your audience."
+      "title": "Craft Memorable Brands",
+      "description": "We help businesses stand out with impactful branding and visually stunning designs. From logo creation and brand identity to complete design systems, our solutions ensure your brand communicates trust, creativity, and consistency — leaving a lasting impression on your audience.",
+      "getStartedButton": "Get Started",
+      "viewServicesButton": "View Services"
     },
     "serviceOverview": {
       "title": "Visual Identity Design",
