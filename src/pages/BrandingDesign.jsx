@@ -74,7 +74,7 @@ export default function BrandingDesign() {
       {/* Primary Button */}
       <a
         href="/contact"
-        className="rounded-md bg-indigo-500 text-black px-5 py-2.5 hover:bg-indigo-600 hover:text-white transition"
+        className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
       >
         {t('brandingDesign.showcase.connectButton')}
       </a>
