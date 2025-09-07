@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { getCurrentUser, isAuthenticated } from '../utils/auth'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import ScrollAnimation from '../components/ScrollAnimation'
 import { useTranslation } from 'react-i18next'
 
 export default function EcommerceSolutions() {
@@ -66,24 +67,29 @@ export default function EcommerceSolutions() {
 
   {/* Content */}
   <div className="relative z-10 px-6 max-w-4xl">
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+      <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
+        {t('ecommerceSolutions.showcase.title')}
+      </h1>
+    </ScrollAnimation>
     
-    <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
-      {t('ecommerceSolutions.showcase.title')}
-    </h1>
-    <p className="text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
-      {t('ecommerceSolutions.showcase.subtitle')}
-    </p>
-    <div className="mt-8 flex gap-4 justify-center">
-      {/* Primary Button */}
-      <a
-        href="/contact"
-        className="rounded-md bg-indigo-500 text-black px-5 py-2.5 hover:bg-indigo-600 hover:text-white transition"
-      >
-        {t('ecommerceSolutions.showcase.connectButton')}
-      </a>
-
-      
-    </div>
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+      <p className="text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
+        {t('ecommerceSolutions.showcase.subtitle')}
+      </p>
+    </ScrollAnimation>
+    
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-3">
+      <div className="mt-8 flex gap-4 justify-center">
+        {/* Primary Button */}
+        <a
+          href="/contact"
+          className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+        >
+          {t('ecommerceSolutions.showcase.connectButton')}
+        </a>
+      </div>
+    </ScrollAnimation>
   </div>
 </section>
       
@@ -97,28 +103,32 @@ export default function EcommerceSolutions() {
   }
 >
   <div className="mx-auto max-w-6xl px-4 py-28 grid md:grid-cols-2 gap-10 items-center">
-    <div className="animate-fade-in">
-      <p className={isDark ? 'text-sm tracking-widest text-white' : 'text-sm tracking-widest text-black'}>
-        {t('ecommerceSolutions.hero.tagline')}
-      </p>
-      
-      <h1 className={isDark ? 'mt-2 text-4xl md:text-5xl font-extrabold leading-tight text-white' : 'mt-2 text-4xl md:text-5xl font-extrabold leading-tight text-black'}>
-        {t('ecommerceSolutions.hero.title')}
-      </h1>
-      
-      <p className={isDark ? 'mt-4 text-gray-300' : 'mt-4 text-black'}>
-        {t('ecommerceSolutions.hero.description')}
-      </p>
-    </div>
+    <ScrollAnimation animation="slide-in-left" stagger="scroll-stagger-1">
+      <div>
+        <p className={isDark ? 'text-sm tracking-widest text-white' : 'text-sm tracking-widest text-black'}>
+          {t('ecommerceSolutions.hero.tagline')}
+        </p>
+        
+        <h1 className={isDark ? 'mt-2 text-4xl md:text-5xl font-extrabold leading-tight text-white' : 'mt-2 text-4xl md:text-5xl font-extrabold leading-tight text-black'}>
+          {t('ecommerceSolutions.hero.title')}
+        </h1>
+        
+        <p className={isDark ? 'mt-4 text-gray-300' : 'mt-4 text-black'}>
+          {t('ecommerceSolutions.hero.description')}
+        </p>
+      </div>
+    </ScrollAnimation>
 
-    <div className="justify-self-center relative">
-      {/* image */}
-      <img
-        src="/images/ecommerce-solutions.jpg" 
-        alt="E-Commerce Solutions illustration"
-        className="h-56 w-56 md:h-72 md:w-72 object-cover shadow-lg"
-      />
-    </div>
+    <ScrollAnimation animation="slide-in-right" stagger="scroll-stagger-2">
+      <div className="justify-self-center relative">
+        {/* image */}
+        <img
+          src="/images/ecommerce-solutions.jpg" 
+          alt="E-Commerce Solutions illustration"
+          className="h-56 w-56 md:h-72 md:w-72 object-cover shadow-lg"
+        />
+      </div>
+    </ScrollAnimation>
   </div>
 </section>
 
@@ -128,65 +138,86 @@ export default function EcommerceSolutions() {
       <section className={isDark ? 'py-20 bg-gray-800' : 'py-20 bg-gray-100'}>
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-                              <h2 className={isDark ? 'text-4xl font-bold text-white mb-6' : 'text-4xl font-bold text-black mb-6'}>
+            <ScrollAnimation animation="slide-in-left" stagger="scroll-stagger-1">
+              <div>
+                <h2 className={isDark ? 'text-4xl font-bold text-white mb-6' : 'text-4xl font-bold text-black mb-6'}>
                   {t('ecommerceSolutions.serviceOverview.title')}
                 </h2>
                 <p className={isDark ? 'text-lg text-gray-400 mb-6 leading-relaxed' : 'text-lg text-black mb-6 leading-relaxed'}>
                   {t('ecommerceSolutions.serviceOverview.description')}
                 </p>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                    </svg>
-                  </div>
-                  <span className={isDark ? 'text-gray-300' : 'text-black'}>{t('ecommerceSolutions.serviceOverview.features.securePayment')}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                    </svg>
-                  </div>
-                  <span className={isDark ? 'text-gray-300' : 'text-black'}>{t('ecommerceSolutions.serviceOverview.features.inventoryManagement')}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                    </svg>
-                  </div>
-                  <span className={isDark ? 'text-gray-300' : 'text-black'}>{t('ecommerceSolutions.serviceOverview.features.customizableDesign')}</span>
+                <div className="space-y-4">
+                  <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                        </svg>
+                      </div>
+                      <span className={isDark ? 'text-gray-300' : 'text-black'}>{t('ecommerceSolutions.serviceOverview.features.securePayment')}</span>
+                    </div>
+                  </ScrollAnimation>
+                  <ScrollAnimation animation="fade-in" stagger="scroll-stagger-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                        </svg>
+                      </div>
+                      <span className={isDark ? 'text-gray-300' : 'text-black'}>{t('ecommerceSolutions.serviceOverview.features.inventoryManagement')}</span>
+                    </div>
+                  </ScrollAnimation>
+                  <ScrollAnimation animation="fade-in" stagger="scroll-stagger-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                        </svg>
+                      </div>
+                      <span className={isDark ? 'text-gray-300' : 'text-black'}>{t('ecommerceSolutions.serviceOverview.features.customizableDesign')}</span>
+                    </div>
+                  </ScrollAnimation>
                 </div>
               </div>
-            </div>
-            <div className={isDark ? 'bg-gray-900 rounded-2xl shadow-xl p-8' : 'bg-white rounded-2xl shadow-xl p-8'}>
-                             <h3 className={isDark ? 'text-2xl font-bold text-white mb-4' : 'text-2xl font-bold text-gray-900 mb-4'}>{t('ecommerceSolutions.serviceOverview.ecommerceFeatures.title')}</h3>
+            </ScrollAnimation>
+            
+            <ScrollAnimation animation="slide-in-right" stagger="scroll-stagger-1">
+              <div className={`${isDark ? 'bg-gray-900 rounded-2xl shadow-xl p-8' : 'bg-white rounded-2xl shadow-xl p-8'}`}>
+                <h3 className={isDark ? 'text-2xl font-bold text-white mb-4' : 'text-2xl font-bold text-gray-900 mb-4'}>{t('ecommerceSolutions.serviceOverview.ecommerceFeatures.title')}</h3>
                 <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></span>
-                    <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('ecommerceSolutions.serviceOverview.ecommerceFeatures.productCatalog')}</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></span>
-                    <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('ecommerceSolutions.serviceOverview.ecommerceFeatures.shoppingCart')}</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></span>
-                    <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('ecommerceSolutions.serviceOverview.ecommerceFeatures.secureCheckout')}</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></span>
-                    <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('ecommerceSolutions.serviceOverview.ecommerceFeatures.orderTracking')}</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></span>
-                    <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('ecommerceSolutions.serviceOverview.ecommerceFeatures.adminDashboard')}</span>
-                  </li>
-              </ul>
-            </div>
+                  <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+                    <li className="flex items-start gap-3">
+                      <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></span>
+                      <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('ecommerceSolutions.serviceOverview.ecommerceFeatures.productCatalog')}</span>
+                    </li>
+                  </ScrollAnimation>
+                  <ScrollAnimation animation="fade-in" stagger="scroll-stagger-3">
+                    <li className="flex items-start gap-3">
+                      <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></span>
+                      <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('ecommerceSolutions.serviceOverview.ecommerceFeatures.shoppingCart')}</span>
+                    </li>
+                  </ScrollAnimation>
+                  <ScrollAnimation animation="fade-in" stagger="scroll-stagger-4">
+                    <li className="flex items-start gap-3">
+                      <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></span>
+                      <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('ecommerceSolutions.serviceOverview.ecommerceFeatures.secureCheckout')}</span>
+                    </li>
+                  </ScrollAnimation>
+                  <ScrollAnimation animation="fade-in" stagger="scroll-stagger-5">
+                    <li className="flex items-start gap-3">
+                      <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></span>
+                      <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('ecommerceSolutions.serviceOverview.ecommerceFeatures.orderTracking')}</span>
+                    </li>
+                  </ScrollAnimation>
+                  <ScrollAnimation animation="fade-in" stagger="scroll-stagger-6">
+                    <li className="flex items-start gap-3">
+                      <span className="w-2 h-2 bg-indigo-500 rounded-full mt-2"></span>
+                      <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('ecommerceSolutions.serviceOverview.ecommerceFeatures.adminDashboard')}</span>
+                    </li>
+                  </ScrollAnimation>
+                </ul>
+              </div>
+            </ScrollAnimation>
           </div>
         </div>
       </section>
@@ -195,7 +226,8 @@ export default function EcommerceSolutions() {
 <section className={isDark ? 'py-20 bg-gray-900 text-white transition-colors duration-500' : 'py-20 bg-white text-gray-900 transition-colors duration-500'}>
   <div className="mx-auto max-w-7xl px-4">
     {/* Heading */}
-          <div className="text-center mb-16">
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+      <div className="text-center mb-16">
         <h2 className={isDark ? 'text-4xl font-bold text-white mb-4' : 'text-4xl font-bold text-gray-900 mb-4'}>
           {t('ecommerceSolutions.process.title')}
         </h2>
@@ -203,52 +235,61 @@ export default function EcommerceSolutions() {
           {t('ecommerceSolutions.process.subtitle')}
         </p>
       </div>
+    </ScrollAnimation>
 
     {/* Steps */}
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       {/* Step 1 */}
-      <div className="text-center">
-        <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-          <span className="text-2xl font-bold text-white">1</span>
+      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
+            <span className="text-2xl font-bold text-white">1</span>
+          </div>
+          <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>{t('ecommerceSolutions.process.steps.strategy.title')}</h3>
+          <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+            {t('ecommerceSolutions.process.steps.strategy.description')}
+          </p>
         </div>
-        <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>{t('ecommerceSolutions.process.steps.strategy.title')}</h3>
-        <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
-          {t('ecommerceSolutions.process.steps.strategy.description')}
-        </p>
-      </div>
+      </ScrollAnimation>
 
       {/* Step 2 */}
-      <div className="text-center">
-        <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-          <span className="text-2xl font-bold text-white">2</span>
+      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-3">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
+            <span className="text-2xl font-bold text-white">2</span>
+          </div>
+          <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>{t('ecommerceSolutions.process.steps.storeDesign.title')}</h3>
+          <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+            {t('ecommerceSolutions.process.steps.storeDesign.description')}
+          </p>
         </div>
-        <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>{t('ecommerceSolutions.process.steps.storeDesign.title')}</h3>
-        <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
-          {t('ecommerceSolutions.process.steps.storeDesign.description')}
-        </p>
-      </div>
+      </ScrollAnimation>
 
       {/* Step 3 */}
-      <div className="text-center">
-        <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-          <span className="text-2xl font-bold text-white">3</span>
+      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-4">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
+            <span className="text-2xl font-bold text-white">3</span>
+          </div>
+          <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>{t('ecommerceSolutions.process.steps.development.title')}</h3>
+          <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+            {t('ecommerceSolutions.process.steps.development.description')}
+          </p>
         </div>
-        <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>{t('ecommerceSolutions.process.steps.development.title')}</h3>
-        <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
-          {t('ecommerceSolutions.process.steps.development.description')}
-        </p>
-      </div>
+      </ScrollAnimation>
 
       {/* Step 4 */}
-      <div className="text-center">
-        <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-          <span className="text-2xl font-bold text-white">4</span>
+      <ScrollAnimation animation="fade-in" stagger="scroll-stagger-5">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
+            <span className="text-2xl font-bold text-white">4</span>
+          </div>
+          <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>{t('ecommerceSolutions.process.steps.launchSupport.title')}</h3>
+          <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+            {t('ecommerceSolutions.process.steps.launchSupport.description')}
+          </p>
         </div>
-        <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>{t('ecommerceSolutions.process.steps.launchSupport.title')}</h3>
-        <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
-          {t('ecommerceSolutions.process.steps.launchSupport.description')}
-        </p>
-      </div>
+      </ScrollAnimation>
     </div>
   </div>
 </section>
@@ -257,14 +298,16 @@ export default function EcommerceSolutions() {
       <section className={isDark ? 'py-20 bg-gray-800' : 'py-20 bg-gray-100'}>
         <div className="mx-auto max-w-7xl px-4">
           {/* Heading */}
-          <div className="text-center mb-16">
-        <h2 className={isDark ? 'text-4xl font-bold text-white mb-4' : 'text-4xl font-bold text-black mb-4'}>
-          {t('ecommerceSolutions.solutions.title')}
-        </h2>
-        <p className={isDark ? 'text-lg text-gray-400 max-w-2xl mx-auto' : 'text-lg text-black max-w-2xl mx-auto'}>
-          {t('ecommerceSolutions.solutions.subtitle')}
-        </p>
-      </div>
+          <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+            <div className="text-center mb-16">
+              <h2 className={isDark ? 'text-4xl font-bold text-white mb-4' : 'text-4xl font-bold text-black mb-4'}>
+                {t('ecommerceSolutions.solutions.title')}
+              </h2>
+              <p className={isDark ? 'text-lg text-gray-400 max-w-2xl mx-auto' : 'text-lg text-black max-w-2xl mx-auto'}>
+                {t('ecommerceSolutions.solutions.subtitle')}
+              </p>
+            </div>
+          </ScrollAnimation>
 
     {/* Services Grid */}
     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -277,15 +320,21 @@ export default function EcommerceSolutions() {
           { name: t('ecommerceSolutions.solutions.services.customerAccounts'), icon: <svg xmlns="http://www.w3.org/2000/svg" width={45} height={45} viewBox="0 0 24 24"><g fill="none" stroke="#000" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit={10} strokeWidth={1}><path d="m20.5 23.5l-2-7L12 15l-6.5 1.5l-2 7zM8.625 5.812L12 7.5h4.5"></path><path d="M16.5 12.25L12 14l-4.5-1.75v-6L12 4.5l4.5 1.75zm-6-2.25v-.5m3 .5v-.5m.953 6.066L12 19.5l-2.453-3.934"></path></g></svg> },
           { name: t('ecommerceSolutions.solutions.services.analyticsReports'), icon: <svg xmlns="http://www.w3.org/2000/svg" width={45} height={45} viewBox="0 0 40 40"><g fill="none" strokeMiterlimit={10}><path fill="#ff52a1" stroke="#231f20" d="M10.23 22.33c-.45-1-2.78-1-4.53-1s-4.08 0-4.53 1C.72 22.84.5 25.55.5 27.8s.22 5 .67 5.47c.45 1 2.78 1 4.53 1s4.08 0 4.53-1c.45-.51.67-3.22.67-5.47s-.22-4.96-.67-5.47Zm14.3-7.19c-.45-1.63-2.78-1.64-4.53-1.64s-4.08 0-4.53 1.64c-.47.86-.67 5.16-.67 8.76s.22 7.94.67 8.76c.45 1.63 2.78 1.64 4.53 1.64s4.08 0 4.53-1.64c.45-.82.67-5.16.67-8.76s-.2-7.9-.67-8.76Z" strokeWidth={1}></path><path fill="#ffe236" stroke="#231f20" d="M38.83 8c-.45-2.28-2.78-2.3-4.53-2.3s-4.08 0-4.53 2.26c-.45 1.12-.67 7.09-.67 12s.22 10.92.67 12c.45 2.24 2.78 2.26 4.53 2.26s4.08 0 4.53-2.26c.45-1.12.67-7.09.67-12S39.28 9.08 38.83 8Z" strokeWidth={1}></path><path stroke="#fff" strokeLinecap="round" d="M35.7 8c.83 0 1 .19 1.2 1.82M21.66 16c.82 0 1.05.19 1.2 1.82M7.1 23.63c.82 0 1.05.19 1.2 1.82" strokeWidth={1}></path></g></svg> },
           { name: t('ecommerceSolutions.solutions.services.marketingTools'), icon: <svg xmlns="http://www.w3.org/2000/svg" width={45} height={45} viewBox="0 0 128 128"><path fill="#c62828" d="M41.01 114.68L30.84 83.46l15.02.89l.74 8.78c.92 1.73 3.09 2.52 4.01 4.25c.47.89.55 1.94.42 2.94c-.27 2.07-1.36 4.31-.3 6.12c1.25 2.13 4.37 2.74 4.27 5.67c-.1 2.68-12.69 6.32-13.99 2.57"></path><path fill="#f44336" d="m39.49 121.41l-.95.33a7.18 7.18 0 0 1-9.14-4.43L17.6 83.28h16.26c.58 1.66.78 2.27 1.37 3.93c.54 1.51 1.28 2.26.8 3.86c-.48 1.58-.88 3.38-.06 4.92c.92 1.73 3.09 2.52 4.01 4.25c.47.89.55 1.94.42 2.94c-.27 2.07-1.36 4.31-.3 6.12c1.25 2.13 4.37 2.74 4.27 5.67c-.09 2.68-2.36 5.57-4.88 6.44"></path><path fill="#a12524" d="M39.78 106.18c-.38 1.56.55 1.77 1.49 1.79c2.29.06 5.31-.86 6.8-1.53c.57-.25 1.1-.58 1.58-.95c.36-.28.6-.69.63-1.14c.07-1.31.57-2.7.74-4.03c.07-.55.07-1.12-.02-1.66c-.07-.43-.57-.65-.95-.44c-.96.53-2.67 1.41-3.81 1.64c-2.26.46-3.65.42-4.63.44c-.73.01-1.31.66-1.21 1.38c.07.5.06 1.01 0 1.5c-.13.98-.38 2.01-.62 3m4.59 8.78c-1.34 4.26-4.68 5.74-8.17 5.97c-3.38.23-5.72-1.66-5.72-1.66c4.84 7.28 17.26 2.75 19.78 1.37c3.85-2.11 4.49-4.25 4.74-8.28c.02-.25-.4-1.1-1.19-.46c-1.2.96-2.56 1.31-4.08 1.62c-1.87.38-2.87.27-3.63.32c-.98.06-1.47.28-1.73 1.12"></path><path fill="#c62828" d="m17.6 83.28l3.13 9.08s1.91-4.25 9.51-3.47c5.15.53 6.69 2.33 6.69 2.33l.33-7.68z"></path><path fill="#e0e0e0" d="M103.16 110.64S69.35 85.61 41.24 84.86c-12.09-.32-20.86-.35-22.97-.35C11.65 84.52 4 75.11 4 58.55s8.61-27.73 15.23-27.73c.98 0 11.45.62 24.11.26c29.78-.84 59.82-24.62 59.82-24.62z"></path><path fill="#bdbdbd" d="M80.14 73.46c-1.13 2.02-1.15 6.62-.85 10.88c.22 3.05-2.83 5.31-5.68 4.19c-19.44-7.58-35.4-6.9-35.4-6.9l.77 3.17l2.25.06c16.98.45 36.04 9.76 48.47 17.07c0 0-3.84-5.52-5.8-13.06c-2.03-7.86-3.76-15.41-3.76-15.41"></path><path fill="#f44336" d="M34.27 58.55c0-9.45 3.09-20.05 6.96-27.42c-11.69.24-21.07-.31-22-.31C12.61 30.82 4 41.99 4 58.55s7.65 25.96 14.28 25.96c2.11 0 10.88.03 22.97.35c.07 0 .15.01.22.01c-4.48-8.04-7.2-16.9-7.2-26.32"></path><ellipse cx={103.16} cy={58.55} fill="#2f7889" rx={20.84} ry={52.09}></ellipse><linearGradient id="SVGrgFX4xUo" x1={103.164} x2={103.164} y1={103.827} y2={45.222} gradientUnits="userSpaceOnUse"><stop offset={0} stopColor="#353738"></stop><stop offset={1} stopColor="#353738" stopOpacity={0}></stop></linearGradient><path fill="url(#SVGrgFX4xUo)" d="M83.24 43.31c-.59 4.82-.91 9.94-.91 15.25c0 28.77 9.33 52.09 20.84 52.09s20.84-23.32 20.84-52.09c0-5.31-.32-10.42-.91-15.25z"></path><path fill="#e0e0e0" d="M103.16 113.64c-13.59 0-23.84-23.68-23.84-55.09S89.57 3.46 103.16 3.46S124 27.15 124 58.55c0 31.41-7.25 55.09-20.84 55.09m0-104.18c-8.44 0-17.84 20.16-17.84 49.09s9.4 49.09 17.84 49.09S121 87.48 121 58.55s-9.4-49.09-17.84-49.09"></path><path fill="#fff" d="M89.56 23.24c-.9 2.44-4.15 7.85-5.65 25.65c-.05.6-.38 3.24-1.85 3.24c-.98 0-1.27-1.48-1.27-3.52c0-7.95 1.32-16.72 4.39-25.38c1.74-4.89 5.63-3.35 4.38.01"></path><radialGradient id="SVGtseHPeoE" cx={101.207} cy={60.248} r={20.918} gradientTransform="matrix(1 0 0 1.7015 0 -42.264)" gradientUnits="userSpaceOnUse"><stop offset={0.416} stopColor="#82aec0"></stop><stop offset={1} stopColor="#7fa9bb" stopOpacity={0}></stop></radialGradient><path fill="url(#SVGtseHPeoE)" d="m85.9 46.49l18.9 2.2v19.9l-18.76 3.38c-1.24-15.73-.14-25.48-.14-25.48"></path><ellipse cx={104.8} cy={58.65} fill="#e0e0e0" rx={4.72} ry={9.95}></ellipse><path fill="#353738" d="m38.23 87.4l-.75 1.3l3.21 6.27c.39.76 1.23 1.18 2.07 1.02l5.42-1.09s1.51-2.15 1.8-2.64s.18-.78.18-.78L44 92.66c-.01 0-5.57-5.2-5.77-5.26"></path><path fill="#616161" d="m42.33 91.96l-4.16-4.53l7.49-.03l4.24 3.67c.51.54.18 1.21-.55 1.33l-4.21.66c-1.06.16-2.13-.25-2.81-1.1"></path><path fill="#fff" d="M57.51 37.53c6.34-.84 12.6-2.77 17.96-6.26c-3.11 8.35-4.59 18.41-3.44 27.26c-2.96-1.46-5.95-2.92-9.11-3.86c-2.64-.78-5.37-1.19-8.1-1.51c-6.87-.83-13.23-.96-20.14-.83c.2 0 .75-4.67 1.59-8.15s1.7-5.5 1.7-5.5s13.53-.35 19.54-1.15"></path><path fill="#ff7555" d="M35.28 38.25c-9.7.29-20.53.42-20.53.42s-4.89 4.26-5.76 13.65c0 0 11.55 0 22.04.19c.74-6.76 2.92-11.75 4.25-14.26"></path></svg> }
-      ].map((service) => (
-        <div 
-          key={service.name} 
-          className={isDark ? 'text-center p-6 bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300' : 'text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300'}
-        >
-          <div className="text-4xl mb-3 flex justify-center items-center">{service.icon}</div>
-          <h3 className={isDark ? 'text-lg font-semibold text-white' : 'text-lg font-semibold text-gray-900'}>{service.name}</h3>
-        </div>
-      ))}
+      ].map((service, index) => {
+        const staggerClasses = ['scroll-stagger-2', 'scroll-stagger-3', 'scroll-stagger-4', 'scroll-stagger-5', 'scroll-stagger-6', 'scroll-stagger-1', 'scroll-stagger-2', 'scroll-stagger-3'];
+        const staggerClass = staggerClasses[index] || 'scroll-stagger-2';
+        
+        return (
+          <ScrollAnimation key={service.name} animation="fade-in" stagger={staggerClass}>
+            <div 
+              className={`${isDark ? 'text-center p-6 bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300' : 'text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300'}`}
+            >
+              <div className="text-4xl mb-3 flex justify-center items-center">{service.icon}</div>
+              <h3 className={isDark ? 'text-lg font-semibold text-white' : 'text-lg font-semibold text-gray-900'}>{service.name}</h3>
+            </div>
+          </ScrollAnimation>
+        );
+      })}
     </div>
   </div>
 </section>
@@ -307,30 +356,36 @@ export default function EcommerceSolutions() {
         
   <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
     {/* Heading */}
-    <h2 className={isDark ? 'text-5xl font-extrabold text-white mb-6 leading-tight' : 'text-5xl font-extrabold text-black mb-6 leading-tight'}>
-      {t('ecommerceSolutions.cta.title')}
-    </h2>
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-1">
+      <h2 className="text-5xl font-extrabold text-white mb-6 leading-tight">
+        {t('ecommerceSolutions.cta.title')}
+      </h2>
+    </ScrollAnimation>
 
     {/* Subtext */}
-    <p className={isDark ? 'text-lg text-white max-w-2xl mx-auto mb-10' : 'text-lg text-black max-w-2xl mx-auto mb-10'}>
-      {t('ecommerceSolutions.cta.subtitle')}
-    </p>
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-2">
+      <p className="text-lg text-white max-w-2xl mx-auto mb-10">
+        {t('ecommerceSolutions.cta.subtitle')}
+      </p>
+    </ScrollAnimation>
 
     {/* Buttons */}
-    <div className="flex flex-col sm:flex-row gap-5 justify-center">
-      <button
-        onClick={() => navigate('/contact')}
-        className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
-      >
-        {t('ecommerceSolutions.cta.startProjectButton')}
-      </button>
-      <button
-        onClick={() => navigate('/services')}
-        className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
-      >
-        {t('ecommerceSolutions.cta.viewServicesButton')}
-      </button>
-    </div>
+    <ScrollAnimation animation="fade-in" stagger="scroll-stagger-3">
+      <div className="flex flex-col sm:flex-row gap-5 justify-center">
+        <button
+          onClick={() => navigate('/contact')}
+          className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+        >
+          {t('ecommerceSolutions.cta.startProjectButton')}
+        </button>
+        <button
+          onClick={() => navigate('/services')}
+          className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
+        >
+          {t('ecommerceSolutions.cta.viewServicesButton')}
+        </button>
+      </div>
+    </ScrollAnimation>
   </div>
 </section>
 

@@ -650,12 +650,12 @@
   "websiteDevelopment": {
     "showcase": {
       "title": "Website Development",
-      "subtitle": "Custom business websites and landing pages that convert visitors into clients. Professional, responsive, and optimized for success.",
+      "subtitle": "Custom business websites that convert visitors into clients.",
       "connectButton": "connect"
     },
     "hero": {
       "tagline": "WEBSITE DEVELOPMENT SERVICES",
-      "title": "Build Powerful Freelancing Platforms with Scalable Web Solutions",
+      "title": "Build Powerful Freelancing Platforms",
       "description": "We specialize in developing modern, high-performance websites tailored for freelancers and businesses. From portfolio platforms to full-featured freelance marketplaces, our solutions are designed to be secure, scalable, and user-friendly — helping you connect talent with opportunities seamlessly."
     },
     "serviceOverview": {
@@ -721,12 +721,12 @@
   "ecommerceSolutions": {
     "showcase": {
       "title": "E-Commerce Solutions",
-      "subtitle": "Online stores with secure checkout, product management, and seamless user experience. Turn your products into profits with a professional e-commerce platform.",
+      "subtitle": "Online stores with secure checkout and seamless user experience.",
       "connectButton": "connect"
     },
     "hero": {
       "tagline": "E-COMMERCE SOLUTIONS",
-      "title": "Drive Online Sales with Scalable E-Commerce Platforms",
+      "title": "Drive Online Sales",
       "description": "We build secure, high-performance e-commerce solutions that help businesses grow online. From sleek storefronts to fully integrated marketplaces, our platforms are optimized for speed, scalability, and seamless user experience — ensuring your customers enjoy effortless shopping across all devices."
     },
     "serviceOverview": {
@@ -770,7 +770,7 @@
     },
     "solutions": {
       "title": "E-Commerce Solutions",
-      "subtitle": "End-to-end e-commerce services to help you launch, manage, and grow your online store",
+      "subtitle": "End-to-end e-commerce services to help you launch and grow your online store",
       "services": {
         "customStorefronts": "Custom Storefronts",
         "paymentIntegration": "Payment Integration",
