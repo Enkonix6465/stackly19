@@ -129,11 +129,6 @@ export default function Navbar({ user }) {
         </ul>
         {/* Right Side - Fixed */}
         <div className="flex items-center gap-4">
-          {/* Logout Button */}
-          <button onClick={handleLogout} className="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors">
-            {t('nav.logout')}
-          </button>
-          
           {/* Language Selector - Fixed Right */}
           <LanguageSelector />
           
@@ -153,6 +148,11 @@ export default function Navbar({ user }) {
           <div className="h-9 w-9 rounded-full bg-indigo-500 dark:bg-indigo-600 text-white grid place-items-center font-semibold select-none">
             {initials}
           </div>
+          
+          {/* Logout Button - Right Corner */}
+          <button onClick={handleLogout} className="hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors">
+            {t('nav.logout')}
+          </button>
         </div>
       </nav>
     </header>
