@@ -472,7 +472,7 @@
         },
         "contentCopywriting": {
           "title": "Content & Copywriting",
-          "description": "Engaging blog posts, SEO content, and product descriptions that drive traffic."
+          "description": "Engaging blog posts and SEO content that drive traffic."
         },
         "digitalMarketing": {
           "title": "Digital Marketing",
@@ -792,12 +792,12 @@
   "contentCopywriting": {
     "showcase": {
       "title": "Content & Copywriting",
-      "subtitle": "Engaging blog posts, SEO content, and product descriptions that drive traffic and convert visitors.",
+      "subtitle": "Engaging blog posts and SEO content that drive traffic",
       "connectButton": "connect"
     },
     "hero": {
       "tagline": "CONTENT COPYWRITING SERVICES",
-      "title": "Engage Audiences with Powerful & Persuasive Copy",
+      "title": "Engage Audiences with Persuasive Copy",
       "description": "Our expert copywriting services help businesses communicate clearly, build trust, and drive action. From website content and blogs to product descriptions and ad copy, we craft words that connect with your audience, strengthen your brand voice, and inspire results."
     },
     "serviceOverview": {
@@ -1049,10 +1049,10 @@
   },
   "digitalMarketing": {
     "title": "Digital Marketing",
-    "description": "Social media campaigns, ads, and email funnels that grow your audience and drive conversions.",
+    "description": "Social media campaigns, ads, and email funnels that grow your audience.",
     "connectButton": "connect",
     "servicesTitle": "DIGITAL MARKETING SERVICES",
-    "strategiesTitle": "Drive Growth with Data-Driven Digital Marketing Strategies",
+    "strategiesTitle": "Drive Growth with Data-Driven",
     "strategiesDescription": "We help brands boost their online presence with customized digital marketing campaigns. From SEO and content marketing to social media and paid ads, our strategies are designed to attract, engage, and convert your audience — delivering measurable results and sustainable growth.",
     "strategicTitle": "Strategic Digital Marketing",
     "strategicDescription": "I develop comprehensive digital marketing strategies that increase your online presence, engage your target audience, and drive measurable business growth. From social media management to paid advertising, every campaign is optimized for results.",
@@ -1066,7 +1066,7 @@
     "contentMarketing": "Content marketing strategy",
     "analyticsReporting": "Analytics and reporting",
     "marketingProcessTitle": "Our Marketing Process",
-    "marketingProcessDescription": "A proven step-by-step approach to help your brand grow and achieve measurable results",
+    "marketingProcessDescription": "A proven step-by-step approach to help your brand grow",
     "researchStrategyTitle": "Research & Strategy",
     "researchStrategyDescription": "Analyzing your market, audience, and competitors to craft a winning strategy",
     "contentCreationTitle": "Content Creation",
@@ -1074,7 +1074,7 @@
     "campaignExecutionTitle": "Campaign Execution",
     "campaignExecutionDescription": "Running data-driven ads and campaigns across the right digital channels",
     "optimizeScaleTitle": "Optimize & Scale",
-    "optimizeScaleDescription": "Tracking results, optimizing performance, and scaling your campaigns for growth",
+    "optimizeScaleDescription": "Tracking results and scaling your campaigns for growth",
     "digitalMarketingSolutionsTitle": "Digital Marketing Solutions",
     "digitalMarketingSolutionsDescription": "Data-driven strategies and tools to grow your online presence, reach the right audience, and maximize ROI",
     "seoOptimization": "SEO Optimization",

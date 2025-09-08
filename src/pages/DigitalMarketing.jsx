@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { getCurrentUser, isAuthenticated } from '../utils/auth'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import ScrollAnimation from '../components/ScrollAnimation'
 import { useTranslation } from 'react-i18next'
 
 export default function DigitalMarketing() {
@@ -65,24 +66,25 @@ export default function DigitalMarketing() {
 
   {/* Content */}
   <div className="relative z-10 px-6 max-w-4xl">
-    
-    <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
-      {t('digitalMarketing.title')}
-    </h1>
-    <p className="text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
-      {t('digitalMarketing.description')}
-    </p>
-    <div className="mt-8 flex gap-4 justify-center">
-      {/* Primary Button */}
-      <a
-        href="/contact"
-        className="rounded-md bg-indigo-500 text-black px-5 py-2.5 hover:bg-indigo-600 hover:text-white transition"
-      >
-        {t('digitalMarketing.connectButton')}
-      </a>
+    <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true}>
+      <h1 className="mt-4 text-5xl md:text-6xl font-extrabold leading-tight text-white">
+        {t('digitalMarketing.title')}
+      </h1>
+      <p className="text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
+        {t('digitalMarketing.description')}
+      </p>
+      <div className="mt-8 flex gap-4 justify-center">
+        {/* Primary Button */}
+        <a
+          href="/contact"
+          className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+        >
+          {t('digitalMarketing.connectButton')}
+        </a>
 
-      
-    </div>
+        
+      </div>
+    </ScrollAnimation>
   </div>
 </section>
       
@@ -96,28 +98,32 @@ export default function DigitalMarketing() {
   }
 >
   <div className="mx-auto max-w-6xl px-4 py-28 grid md:grid-cols-2 gap-10 items-center">
-    <div className="animate-fade-in">
-      <p className={isDark ? 'text-sm tracking-widest text-white' : 'text-sm tracking-widest text-black'}>
-        {t('digitalMarketing.servicesTitle')}
-      </p>
-      
-      <h1 className={isDark ? 'mt-2 text-4xl md:text-5xl font-extrabold leading-tight text-white' : 'mt-2 text-4xl md:text-5xl font-extrabold leading-tight text-black'}>
-        {t('digitalMarketing.strategiesTitle')}
-      </h1>
-      
-      <p className={isDark ? 'mt-4 text-gray-300' : 'mt-4 text-black'}>
-        {t('digitalMarketing.strategiesDescription')}
-      </p>
-    </div>
+    <ScrollAnimation animation="fade-in-left" threshold={0.2} triggerOnce={true}>
+      <div>
+        <p className={isDark ? 'text-sm tracking-widest text-white' : 'text-sm tracking-widest text-black'}>
+          {t('digitalMarketing.servicesTitle')}
+        </p>
+        
+        <h1 className={isDark ? 'mt-2 text-4xl md:text-5xl font-extrabold leading-tight text-white' : 'mt-2 text-4xl md:text-5xl font-extrabold leading-tight text-black'}>
+          {t('digitalMarketing.strategiesTitle')}
+        </h1>
+        
+        <p className={isDark ? 'mt-4 text-gray-300' : 'mt-4 text-black'}>
+          {t('digitalMarketing.strategiesDescription')}
+        </p>
+      </div>
+    </ScrollAnimation>
 
-    <div className="justify-self-center relative">
-      {/* image */}
-      <img
-        src="/images/digital-marketing.jpg"
-        alt="Digital Marketing illustration"
-        className="h-56 w-56 md:h-72 md:w-72 object-cover shadow-lg"
-      />
-    </div>
+    <ScrollAnimation animation="fade-in-right" threshold={0.2} triggerOnce={true} stagger="delay-200">
+      <div className="justify-self-center relative">
+        {/* image */}
+        <img
+          src="/images/digital-marketing.jpg"
+          alt="Digital Marketing illustration"
+          className="h-56 w-56 md:h-72 md:w-72 object-cover shadow-lg"
+        />
+      </div>
+    </ScrollAnimation>
   </div>
 </section>
 
@@ -128,67 +134,87 @@ export default function DigitalMarketing() {
       <section className={isDark ? 'py-20 bg-black' : 'py-20 bg-gray-100'}>
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className={isDark ? 'text-4xl font-bold text-white mb-6' : 'text-4xl font-bold text-black mb-6'}>
-                {t('digitalMarketing.strategicTitle')}
-              </h2>
-              <p className={isDark ? 'text-lg text-gray-400 mb-6 leading-relaxed' : 'text-lg text-black mb-6 leading-relaxed'}>
-                {t('digitalMarketing.strategicDescription')}
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                    </svg>
-                  </div>
-                  <span className={isDark ? 'text-gray-300' : 'text-black'}>{t('digitalMarketing.dataDriven')}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                    </svg>
-                  </div>
-                  <span className={isDark ? 'text-gray-300' : 'text-black'}>{t('digitalMarketing.multiChannel')}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
-                    </svg>
-                  </div>
-                  <span className={isDark ? 'text-gray-300' : 'text-black'}>{t('digitalMarketing.roiFocused')}</span>
+            <ScrollAnimation animation="fade-in-left" threshold={0.2} triggerOnce={true}>
+              <div>
+                <h2 className={isDark ? 'text-4xl font-bold text-white mb-6' : 'text-4xl font-bold text-black mb-6'}>
+                  {t('digitalMarketing.strategicTitle')}
+                </h2>
+                <p className={isDark ? 'text-lg text-gray-400 mb-6 leading-relaxed' : 'text-lg text-black mb-6 leading-relaxed'}>
+                  {t('digitalMarketing.strategicDescription')}
+                </p>
+                <div className="space-y-4">
+                  <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true} stagger="delay-100">
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                        </svg>
+                      </div>
+                      <span className={isDark ? 'text-gray-300' : 'text-black'}>{t('digitalMarketing.dataDriven')}</span>
+                    </div>
+                  </ScrollAnimation>
+                  <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true} stagger="delay-200">
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                        </svg>
+                      </div>
+                      <span className={isDark ? 'text-gray-300' : 'text-black'}>{t('digitalMarketing.multiChannel')}</span>
+                    </div>
+                  </ScrollAnimation>
+                  <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true} stagger="delay-300">
+                    <div className="flex items-center gap-3">
+                      <div className="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                        </svg>
+                      </div>
+                      <span className={isDark ? 'text-gray-300' : 'text-black'}>{t('digitalMarketing.roiFocused')}</span>
+                    </div>
+                  </ScrollAnimation>
                 </div>
               </div>
-            </div>
-            <div className={isDark ? 'bg-gray-900 rounded-2xl shadow-xl p-8' : 'bg-white rounded-2xl shadow-xl p-8'}>
-              <h3 className={isDark ? 'text-2xl font-bold text-white mb-4' : 'text-2xl font-bold text-gray-900 mb-4'}>
-                {t('digitalMarketing.marketingServicesTitle')}
-              </h3>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2"></span>
-                  <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('digitalMarketing.socialMediaManagement')}</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2"></span>
-                  <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('digitalMarketing.ppcGoogleAds')}</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2"></span>
-                  <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('digitalMarketing.emailMarketing')}</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2"></span>
-                  <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('digitalMarketing.contentMarketing')}</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2"></span>
-                  <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('digitalMarketing.analyticsReporting')}</span>
-                </li>
-              </ul>
-            </div>
+            </ScrollAnimation>
+            <ScrollAnimation animation="fade-in-right" threshold={0.2} triggerOnce={true} stagger="delay-200">
+              <div className={isDark ? 'bg-gray-900 rounded-2xl shadow-xl p-8' : 'bg-white rounded-2xl shadow-xl p-8'}>
+                <h3 className={isDark ? 'text-2xl font-bold text-white mb-4' : 'text-2xl font-bold text-gray-900 mb-4'}>
+                  {t('digitalMarketing.marketingServicesTitle')}
+                </h3>
+                <ul className="space-y-3">
+                  <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true} stagger="delay-100">
+                    <li className="flex items-start gap-3">
+                      <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2"></span>
+                      <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('digitalMarketing.socialMediaManagement')}</span>
+                    </li>
+                  </ScrollAnimation>
+                  <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true} stagger="delay-200">
+                    <li className="flex items-start gap-3">
+                      <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2"></span>
+                      <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('digitalMarketing.ppcGoogleAds')}</span>
+                    </li>
+                  </ScrollAnimation>
+                  <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true} stagger="delay-300">
+                    <li className="flex items-start gap-3">
+                      <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2"></span>
+                      <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('digitalMarketing.emailMarketing')}</span>
+                    </li>
+                  </ScrollAnimation>
+                  <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true} stagger="delay-400">
+                    <li className="flex items-start gap-3">
+                      <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2"></span>
+                      <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('digitalMarketing.contentMarketing')}</span>
+                    </li>
+                  </ScrollAnimation>
+                  <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true} stagger="delay-500">
+                    <li className="flex items-start gap-3">
+                      <span className="w-2 h-2 bg-indigo-600 rounded-full mt-2"></span>
+                      <span className={isDark ? 'text-gray-400' : 'text-gray-600'}>{t('digitalMarketing.analyticsReporting')}</span>
+                    </li>
+                  </ScrollAnimation>
+                </ul>
+              </div>
+            </ScrollAnimation>
           </div>
         </div>
       </section>
@@ -198,68 +224,78 @@ export default function DigitalMarketing() {
       <section className={isDark ? 'py-20 bg-gray-900 text-white transition-colors duration-500' : 'py-20 bg-white text-gray-900 transition-colors duration-500'}>
         <div className="mx-auto max-w-7xl px-4">
           {/* Heading */}
-          <div className="text-center mb-16">
-            <h2 className={isDark ? 'text-4xl font-bold text-white mb-4' : 'text-4xl font-bold text-gray-900 mb-4'}>
-              {t('digitalMarketing.marketingProcessTitle')}
-            </h2>
-            <p className={isDark ? 'text-lg text-gray-300 max-w-2xl mx-auto' : 'text-lg text-gray-600 max-w-2xl mx-auto'}>
-              {t('digitalMarketing.marketingProcessDescription')}
-            </p>
-          </div>
+          <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true}>
+            <div className="text-center mb-16">
+              <h2 className={isDark ? 'text-4xl font-bold text-white mb-4' : 'text-4xl font-bold text-gray-900 mb-4'}>
+                {t('digitalMarketing.marketingProcessTitle')}
+              </h2>
+              <p className={isDark ? 'text-lg text-gray-300 max-w-2xl mx-auto' : 'text-lg text-gray-600 max-w-2xl mx-auto'}>
+                {t('digitalMarketing.marketingProcessDescription')}
+              </p>
+            </div>
+          </ScrollAnimation>
 
           {/* Steps */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Step 1 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-                <span className="text-2xl font-bold text-white">1</span>
+            <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true} stagger="delay-100">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
+                  <span className="text-2xl font-bold text-white">1</span>
+                </div>
+                <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>
+                  {t('digitalMarketing.researchStrategyTitle')}
+                </h3>
+                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                  {t('digitalMarketing.researchStrategyDescription')}
+                </p>
               </div>
-              <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>
-                {t('digitalMarketing.researchStrategyTitle')}
-              </h3>
-              <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
-                {t('digitalMarketing.researchStrategyDescription')}
-              </p>
-            </div>
+            </ScrollAnimation>
 
             {/* Step 2 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-                <span className="text-2xl font-bold text-white">2</span>
+            <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true} stagger="delay-200">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
+                  <span className="text-2xl font-bold text-white">2</span>
+                </div>
+                <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>
+                  {t('digitalMarketing.contentCreationTitle')}
+                </h3>
+                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                  {t('digitalMarketing.contentCreationDescription')}
+                </p>
               </div>
-              <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>
-                {t('digitalMarketing.contentCreationTitle')}
-              </h3>
-              <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
-                {t('digitalMarketing.contentCreationDescription')}
-              </p>
-            </div>
+            </ScrollAnimation>
 
             {/* Step 3 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-                <span className="text-2xl font-bold text-white">3</span>
+            <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true} stagger="delay-300">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
+                  <span className="text-2xl font-bold text-white">3</span>
+                </div>
+                <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>
+                  {t('digitalMarketing.campaignExecutionTitle')}
+                </h3>
+                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                  {t('digitalMarketing.campaignExecutionDescription')}
+                </p>
               </div>
-              <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>
-                {t('digitalMarketing.campaignExecutionTitle')}
-              </h3>
-              <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
-                {t('digitalMarketing.campaignExecutionDescription')}
-              </p>
-            </div>
+            </ScrollAnimation>
 
             {/* Step 4 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
-                <span className="text-2xl font-bold text-white">4</span>
+            <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true} stagger="delay-400">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-300/40">
+                  <span className="text-2xl font-bold text-white">4</span>
+                </div>
+                <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>
+                  {t('digitalMarketing.optimizeScaleTitle')}
+                </h3>
+                <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
+                  {t('digitalMarketing.optimizeScaleDescription')}
+                </p>
               </div>
-              <h3 className={isDark ? 'text-xl font-semibold text-white mb-2' : 'text-xl font-semibold text-gray-900 mb-2'}>
-                {t('digitalMarketing.optimizeScaleTitle')}
-              </h3>
-              <p className={isDark ? 'text-gray-300' : 'text-gray-600'}>
-                {t('digitalMarketing.optimizeScaleDescription')}
-              </p>
-            </div>
+            </ScrollAnimation>
           </div>
         </div>
       </section>
@@ -267,14 +303,16 @@ export default function DigitalMarketing() {
       {/* Digital Marketing Solutions */}
       <section className={isDark ? 'py-20 bg-black text-white' : 'py-20 bg-gray-100 text-gray-900'}>
         <div className="mx-auto max-w-7xl px-4">
-          <div className="text-center mb-16">
-            <h2 className={isDark ? 'text-4xl font-bold text-white mb-4' : 'text-4xl font-bold text-gray-900 mb-4'}>
-              {t('digitalMarketing.digitalMarketingSolutionsTitle')}
-            </h2>
-            <p className={isDark ? 'text-lg text-gray-400 max-w-2xl mx-auto' : 'text-lg text-gray-600 max-w-2xl mx-auto'}>
-              {t('digitalMarketing.digitalMarketingSolutionsDescription')}
-            </p>
-          </div>
+          <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true}>
+            <div className="text-center mb-16">
+              <h2 className={isDark ? 'text-4xl font-bold text-white mb-4' : 'text-4xl font-bold text-gray-900 mb-4'}>
+                {t('digitalMarketing.digitalMarketingSolutionsTitle')}
+              </h2>
+              <p className={isDark ? 'text-lg text-gray-400 max-w-2xl mx-auto' : 'text-lg text-gray-600 max-w-2xl mx-auto'}>
+                {t('digitalMarketing.digitalMarketingSolutionsDescription')}
+              </p>
+            </div>
+          </ScrollAnimation>
 
     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
       {[
@@ -286,19 +324,28 @@ export default function DigitalMarketing() {
         { name: t('digitalMarketing.analyticsReporting'), icon: <svg xmlns="http://www.w3.org/2000/svg" width={45} height={45} viewBox="0 0 64 64"><path fill="#e6e7e8" d="M63.6 56.737a6.856 6.856 0 0 1-6.854 6.86H6.857c-3.784.001-6.853-3.071-6.853-6.86V6.856A6.856 6.856 0 0 1 6.857 0h49.889A6.855 6.855 0 0 1 63.6 6.856z"></path><path fill="none" stroke="#005" strokeLinecap="round" strokeOpacity={0.221} strokeWidth={0.4} d="M9.429 4.424v55.15zm6.451 0v55.15zm6.451 0v55.15zm6.451 0v55.15zm6.448 0v55.15zm6.454 0v55.15zm6.446 0v55.15zm6.46 0v55.15zM4.185 54.775h55.15zm0-6.455h55.15zm0-6.447h55.15zm0-6.451h55.15z"></path><path fill="#f05a28" d="M36.725 63.65V36.99c0-2.06-2.669-3.62-4.728-3.62s-4.729 1.561-4.729 3.62v26.66z"></path><path fill="#d04427" d="M33.778 33.718c-.594-.217-1.211-.348-1.781-.348c-2.059 0-4.729 1.561-4.729 3.62v26.66h3.565V36.99c0-1.488 1.397-2.706 2.945-3.272"></path><path fill="none" stroke="#005" strokeLinecap="round" strokeOpacity={0.221} strokeWidth={0.4} d="M4.185 28.971h55.15zm0-6.451h55.15z"></path><path fill="#208d55" d="M19.11 63.65V24.988c0-2.059-3.668-3.727-5.728-3.727s-5.729 1.668-5.729 3.727V63.65z"></path><path fill="#1b8049" d="M15.551 21.789c-.771-.27-1.542-.438-2.163-.438c-2.059 0-5.729 1.668-5.729 3.727V63.74h4.325V25.078c0-1.438 1.788-2.668 3.567-3.289"></path><path fill="none" stroke="#005" strokeLinecap="round" strokeOpacity={0.221} strokeWidth={0.4} d="M4.185 16.07h55.15zm0-6.451h55.15z"></path><path fill="#0867a3" d="M55.942 63.65V6.985c0-2.059-3.669-3.727-5.728-3.727s-5.729 1.668-5.729 3.727V63.65z"></path><path fill="#055e8c" d="M52.35 3.684c-.762-.262-1.52-.426-2.135-.426c-2.059 0-5.729 1.668-5.729 3.727V63.65h4.271V6.985c0-1.443 1.804-2.682 3.593-3.301"></path></svg> }, 
         { name: t('digitalMarketing.brandStrategy'), icon: <svg xmlns="http://www.w3.org/2000/svg" width={45} height={45} viewBox="0 0 50 50"><g fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}><path stroke="#344054" d="m31.25 18.75l-5.208 5.208zm0-6.25v6.25h6.25l6.25-6.25H37.5V6.25z"></path><path stroke="#306cfe" d="M25.688 6.25H25A18.75 18.75 0 1 0 43.75 25v-.687"></path><path stroke="#306cfe" d="M35.208 27.083a10.417 10.417 0 1 1-12.291-12.291"></path></g></svg> }, 
         { name: t('digitalMarketing.influencerMarketing'), icon: <svg xmlns="http://www.w3.org/2000/svg" width={45} height={45} viewBox="0 0 36 36"><path fill="#ef9645" d="M16.428 30.331a2.31 2.31 0 0 0 3.217-.568a.8.8 0 0 0-.197-1.114l-1.85-1.949l4.222 2.955a1.497 1.497 0 0 0 2.089-.369a1.5 1.5 0 0 0-.369-2.089l-3.596-3.305l5.375 3.763a1.497 1.497 0 0 0 2.089-.369a1.5 1.5 0 0 0-.369-2.089l-4.766-4.073l5.864 4.105a1.497 1.497 0 0 0 2.089-.369a1.5 1.5 0 0 0-.369-2.089L4.733 11.194l-3.467 5.521c-.389.6-.283 1.413.276 1.891l7.786 6.671q.533.456 1.107.859z"></path><path fill="#ffdc5d" d="M29.802 21.752L18.5 13.601l-.059-.08l.053-.08l.053-.053l.854.469c.958.62 3.147 1.536 4.806 1.536c1.135 0 1.815-.425 2.018-1.257a1.41 1.41 0 0 0-1.152-1.622a6.8 6.8 0 0 1-2.801-1.091l-.555-.373c-.624-.421-1.331-.898-1.853-1.206c-.65-.394-1.357-.585-2.163-.585c-1.196 0-2.411.422-3.585.83l-1.266.436a5.2 5.2 0 0 1-1.696.271c-1.544 0-3.055-.586-4.516-1.152l-.147-.058a1.39 1.39 0 0 0-1.674.56L1.35 15.669a1.36 1.36 0 0 0 .257 1.761l7.785 6.672c.352.301.722.588 1.1.852l6.165 4.316a2 2 0 0 0 2.786-.491a.803.803 0 0 0-.196-1.115l-1.833-1.283a.424.424 0 0 1-.082-.618a.42.42 0 0 1 .567-.075l3.979 2.785a1.4 1.4 0 0 0 1.606-2.294l-3.724-2.606a.424.424 0 0 1-.082-.618a.423.423 0 0 1 .567-.075l5.132 3.593a1.4 1.4 0 0 0 1.606-2.294l-4.868-3.407a.42.42 0 0 1-.081-.618a.377.377 0 0 1 .506-.066l5.656 3.959a1.4 1.4 0 0 0 1.606-2.295"></path><path fill="#ef9645" d="M16.536 27.929c-.07.267-.207.498-.389.681l-1.004.996a1.5 1.5 0 0 1-1.437.396a1.5 1.5 0 0 1-.683-2.512l1.004-.996a1.5 1.5 0 0 1 1.437-.396a1.5 1.5 0 0 1 1.072 1.831M5.992 23.008l1.503-1.497a1.5 1.5 0 0 0-.444-2.429a1.495 1.495 0 0 0-1.674.31l-1.503 1.497a1.5 1.5 0 0 0 .445 2.429a1.5 1.5 0 0 0 1.673-.31m5.204.052a1.5 1.5 0 1 0-2.122-2.118L6.072 23.94a1.5 1.5 0 1 0 2.122 2.118zm2.25 3a1.5 1.5 0 0 0-.945-2.555a1.49 1.49 0 0 0-1.173.44L9.323 25.94a1.5 1.5 0 0 0 .945 2.556c.455.036.874-.141 1.173-.44zm16.555-4.137l.627-.542l-6.913-10.85l-12.27 1.985a1.507 1.507 0 0 0-1.235 1.737c.658 2.695 6.003.693 8.355-.601z"></path><path fill="#ffcc4d" d="M16.536 26.929c-.07.267-.207.498-.389.681l-1.004.996a1.5 1.5 0 0 1-1.437.396a1.5 1.5 0 0 1-.683-2.512l1.004-.996a1.5 1.5 0 0 1 1.437-.396a1.5 1.5 0 0 1 1.072 1.831M5.992 22.008l1.503-1.497a1.5 1.5 0 0 0-.444-2.429a1.5 1.5 0 0 0-1.674.31l-1.503 1.497a1.5 1.5 0 0 0 .445 2.429a1.5 1.5 0 0 0 1.673-.31m5.204.052a1.5 1.5 0 1 0-2.122-2.118L6.072 22.94a1.5 1.5 0 1 0 2.122 2.118zm2.25 3a1.5 1.5 0 0 0-.945-2.555a1.49 1.49 0 0 0-1.173.44L9.323 24.94a1.5 1.5 0 0 0 .945 2.556c.455.036.874-.141 1.173-.44zm21.557-7.456a1.45 1.45 0 0 0 .269-1.885l-.003-.005l-3.467-6.521a1.49 1.49 0 0 0-1.794-.6c-1.992.771-4.174 1.657-6.292.937l-1.098-.377c-1.948-.675-4.066-1.466-6-.294c-.695.409-1.738 1.133-2.411 1.58a6.9 6.9 0 0 1-2.762 1.076a1.5 1.5 0 0 0-1.235 1.737c.613 2.512 5.3.908 7.838-.369a.97.97 0 0 1 1.002.081l11.584 8.416z"></path></svg>} 
-      ].map((service) => (
-        <div 
+      ].map((service, index) => {
+        const animations = ['fade-in-up', 'scale-in', 'bounce-in', 'zoom-in', 'slide-in-up', 'fade-in-left', 'fade-in-right', 'rotate-in']
+        const animation = animations[index % animations.length]
+        return (
+        <ScrollAnimation 
           key={service.name} 
-          className="text-center p-6 bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+          animation={animation} 
+          threshold={0.2} 
+          triggerOnce={true} 
+          stagger={`delay-${(index + 1) * 100}`}
         >
-          <div className="text-4xl mb-3 flex justify-center items-center">
-            {service.icon}
+          <div className="text-center p-6 bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <div className="text-4xl mb-3 flex justify-center items-center">
+              {service.icon}
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              {service.name}
+            </h3>
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-            {service.name}
-          </h3>
-        </div>
-      ))}
+        </ScrollAnimation>
+        )
+      })}
     </div>
   </div>
 </section>
@@ -323,28 +370,35 @@ export default function DigitalMarketing() {
         
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
     {/* Heading */}
-   <h2 className={`text-5xl font-extrabold mb-6 leading-tight ${isDark ? "text-white" : "text-black"}`}>
+    <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true}>
+      <h2 className="text-5xl font-extrabold mb-6 leading-tight text-white">
         {t('digitalMarketing.ctaTitle')}
       </h2>
-      <p className={`text-lg max-w-2xl mx-auto mb-10 ${isDark ? "text-gray-400" : "text-gray-700"}`}>
+    </ScrollAnimation>
+    
+    <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true} stagger="delay-200">
+      <p className="text-lg max-w-2xl mx-auto mb-10 text-white">
         {t('digitalMarketing.ctaDescription')}
       </p>
+    </ScrollAnimation>
 
     {/* Buttons */}
-    <div className="flex flex-col sm:flex-row gap-5 justify-center">
-      <button
-        onClick={() => navigate('/contact')}
-        className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
-      >
-        {t('digitalMarketing.startProjectButton')}
-      </button>
-      <button
-        onClick={() => navigate('/services')}
-        className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
-      >
-        {t('digitalMarketing.viewServicesButton')}
-      </button>
-    </div>
+    <ScrollAnimation animation="fade-in-up" threshold={0.2} triggerOnce={true} stagger="delay-400">
+      <div className="flex flex-col sm:flex-row gap-5 justify-center">
+        <button
+          onClick={() => navigate('/contact')}
+          className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+        >
+          {t('digitalMarketing.startProjectButton')}
+        </button>
+        <button
+          onClick={() => navigate('/services')}
+          className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-white text-indigo-600 border-2 border-indigo-500 hover:bg-indigo-500 hover:text-white shadow-lg hover:shadow-xl"
+        >
+          {t('digitalMarketing.viewServicesButton')}
+        </button>
+      </div>
+    </ScrollAnimation>
   </div>
 </section>
 
