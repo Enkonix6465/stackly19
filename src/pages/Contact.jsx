@@ -105,7 +105,7 @@ export default function Contact() {
       console.error('Video error:', e)
     }}
   >
-    <source src="/showcase-video.mp4" type="video/mp4" />
+    <source src="/vedio6.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
@@ -132,7 +132,7 @@ export default function Contact() {
         {/* Primary Button */}
         <a
           href="#contact"
-          className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+          className="btn-animate-strong inline-flex items-center rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
         >
           {t('contact.showcase.contactButton')}
         </a>
@@ -415,20 +415,28 @@ export default function Contact() {
       </section>
 
       {/* Call to Action Section */}
-<section className={`py-20 transition-colors duration-500 ${isDark ? 'bg-gray-900' : 'bg-gray-100'}`}>
-
-  <div className="absolute inset-0 bg-black bg-opacity-20"></div> {/* reduced overlay opacity */}
+<section className="relative py-20 overflow-hidden">
+  {/* Background Image */}
+  <div 
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+    style={{
+      backgroundImage: 'url(/images/CTAc.jpg)'
+    }}
+  ></div>
+  
+  {/* Black Overlay */}
+  <div className="absolute inset-0 bg-black/60"></div>
   
   <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
-    <h2 className={`text-4xl md:text-5xl font-extrabold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+    <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-white">
       {t('contact.cta.title')}
     </h2>
-    <p className={`text-lg md:text-xl mb-10 leading-relaxed ${isDark ? 'text-white' : 'text-gray-600'}`}>
+    <p className="text-lg md:text-xl mb-10 leading-relaxed text-white/90">
       {t('contact.cta.subtitle')}
     </p>
     <a
       href='#contact2'
-      className="btn-animate-strong rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
+      className="btn-animate-strong inline-flex items-center rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl"
     >
       {t('contact.cta.getStartedButton')}
     </a>

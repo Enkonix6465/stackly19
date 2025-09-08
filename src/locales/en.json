@@ -702,9 +702,9 @@
       "subtitle": "Modern, reliable technologies to build fast and scalable websites",
       "services": {
         "react": "React",
-        "nextjs": "Next.js",
-        "tailwind": "Tailwind CSS",
-        "nodejs": "Node.js",
+        "next.js": "Next.js",
+        "tailwind css": "Tailwind CSS",
+        "node.js": "Node.js",
         "typescript": "TypeScript",
         "mongodb": "MongoDB",
         "postgresql": "PostgreSQL",

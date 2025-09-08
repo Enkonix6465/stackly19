@@ -343,7 +343,7 @@ export default function WebsiteDevelopment() {
                 <ScrollAnimation key={tech.name} animation="fade-in" stagger={staggerClass}>
                   <div className={`${isDark ? 'text-center p-6 bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300' : 'text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300'}`}>
                     <div className="text-4xl mb-3 flex justify-center item-center">{tech.icon}</div>
-                    <h3 className={isDark ? 'text-lg font-semibold text-white' : 'text-lg font-semibold text-gray-900'}>{tech.name}</h3>
+                    <h3 className={isDark ? 'text-lg font-semibold text-white' : 'text-lg font-semibold text-gray-900'}>{t(`websiteDevelopment.technologies.services.${tech.name.toLowerCase()}`)}</h3>
                   </div>
                 </ScrollAnimation>
               );

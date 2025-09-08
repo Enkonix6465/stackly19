@@ -814,14 +814,14 @@
       "title": "הטכנולוגיות שאני משתמש בהן",
       "subtitle": "טכנולוגיות מודרניות ואמינות לבניית אתרים מהירים וניתנים להרחבה",
       "services": {
-        "react": "React",
-        "nextjs": "Next.js",
-        "tailwind": "Tailwind CSS",
-        "nodejs": "Node.js",
-        "typescript": "TypeScript",
-        "mongodb": "MongoDB",
-        "postgresql": "PostgreSQL",
-        "aws": "AWS"
+        "react": "ריאקט",
+        "next.js": "נקסט.ג׳ס",
+        "tailwind css": "טיילווינד סי־אס־אס",
+        "node.js": "נוד.ג׳ס",
+        "typescript": "טייפסקריפט",
+        "mongodb": "מונגו־די־בי",
+        "postgresql": "פוסטגרה־אס־קיו־אל",
+        "aws": "איי־דבליו־אס"
       }
     },
     "cta": {
