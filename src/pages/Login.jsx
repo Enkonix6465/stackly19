@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { LanguageSelector } from '../components/language-selector'
-import { loginUser } from '../utils/auth'
+import { loginUser, getUsers, saveUsers } from '../utils/auth'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -15,6 +15,8 @@ export default function Login() {
     e.preventDefault()
     setError('')
 
+    console.log('🔍 Login attempt:', { email, password })
+
     if (!email.trim() || !password) {
       setError(t('login.errorEmailPassword'))
       return
@@ -22,7 +24,9 @@ export default function Login() {
 
     // Check for admin credentials
     if ((email === "admin@enkonix.in" || email === "admin@enkonix.com") && password === "admin123") {
-      // Store admin user in localStorage for authentication
+      console.log('✅ Admin credentials detected')
+      
+      // Create admin user object (DO NOT add to users list)
       const adminUser = {
         id: 'admin',
         firstName: 'Admin',
@@ -30,13 +34,24 @@ export default function Login() {
         email: email,
         password: password,
         role: 'admin',
-        loginTime: new Date().toISOString()
+        loginTime: new Date().toISOString(),
+        isAdmin: true // Special flag to identify admin
       }
+      
+      // Store admin user in localStorage for authentication ONLY
       localStorage.setItem('authUser', JSON.stringify(adminUser))
+      console.log('💾 Admin user authenticated:', adminUser)
+      
+      // Verify storage
+      const stored = localStorage.getItem('authUser')
+      console.log('🔍 Stored auth data:', stored)
+      
+      console.log('🚀 Navigating to admin dashboard')
       navigate('/admin-dashboard', { replace: true })
       return
     }
 
+    console.log('👤 Regular user login attempt')
     const { success, message } = loginUser(email, password)
     if (!success) {
       setError(message)

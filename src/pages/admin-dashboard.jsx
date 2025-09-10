@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LanguageSelector } from "../components/language-selector";
 import { getCurrentUser, logoutUser } from "../utils/auth";
@@ -13,7 +13,9 @@ import {
   Download,
   LogOut,
   Settings,
-  BarChart3
+  BarChart3,
+  Trash2,
+  AlertTriangle
 } from "lucide-react";
 
 function getUsersFromLocalStorage() {
@@ -28,11 +30,15 @@ function getLoggedInUser() {
 
 export default function AdminDashboard() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
-    const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
+  const [editingUserId, setEditingUserId] = useState(null);
 
   useEffect(() => {
     const checkDark = () => setIsDark(document.documentElement.classList.contains('dark'))
@@ -43,16 +49,75 @@ export default function AdminDashboard() {
   }, [])
 
   useEffect(() => {
-    setUsers(getUsersFromLocalStorage());
+    const allUsers = getUsersFromLocalStorage();
+    // Remove any admin users from the users list to prevent them from appearing
+    const regularUsers = allUsers.filter(user => 
+      user.id !== 'admin' && !user.isAdmin && user.role !== 'admin'
+    );
+    
+    // If we found admin users in the list, clean them up
+    if (allUsers.length !== regularUsers.length) {
+      localStorage.setItem("users", JSON.stringify(regularUsers));
+    }
+    
+    setUsers(regularUsers);
     setLoggedInUser(getLoggedInUser());
   }, []);
 
   const handleLogout = () => {
     logoutUser();
-    window.location.href = "/login";
+    navigate("/login", { replace: true });
+  };
+
+  const handleEditUser = (user) => {
+    setEditingUserId(user.id);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingUserId(null);
+  };
+
+  const handleDeleteUser = (user) => {
+    // Prevent admin from deleting themselves or other admins
+    if (user.id === 'admin' || user.isAdmin || user.role === 'admin') {
+      alert('Cannot delete admin users');
+      return;
+    }
+    
+    setUserToDelete(user);
+    setShowDeleteConfirm(true);
+    setEditingUserId(null); // Exit edit mode when deleting
+  };
+
+  const confirmDeleteUser = () => {
+    if (userToDelete) {
+      // Double-check protection against admin deletion
+      if (userToDelete.id === 'admin' || userToDelete.isAdmin || userToDelete.role === 'admin') {
+        alert('Cannot delete admin users');
+        setShowDeleteConfirm(false);
+        setUserToDelete(null);
+        return;
+      }
+      
+      const updatedUsers = users.filter(user => user.id !== userToDelete.id);
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+      setUsers(updatedUsers);
+      setShowDeleteConfirm(false);
+      setUserToDelete(null);
+    }
+  };
+
+  const cancelDeleteUser = () => {
+    setShowDeleteConfirm(false);
+    setUserToDelete(null);
   };
 
   const filteredUsers = users.filter(user => {
+    // Exclude admin users from the list
+    if (user.id === 'admin' || user.isAdmin || user.role === 'admin') {
+      return false;
+    }
+    
     const matchesSearch = user.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          user.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          user.email?.toLowerCase().includes(searchTerm.toLowerCase());
@@ -65,35 +130,31 @@ export default function AdminDashboard() {
   });
 
   const stats = {
-    totalUsers: users.length,
-    activeUsers: users.filter(u => u.loginTime).length,
+    totalUsers: users.filter(u => u.id !== 'admin' && !u.isAdmin && u.role !== 'admin').length,
+    activeUsers: users.filter(u => u.loginTime && u.id !== 'admin' && !u.isAdmin && u.role !== 'admin').length,
     newRegistrations: users.filter(u => {
       const regDate = new Date(u.createdAt || Date.now());
       const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-      return regDate > weekAgo;
+      return regDate > weekAgo && u.id !== 'admin' && !u.isAdmin && u.role !== 'admin';
     }).length
   };
 
   return (
-<div
-  className={`min-h-screen ${
-    isDark
-      ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700'
-      : 'bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50'
-  }`}
->      {/* Header */}
+    <div
+      className={`min-h-screen ${
+        isDark
+          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700'
+          : 'bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50'
+      }`}
+    >
+      {/* Header - Updated */}
       <header className="bg-white/80 backdrop-blur-md border-b border-slate-200/60 shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo and Title */}
+            {/* Logo */}
             <div className="flex items-center space-x-4">
               <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
                 <img src="/Logo.jpg" alt="Logo" className="h-8 w-auto" />
-                <div className="hidden sm:block">
-                  <h1 className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
-                    {t('admin.title')}
-                  </h1>
-                </div>
               </Link>
             </div>
 
@@ -102,16 +163,10 @@ export default function AdminDashboard() {
               <LanguageSelector variant="default" />
               
               <div className="flex items-center space-x-3">
-                <div className="hidden sm:block text-right">
-                  <p className="text-sm font-medium text-slate-700">
-                    {loggedInUser?.firstName} {loggedInUser?.lastName}
-                  </p>
-                  <p className="text-xs text-slate-500">Admin</p>
-                </div>
-                
                 <button
                   onClick={handleLogout}
                   className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                  title={t('nav.logout')}
                 >
                   <LogOut className="h-4 w-4" />
                   <span className="hidden sm:inline">{t('nav.logout')}</span>
@@ -126,12 +181,29 @@ export default function AdminDashboard() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-slate-800 mb-2">
+          <h2 className="text-2xl font-bold text-indigo-600 mb-2">
             {t('admin.welcome')}
           </h2>
-          <p className="text-slate-600">
+          <p className="text-blue-600">
             {t('admin.overview')}
           </p>
+          
+          {/* Admin Info Section */}
+          {loggedInUser && (loggedInUser.role === 'admin' || loggedInUser.isAdmin) && (
+            <div className="mt-4 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-lg">
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-indigo-100 rounded-full">
+                  <UserCheck className="h-5 w-5 text-indigo-600" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-indigo-800">Admin Account</h3>
+                  <p className="text-sm text-indigo-600">
+                    Logged in as: {loggedInUser.firstName} {loggedInUser.lastName} ({loggedInUser.email})
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Statistics Cards */}
@@ -199,8 +271,8 @@ export default function AdminDashboard() {
                 </p>
               </div>
               
-              <button className="btn-animate-strong flex items-center space-x-2 rounded-lg px-8 py-4 font-bold text-lg transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-lg hover:shadow-xl">
-                <Download className="h-4 w-4" />
+              <button className="btn-animate-strong flex items-center space-x-2 rounded-lg px-4 py-2 font-medium text-sm transition-all duration-300 bg-indigo-500 text-white hover:bg-indigo-600 shadow-md hover:shadow-lg">
+                <Download className="h-3 w-3" />
                 <span>{t('admin.actions.export')}</span>
               </button>
             </div>
@@ -298,12 +370,32 @@ export default function AdminDashboard() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex space-x-2">
-                        <button className="text-indigo-600 hover:text-indigo-900">
-                          {t('admin.actions.view')}
-                        </button>
-                        <button className="text-slate-600 hover:text-slate-900">
-                          {t('admin.actions.edit')}
-                        </button>
+                        {editingUserId === user.id ? (
+                          // Edit mode - show delete button and cancel
+                          <div className="flex space-x-2">
+                            <button 
+                              onClick={() => handleDeleteUser(user)}
+                              className="text-red-600 hover:text-red-900 flex items-center space-x-1 px-2 py-1 rounded-md hover:bg-red-50 transition-colors"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                              <span>{t('admin.actions.delete')}</span>
+                            </button>
+                            <button 
+                              onClick={handleCancelEdit}
+                              className="text-slate-600 hover:text-slate-900 px-2 py-1 rounded-md hover:bg-slate-50 transition-colors"
+                            >
+                              {t('admin.editMode.cancel')}
+                            </button>
+                          </div>
+                        ) : (
+                          // Normal mode - show edit button
+                          <button 
+                            onClick={() => handleEditUser(user)}
+                            className="text-slate-600 hover:text-slate-900 px-2 py-1 rounded-md hover:bg-slate-50 transition-colors"
+                          >
+                            {t('admin.actions.edit')}
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>
@@ -328,6 +420,43 @@ export default function AdminDashboard() {
           )}
         </div>
       </main>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div className="flex items-center space-x-3 mb-4">
+              <div className="p-2 bg-red-100 rounded-full">
+                <AlertTriangle className="h-6 w-6 text-red-600" />
+              </div>
+              <h3 className="text-lg font-semibold text-slate-900">
+                {t('admin.deleteConfirm.title')}
+              </h3>
+            </div>
+            
+            <p className="text-slate-600 mb-6">
+              {t('admin.deleteConfirm.message', { 
+                name: userToDelete ? `${userToDelete.firstName} ${userToDelete.lastName}` : '' 
+              })}
+            </p>
+            
+            <div className="flex space-x-3 justify-end">
+              <button
+                onClick={cancelDeleteUser}
+                className="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+              >
+                {t('admin.deleteConfirm.cancel')}
+              </button>
+              <button
+                onClick={confirmDeleteUser}
+                className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors"
+              >
+                {t('admin.deleteConfirm.confirm')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1453,6 +1453,15 @@
       "delete": "Delete",
       "export": "Export Data"
     },
+    "deleteConfirm": {
+      "title": "Delete User",
+      "message": "Are you sure you want to delete {{name}}? This action cannot be undone.",
+      "cancel": "Cancel",
+      "confirm": "Delete User"
+    },
+    "editMode": {
+      "cancel": "Cancel"
+    },
     "filters": {
       "all": "All Users",
       "active": "Active",

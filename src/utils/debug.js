@@ -17,6 +17,11 @@ export function clearAuthData() {
   console.log('🧹 Auth data cleared');
 }
 
+export function clearAllData() {
+  localStorage.clear();
+  console.log('🧹 All localStorage data cleared');
+}
+
 export function setTestUser() {
   const testUser = {
     id: 'test-user',
@@ -30,4 +35,29 @@ export function setTestUser() {
   localStorage.setItem('authUser', JSON.stringify(testUser));
   localStorage.setItem('users', JSON.stringify([testUser]));
   console.log('👤 Test user set:', testUser);
+}
+
+export function setTestAdmin() {
+  const adminUser = {
+    id: 'admin',
+    firstName: 'Admin',
+    lastName: 'User',
+    email: 'admin@enkonix.in',
+    password: 'admin123',
+    role: 'admin',
+    loginTime: new Date().toISOString()
+  };
+  
+  localStorage.setItem('authUser', JSON.stringify(adminUser));
+  
+  // Add admin to users list
+  const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+  const adminExists = existingUsers.find(u => u.id === 'admin');
+  
+  if (!adminExists) {
+    const updatedUsers = [...existingUsers, adminUser];
+    localStorage.setItem('users', JSON.stringify(updatedUsers));
+  }
+  
+  console.log('👑 Test admin set:', adminUser);
 }

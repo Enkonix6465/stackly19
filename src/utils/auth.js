@@ -12,26 +12,26 @@ function safelyParseJson(jsonString, fallback) {
 
 export function getUsers() {
   const raw = localStorage.getItem(USERS_KEY);
-  // console.log('🔍 Retrieving users from localStorage:', raw);
+  // console.log(' Retrieving users from localStorage:', raw);
   const users = safelyParseJson(raw, []);
  // Handle different cases
   if (Array.isArray(users)) {
-    console.log("📂 Users retrieved (array):", users);
+    console.log(" Users retrieved (array):", users);
     return users;
   }
 
   if (users && typeof users === "object") {
-    console.log("📂 Users retrieved (wrapped single object):", users);
+    console.log(" Users retrieved (wrapped single object):", users);
     return [users]; // wrap single object inside array
   }
 
-  console.log("📂 No users found, returning empty array");
+  console.log(" No users found, returning empty array");
   return [];
 }
 
 export function saveUsers(users) {
   localStorage.setItem(USERS_KEY, JSON.stringify(users));
-  return users; // ✅ return updated array for convenience
+  return users; //  return updated array for convenience
 }
 
 export function registerUser({ firstName, lastName, email, password }) {
@@ -56,8 +56,8 @@ export function registerUser({ firstName, lastName, email, password }) {
 
   const updatedUsers = saveUsers([...existingUsers, newUser]);
 
-  console.log('✅ User registered successfully:', newUser);
-  console.log('📂 All users after registration:', updatedUsers);
+  console.log(' User registered successfully:', newUser);
+  console.log(' All users after registration:', updatedUsers);
 
   return { success: true, message: 'Registered successfully', user: newUser };
 }
@@ -66,7 +66,7 @@ export function registerUser({ firstName, lastName, email, password }) {
 export function loginUser(email, password) {
   const normalizedEmail = String(email || '').trim().toLowerCase();
   const users = getUsers();
-  console.log('🔍 Attempting login for:',users)  ;
+  console.log(' Attempting login for:',users)  ;
 
   const found = users.find(
     u => String(u.email).toLowerCase() === normalizedEmail && u.password === password
@@ -94,21 +94,29 @@ export function loginUser(email, password) {
 
 
 export function logoutUser() {
-  const userData = JSON.parse(localStorage.getItem(AUTH_KEY));
+  const userData = getCurrentUser();
 
   if (userData) {
-    // Add logout time
-    const logoutInfo = {
-      ...userData,
-      logoutTime: new Date().toISOString()
-    };
-
-    // Optionally, store it in another key for reference
-    localStorage.setItem(USERS_KEY, JSON.stringify(logoutInfo));
+    console.log('👋 Logging out user:', userData.email);
+    
+    // If it's a regular user (not admin), update their logout time in the users list
+    if (userData.role !== 'admin') {
+      const users = getUsers();
+      const userIndex = users.findIndex(u => u.id === userData.id);
+      
+      if (userIndex !== -1) {
+        users[userIndex] = {
+          ...users[userIndex],
+          logoutTime: new Date().toISOString()
+        };
+        saveUsers(users);
+      }
+    }
   }
 
   // Remove authenticated user
   localStorage.removeItem(AUTH_KEY);
+  console.log('✅ User logged out successfully');
 }
 
 
@@ -123,7 +131,7 @@ export function isAuthenticated() {
 
 export function isAdmin() {
   const user = getCurrentUser();
-  return user && user.role === 'admin';
+  return user && (user.role === 'admin' || user.isAdmin === true);
 }
 
 export function resetPassword(email, newPassword) {
@@ -244,7 +252,7 @@ export function resetPassword(email, newPassword) {
 //   // Store logged-in user separately in AUTH_KEY
 //   localStorage.setItem(AUTH_KEY, JSON.stringify(loggedInUser));
 
-//   console.log("✅ Logged in user:", loggedInUser);
+//   console.log(" Logged in user:", loggedInUser);
 
 //   return { success: true, message: "Logged in", user: loggedInUser };
 // }
